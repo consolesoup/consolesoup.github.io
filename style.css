@@ -2,16 +2,45 @@ body {
     font-family: Arial, sans-serif; /* 見やすいフォントを設定 */
     line-height: 1.6;
     margin: 0;
-    padding: 0;
+    padding-top: 60px;
     background-color: #f4f4f4; /* わずかにグレーの背景 */
     color: #333; /* 文字色 */
 }
 
 header {
-    background: #333;
-    color: #fff;
-    padding: 1em 0;
-    text-align: center;
+    /* 常にブラウザの上部に固定 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #666; /* 背景色 */
+    color: white; /* 文字色 */
+    padding: 15px 20px;
+    z-index: 1000; /* 他の要素の上に表示 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* 影を付けて浮いているように見せる */
+    /* Flexboxで中身のレイアウトを調整 */
+    display: flex;
+    justify-content: space-between; /* 左右中央の要素を均等に配置 */
+    align-items: center;
+}
+
+/* ヘッダーの子要素（戻るボタン、タイトルなど） */
+header .header-left,
+header .header-right {
+    /* 戻るボタンや右側の要素のためのスペース。
+    Flexアイテムの比率を調整して中央のタイトルを押し出す */
+    flex: 1;
+    min-width: 50px; /* 必要に応じて最小幅を設定 */
+}
+
+/* 中央のタイトル */
+header .header-center {
+    /* 中央のタイトルは flex: 1; よりも高い比率にし、目立たせる */
+    flex: 2;
+    text-align: center; /* タイトルを中央寄せ */
+    font-size: 1.2em;
+    font-weight: bold;
+    /* ページのタイトルにリンクを貼る場合はここで色などを調整 */
 }
 
 section {
