@@ -64,7 +64,7 @@ function WatchListLayout() {
         // 年代のヘッダーを作成
         const yearHeader = document.createElement('h3');
         yearHeader.textContent = `--- ${year}年 放送/開始 ---`;
-        yearHeader.classList.add('year-separator'); // CSSで装飾するためのクラス
+        yearHeader.classList.add('year-separator');
         watchListSection.appendChild(yearHeader);
 
         // 年代ごとのリストを作成
@@ -74,17 +74,15 @@ function WatchListLayout() {
         // その年代の各アイテムをリストに追加
         itemsInYear.forEach(item => {
             const li = document.createElement('li');
-            li.classList.add('anime-item', 'finished'); // ステータスは適宜変更
+            li.classList.add('anime-item', 'finished');
 
-            // HTMLコンテンツの組み立て
             li.innerHTML = `
-                        <h4>${item.title}</h4>
-                        <p class="meta">
-                            <span>カテゴリ: ${item.category}</span>
-                            <span>放送年: ${item.year}</span>
-                        </p>
-                        <p class="comment">${item.comment}</p>
-                    `;
+                <div class="category-vertical">${item.category}</div>
+                <div class="content-wrapper">
+                    <h4 class="item-title">${item.title}</h4>
+                    <p class="comment">${item.comment}</p>
+                </div>
+            `;
 
             ul.appendChild(li);
         });

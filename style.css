@@ -59,3 +59,108 @@ h3 {
     padding: 2px 10px 2px 10px;
     border-left: 5px solid #007bff; /* ポイントカラー（青）を左端に */
 }
+
+/* ==================================== */
+/* 共通設定 (必要に応じて) */
+/* ==================================== */
+.watchlist {
+    padding: 20px;
+    max-width: 900px;
+    margin: 20px auto;
+}
+.anime-list {
+    list-style: none;
+    padding: 0;
+}
+.anime-item {
+    /* 既存の padding, border-radius, box-shadow などを設定 */
+}
+
+/* ==================================== */
+/* 年代ヘッダーの固定 (Sticky) */
+/* ==================================== */
+.year-separator {
+    position: sticky; 
+    top: 0; /* 画面の一番上で固定 */
+    z-index: 500; /* ヘッダーの下、コンテンツの上に表示 */
+    
+    /* デザイン */
+    text-align: center;
+    margin: 40px auto 20px;
+    padding: 15px 0;
+    font-size: 1.5em;
+    color: white; 
+    background-color: #555; 
+    border-bottom: 3px double #ccc;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-width: 900px; 
+}
+
+/* ==================================== */
+/* 各アニメアイテムの Grid レイアウト */
+/* ==================================== */
+.anime-item {
+    display: grid;
+    
+    /* 2列を定義: 1列目(カテゴリ)は自動幅、2列目(コンテンツ)は残りすべて */
+    grid-template-columns: auto 1fr; 
+    /* 2行を定義: A行(タイトル)、B行(コメント) */
+    grid-template-rows: auto 1fr;
+    
+    /* セルの配置を定義 */
+    grid-template-areas: 
+        "category title"
+        "category comment";
+    
+    padding: 0;
+    margin-bottom: 20px;
+    border-radius: 8px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    background-color: #ffffff;
+    transition: transform 0.2s;
+}
+
+.anime-item:hover {
+    transform: translateY(-3px);
+}
+
+/* 1列目: カテゴリ（縦書き）*/
+.category-vertical {
+    grid-area: category; /* 1列目のA行とB行をまたぐ */
+    
+    /* 縦書きの指定 */
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    
+    /* デザイン */
+    padding: 10px;
+    font-weight: bold;
+    font-size: 1.1em;
+    background-color: #4CAF50;
+    color: white;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    width: 2em; /* 縦書き時の横幅 */
+    text-align: center;
+}
+
+/* 2列目A行: タイトル */
+.item-title {
+    grid-area: title; 
+    
+    margin: 0;
+    padding: 10px 15px 5px 15px; 
+    color: #1a73e8; 
+    font-size: 1.3em;
+    border-bottom: 1px solid #eeeeee;
+}
+
+/* 2列目B行: コメント */
+.comment {
+    grid-area: comment;
+    
+    margin: 0;
+    padding: 5px 15px 10px 15px; 
+    font-size: 0.9em; /* タイトルより文字を小さく */
+    color: #333;
+}
