@@ -51,11 +51,6 @@ function WatchListLayout() {
     // 年代を新しい順にソート
     const sortedYears = Object.keys(groupedByYear).sort((a, b) => b - a);
 
-    // h2タイトルをセクションに追加
-    const h2 = document.createElement('h2');
-    h2.textContent = "視聴済リスト";
-    watchlistSection.appendChild(h2);
-
     // ソートされた年代ごとに処理を行う
     sortedYears.forEach(year => {
         const itemsInYear = groupedByYear[year];
