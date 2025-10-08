@@ -23,22 +23,21 @@ function LoadWatchListData() {
 }
 
 function WatchListLayout() {
-    const watchListSection = document.getElementById('watchlist');
-    watchListSection.innerHTML = ''; // レイアウト初期化
-    
+    const watchlistSection = document.getElementById('watchlist');
+    watchlistSection.innerHTML = ''; // レイアウト初期化
+
     if (WatchListData == null) {
-        watchListSection.innerHTML = '<p>データを読み込めませんでした。</p>';
+        watchlistSection.innerHTML = '<p>データを読み込めませんでした。</p>';
         return;
     }
-    
-    // WatchListの取得
+
     var watchList = null;
     if ('watchlist' in WatchListData) watchList = WatchListData.watchlist;
     if (watchList == null) {
-        watchListSection.innerHTML = '<p>データが壊れています。</p>';
+        watchlistSection.innerHTML = '<p>データが壊れています。</p>';
         return;
     }
-    
+
     // 年代別にグループ分け
     const groupedByYear = watchList.reduce((acc, item) => {
         const year = item.year;
@@ -48,46 +47,59 @@ function WatchListLayout() {
         acc[year].push(item);
         return acc;
     }, {});
-    
+
     // 年代を新しい順にソート
     const sortedYears = Object.keys(groupedByYear).sort((a, b) => b - a);
-    
+
     // h2タイトルをセクションに追加
     const h2 = document.createElement('h2');
     h2.textContent = "視聴済リスト";
-    watchListSection.appendChild(h2);
-    
+    watchlistSection.appendChild(h2);
+
     // ソートされた年代ごとに処理を行う
     sortedYears.forEach(year => {
         const itemsInYear = groupedByYear[year];
 
         // 年代のヘッダーを作成
         const yearHeader = document.createElement('h3');
-        yearHeader.textContent = `--- ${year}年 放送/開始 ---`;
-        yearHeader.classList.add('year-separator');
-        watchListSection.appendChild(yearHeader);
+        yearHeader.textContent = `${year}年`;
+        yearHeader.classList.add('sticky-category');
+        watchlistSection.appendChild(yearHeader);
 
         // 年代ごとのリストを作成
         const ul = document.createElement('ul');
-        ul.classList.add('anime-list');
 
         // その年代の各アイテムをリストに追加
         itemsInYear.forEach(item => {
+            // リストアイテム
             const li = document.createElement('li');
-            li.classList.add('anime-item', 'finished');
+            li.classList.add('item-list');
 
-            li.innerHTML = `
-                <div class="category-vertical">${item.category}</div>
-                <div class="content-wrapper">
-                    <h4 class="item-title">${item.title}</h4>
-                    <p class="comment">${item.comment}</p>
-                </div>
-            `;
-
+            // タイトル
+            const itemTitle = document.createElement('h4');
+            itemTitle.textContent = item.title;
+            itemTitle.classList.add('item-title');
+            li.appendChild(itemTitle);
+            
+            // コメント
+            const commentText = document.createElement('p');
+            commentText.textContent = item.comment;
+            commentText.classList.add('item-comment');
+            li.appendChild(commentText)
+            
+            // タグ一覧
+            const tagContainer = document.createElement('div');
+            tagContainer.classList.add('tag-container');
+            for (const tag of item.tag) {
+                const tagText = document.createElement('span');
+                tagText.textContent = tag;
+                tagText.classList.add('item-tag');
+                tagContainer.appendChild(tagText);
+            }
+            li.appendChild(tagContainer)
             ul.appendChild(li);
         });
-
         // 年代ごとのリストをセクションに追加
-        watchListSection.appendChild(ul);
+        watchlistSection.appendChild(ul);
     });
 }
