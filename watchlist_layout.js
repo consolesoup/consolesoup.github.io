@@ -25,21 +25,39 @@ function LoadWatchListData() {
 function WatchListLayout() {
     const watchlistSection = document.getElementById('watchlist');
     watchlistSection.innerHTML = ''; // レイアウト初期化
-
+    
     if (WatchListData == null) {
         watchlistSection.innerHTML = '<p>データを読み込めませんでした。</p>';
         return;
     }
-
+    
     var watchList = null;
     if ('watchlist' in WatchListData) watchList = WatchListData.watchlist;
     if (watchList == null) {
         watchlistSection.innerHTML = '<p>データが壊れています。</p>';
         return;
     }
-
+    
+    const baseUrl = window.location.origin + window.location.pathname;
+    
+    // URLパラメータからフィルタリング
+    const urlParams = new URLSearchParams(window.location.search);
+    const filterTag = urlParams.get('tag');
+    let filteredList = watchList;
+    if (filterTag) {
+        filteredList = watchList.filter(item => {
+            if (!Array.isArray(item.tag)) return false;
+            return item.tag.includes(filterTag);
+        });
+        
+        if (filteredList.length === 0) {
+            watchlistSection.innerHTML = `<p>「${filterTag}」に一致する作品は見つかりませんでした。</p>`;
+            return;
+        }
+    }
+    
     // 年代別にグループ分け
-    const groupedByYear = watchList.reduce((acc, item) => {
+    const groupedByYear = filteredList.reduce((acc, item) => {
         const year = item.year;
         if (!acc[year]) {
             acc[year] = [];
@@ -47,10 +65,10 @@ function WatchListLayout() {
         acc[year].push(item);
         return acc;
     }, {});
-
+    
     // 年代を新しい順にソート
     const sortedYears = Object.keys(groupedByYear).sort((a, b) => b - a);
-
+    
     // ソートされた年代ごとに処理を行う
     sortedYears.forEach(year => {
         const itemsInYear = groupedByYear[year];
@@ -85,11 +103,12 @@ function WatchListLayout() {
             // タグ一覧
             const tagContainer = document.createElement('div');
             tagContainer.classList.add('tag-container');
-            for (const tag of item.tag) {
-                const tagText = document.createElement('span');
-                tagText.textContent = tag;
-                tagText.classList.add('item-tag');
-                tagContainer.appendChild(tagText);
+            for (const tagStr of item.tag) {
+                const tagLink = document.createElement('a');
+                tagLink.innerText = tagStr;
+                tagLink.href = `${baseUrl}?tag=${encodeURIComponent(tagStr)}`;
+                tagLink.classList.add('item-tag');
+                tagContainer.appendChild(tagLink);
             }
             li.appendChild(tagContainer)
             ul.appendChild(li);
