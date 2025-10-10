@@ -1,5 +1,5 @@
 var WatchListData = null;
-var filterTag = null;
+var filterTags = [];
 document.addEventListener('DOMContentLoaded', LoadWatchListData);
 
 function LoadWatchListData() {
@@ -8,7 +8,7 @@ function LoadWatchListData() {
 
     // URLパラメータからフィルタリングパラメータ取得
     const urlParams = new URLSearchParams(window.location.search);
-    filterTag = urlParams.get('tag');
+    filterTags = urlParams.getAll('tag'); 
     FooterBarLayout();
 
     // Json取得
@@ -32,30 +32,50 @@ function LoadWatchListData() {
 function FooterBarLayout() {
     const footerBar = document.getElementById('footer-bar');
     footerBar.innerHTML = ''; // 内容をクリア
-    
-    if (filterTag) {
-        // タグ全体をラップするコンテナ
-        const tagContainer = document.createElement('div');
-        tagContainer.classList.add('active-filter-tag');
 
-        // タグのテキスト
-        const tagText = document.createElement('span');
-        tagText.textContent = filterTag;
-        tagContainer.appendChild(tagText);
+    // filterTags配列の要素数でチェック
+    if (filterTags.length > 0) {
+        // 複数タグのコンテナ
+        const tagsWrapper = document.createElement('div');
+        tagsWrapper.classList.add('active-filter-tag-list');
+        filterTags.forEach(tag => {
+            // タグ全体をラップするコンテナ
+            const tagContainer = document.createElement('div');
+            tagContainer.classList.add('active-filter-tag');
 
-        // 解除ボタン (×マーク)
-        const clearLink = document.createElement('a');
-        clearLink.classList.add('filter-clear-button');
-        clearLink.textContent = ' ×';
+            // タグのテキスト
+            const tagText = document.createElement('span');
+            tagText.textContent = tag;
+            tagContainer.appendChild(tagText);
 
-        // パラメータをクリアした現在のページのURLを設定
-        clearLink.href = window.location.origin + window.location.pathname;
+            // 解除ボタン (×マーク)
+            const clearLink = document.createElement('a');
+            clearLink.classList.add('filter-clear-button');
+            clearLink.textContent = ' ×';
 
-        tagContainer.appendChild(clearLink);
-        footerBar.appendChild(tagContainer);
-    }
-    else {
-        footerBar.innerHTML = '全件表示（タグ選択でフィルタリング可能）';
+            // 解除リンクのURLを生成
+            const clearParams = new URLSearchParams();
+            filterTags.forEach(t => {
+                // 現在のタグ以外をパラメータに残す
+                if (t !== tag) {
+                    clearParams.append('tag', t);
+                }
+            });
+
+            // 解除リンクのhrefを設定
+            const baseUrl = window.location.origin + window.location.pathname;
+            if (clearParams.toString() === '') {
+                // 残りのタグがない場合はベースURLへ
+                clearLink.href = baseUrl;
+            } else {
+                // 残りのタグがある場合はパラメータを付けて設定
+                clearLink.href = `${baseUrl}?${clearParams.toString()}`;
+            }
+
+            tagContainer.appendChild(clearLink);
+            tagsWrapper.appendChild(tagContainer);
+        });
+        footerBar.appendChild(tagsWrapper);
     }
 }
 
@@ -79,10 +99,10 @@ function WatchListLayout() {
     
     // パラメータからフィルタリング
     let filteredList = watchList;
-    if (filterTag) {
+    if (filterTags.length > 0) {
         filteredList = watchList.filter(item => {
             if (!Array.isArray(item.tag)) return false;
-            return item.tag.includes(filterTag);
+            return filterTags.every(requiredTag => item.tag.includes(requiredTag));
         });
         
         if (filteredList.length === 0) {
@@ -140,9 +160,26 @@ function WatchListLayout() {
             tagContainer.classList.add('tag-container');
             for (const tagStr of item.tag) {
                 const tagLink = document.createElement('a');
-                tagLink.innerText = tagStr;
-                tagLink.href = `${baseUrl}?tag=${encodeURIComponent(tagStr)}`;
                 tagLink.classList.add('item-tag');
+                tagLink.innerText = tagStr;
+                
+                // タグが選択中かどうかで分岐
+                if (filterTags.includes(tagStr)) {
+                    // 選択中のタグの場合、ページを更新しないようにする
+                    tagLink.href = `#`;
+                    tagLink.onclick = (e) => {
+                        e.preventDefault();
+                    };
+                } else {
+                    // 未選択のタグの場合、URLにタグを追加
+                    const newParams = new URLSearchParams();
+                    filterTags.forEach(t => newParams.append('tag', t));
+                    newParams.append('tag', tagStr);
+
+                    // タグが追加されたURLに更新
+                    tagLink.href = `${baseUrl}?${newParams.toString()}`;
+                    tagLink.onclick = null;
+                }
                 tagContainer.appendChild(tagLink);
             }
             li.appendChild(tagContainer)

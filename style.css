@@ -151,8 +151,13 @@ h3 {
     z-index: 900; /* ヘッダーより下に、コンテンツより上に */
     /* 中身の配置 */
     display: flex;
-    justify-content: space-between; /* タグと解除ボタンを左右に配置 */
+    justify-content: flex-start;
     align-items: center;
+}
+
+.active-filter-tag-list {
+    display: flex;
+    gap: 10px;
 }
 
 /* 選択中のフィルタリングタグのデザイン */
