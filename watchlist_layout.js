@@ -160,8 +160,11 @@ function WatchListLayout() {
             tagContainer.classList.add('tag-container');
             for (const tagStr of item.tag) {
                 const tagLink = document.createElement('a');
-                tagLink.classList.add('item-tag');
                 tagLink.innerText = tagStr;
+                tagLink.classList.add('item-tag');
+                if (tagStr === 'おすすめ') {
+                    tagLink.classList.add('item-tag-recommend');
+                }
                 
                 // タグが選択中かどうかで分岐
                 if (filterTags.includes(tagStr)) {

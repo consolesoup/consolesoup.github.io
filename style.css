@@ -137,6 +137,12 @@ h3 {
     text-decoration: none;
 }
 
+.item-tag-recommend {
+    background-color: #ffda03;
+    color: #333;
+    font-weight: bold;
+}
+
 /*í‚Éƒuƒ‰ƒEƒU‚Ì‰º•”‚ÉŒÅ’è*/
 .footer-bar {
     position: fixed;
