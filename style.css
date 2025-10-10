@@ -7,8 +7,8 @@ body {
     color: #333; /* 文字色 */
 }
 
+/*常にブラウザの上部に固定*/
 header {
-    /* 常にブラウザの上部に固定 */
     position: fixed;
     top: 0;
     left: 0;
@@ -31,6 +31,12 @@ header .header-right {
     Flexアイテムの比率を調整して中央のタイトルを押し出す */
     flex: 1;
     min-width: 50px; /* 必要に応じて最小幅を設定 */
+}
+
+header .header-left a {
+    color: white; /* リンクの色をヘッダーの文字色に合わせる */
+    text-decoration: none; /* 下線を非表示にする */
+    font-weight: bold; /* 少し強調する */
 }
 
 /* 中央のタイトル */
@@ -63,12 +69,12 @@ h3 {
 /* 上部固定カテゴリ */
 .sticky-category {
     position: sticky;
-    top: 50px;
+    top: 60px;
     z-index: 500;
     
     text-align: center;
     margin: 0px auto 20px;
-    padding: 15px 0;
+    padding: 4px 0;
     font-size: 1.5em;
     color: white;
     background-color: #555;
@@ -129,4 +135,49 @@ h3 {
     font-size: xx-small;
     font-weight: 500;
     text-decoration: none;
+}
+
+/*常にブラウザの下部に固定*/
+.footer-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    /* デザイン */
+    background-color: #333; /* 濃いグレー */
+    color: white;
+    padding: 10px 20px;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2); /* 上部に影 */
+    z-index: 900; /* ヘッダーより下に、コンテンツより上に */
+    /* 中身の配置 */
+    display: flex;
+    justify-content: space-between; /* タグと解除ボタンを左右に配置 */
+    align-items: center;
+}
+
+/* 選択中のフィルタリングタグのデザイン */
+.active-filter-tag {
+    background-color: #f0f0f0;
+    color: #555;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: xx-small;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+}
+
+/* 解除ボタン（×マーク）*/
+.active-filter-tag .filter-clear-button {
+    /* a要素のデフォルトスタイルをリセット */
+    color: #333;
+    text-decoration: none;
+    font-size: 1.2em;
+    margin-left: 5px; /* タグ名との間隔 */
+    padding: 0 2px;
+    transition: color 0.2s;
+}
+
+.active-filter-tag .filter-clear-button:hover {
+    color: red; /* ホバーで赤く変化 */
 }

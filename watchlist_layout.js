@@ -1,10 +1,17 @@
 var WatchListData = null;
+var filterTag = null;
 document.addEventListener('DOMContentLoaded', LoadWatchListData);
 
 function LoadWatchListData() {
     const watchListSection = document.getElementById('watchlist');
     watchListSection.innerHTML = '<p>データ読み込み中...</p>';
-    
+
+    // URLパラメータからフィルタリングパラメータ取得
+    const urlParams = new URLSearchParams(window.location.search);
+    filterTag = urlParams.get('tag');
+    FooterBarLayout();
+
+    // Json取得
     fetch('watchlist.json')
         .then(response => {
             if (!response.ok) {
@@ -20,6 +27,36 @@ function LoadWatchListData() {
             console.error('WatchlistLoadFailed:', error);
             WatchListLayout();
         });
+}
+
+function FooterBarLayout() {
+    const footerBar = document.getElementById('footer-bar');
+    footerBar.innerHTML = ''; // 内容をクリア
+    
+    if (filterTag) {
+        // タグ全体をラップするコンテナ
+        const tagContainer = document.createElement('div');
+        tagContainer.classList.add('active-filter-tag');
+
+        // タグのテキスト
+        const tagText = document.createElement('span');
+        tagText.textContent = filterTag;
+        tagContainer.appendChild(tagText);
+
+        // 解除ボタン (×マーク)
+        const clearLink = document.createElement('a');
+        clearLink.classList.add('filter-clear-button');
+        clearLink.textContent = ' ×';
+
+        // パラメータをクリアした現在のページのURLを設定
+        clearLink.href = window.location.origin + window.location.pathname;
+
+        tagContainer.appendChild(clearLink);
+        footerBar.appendChild(tagContainer);
+    }
+    else {
+        footerBar.innerHTML = '全件表示（タグ選択でフィルタリング可能）';
+    }
 }
 
 function WatchListLayout() {
@@ -40,9 +77,7 @@ function WatchListLayout() {
     
     const baseUrl = window.location.origin + window.location.pathname;
     
-    // URLパラメータからフィルタリング
-    const urlParams = new URLSearchParams(window.location.search);
-    const filterTag = urlParams.get('tag');
+    // パラメータからフィルタリング
     let filteredList = watchList;
     if (filterTag) {
         filteredList = watchList.filter(item => {
@@ -72,7 +107,7 @@ function WatchListLayout() {
     // ソートされた年代ごとに処理を行う
     sortedYears.forEach(year => {
         const itemsInYear = groupedByYear[year];
-
+        
         // 年代のヘッダーを作成
         const yearHeader = document.createElement('h3');
         yearHeader.textContent = `${year}年`;
