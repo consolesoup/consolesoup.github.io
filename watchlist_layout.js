@@ -1,4 +1,4 @@
-var WatchListData = null;
+var WatchList = [];
 var filterTags = [];
 document.addEventListener('DOMContentLoaded', LoadWatchListData);
 
@@ -11,8 +11,17 @@ function LoadWatchListData() {
     filterTags = urlParams.getAll('tag'); 
     FooterBarLayout();
 
+    // 分割Jsonデータ取得
+    LoadWatchListJson('watchlist_1999.json', () => {
+        LoadWatchListJson('watchlist_2000-2010.json', () => {
+            WatchListLayout();
+        });
+    });
+}
+
+function LoadWatchListJson(filePath, callback) {
     // Json取得
-    fetch('watchlist.json')
+    fetch(filePath)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok: ' + response.statusText);
@@ -20,12 +29,17 @@ function LoadWatchListData() {
             return response.json();
         })
         .then(data => {
-            WatchListData = data;
-            WatchListLayout();
+            // Jsonに要素があり配列なら追加する
+            if ('watchlist' in data) {
+                if (Array.isArray(data.watchlist)) {
+                    WatchList = data.watchlist.concat(WatchList);
+                }
+            }
+            callback();
         })
         .catch(error => {
             console.error('WatchlistLoadFailed:', error);
-            WatchListLayout();
+            callback();
         });
 }
 
@@ -82,30 +96,23 @@ function FooterBarLayout() {
 function WatchListLayout() {
     const watchlistSection = document.getElementById('watchlist');
     watchlistSection.innerHTML = ''; // レイアウト初期化
-    
-    if (WatchListData == null) {
+
+    if (WatchList == null || WatchList.length == 0) {
         watchlistSection.innerHTML = '<p>データを読み込めませんでした。</p>';
-        return;
-    }
-    
-    var watchList = null;
-    if ('watchlist' in WatchListData) watchList = WatchListData.watchlist;
-    if (watchList == null) {
-        watchlistSection.innerHTML = '<p>データが壊れています。</p>';
         return;
     }
     
     const baseUrl = window.location.origin + window.location.pathname;
     
     // パラメータからフィルタリング
-    let filteredList = watchList;
+    let filteredList = WatchList;
     if (filterTags.length > 0) {
         filteredList = watchList.filter(item => {
             if (!Array.isArray(item.tag)) return false;
             return filterTags.every(requiredTag => item.tag.includes(requiredTag));
         });
         
-        if (filteredList.length === 0) {
+        if (filteredList.length == 0) {
             watchlistSection.innerHTML = `<p>「${filterTag}」に一致する作品は見つかりませんでした。</p>`;
             return;
         }
