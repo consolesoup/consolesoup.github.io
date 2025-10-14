@@ -1,5 +1,6 @@
 var WatchList = [];
 var filterTags = [];
+var filterCopyright = null;
 document.addEventListener('DOMContentLoaded', LoadWatchListData);
 
 function LoadWatchListData() {
@@ -8,7 +9,8 @@ function LoadWatchListData() {
 
     // URLパラメータからフィルタリングパラメータ取得
     const urlParams = new URLSearchParams(window.location.search);
-    filterTags = urlParams.getAll('tag'); 
+    filterTags = urlParams.getAll('tag');
+    filterCopyright = urlParams.get('copyright');
     FooterBarLayout();
 
     // 分割Jsonデータ取得
@@ -46,46 +48,86 @@ function LoadWatchListJson(filePath, callback) {
 function FooterBarLayout() {
     const footerBar = document.getElementById('footer-bar');
     footerBar.innerHTML = ''; // 内容をクリア
-
+    
     // filterTags配列の要素数でチェック
-    if (filterTags.length > 0) {
-        // 複数タグのコンテナ
+    if (filterTags.length > 0 || filterCopyright != null) {
+        // 複数のフィルタリングのコンテナ
         const tagsWrapper = document.createElement('div');
         tagsWrapper.classList.add('active-filter-tag-list');
-        filterTags.forEach(tag => {
-            // タグ全体をラップするコンテナ
-            const tagContainer = document.createElement('div');
-            tagContainer.classList.add('active-filter-tag');
-
-            // タグのテキスト
-            const tagText = document.createElement('span');
-            tagText.textContent = tag;
-            tagContainer.appendChild(tagText);
-
+        
+        // コピーライトフィルタが設定されている場合
+        if (filterCopyright != null) {
+            // コピーライト全体をラップするコンテナ
+            const copyrightContainer = document.createElement('div');
+            copyrightContainer.classList.add('active-filter-tag');
+            
+            // コピーライトのテキスト
+            const copyrightText = document.createElement('span');
+            copyrightText.textContent = filterCopyright;
+            copyrightContainer.appendChild(copyrightText);
+            
             // 解除ボタン (×マーク)
             const clearLink = document.createElement('a');
             clearLink.classList.add('filter-clear-button');
             clearLink.textContent = ' ×';
-
-            // 解除リンクのURLを生成
+            
+            // 解除リンクのURLを生成（選択中のタグだけのパラメータ）
             const clearParams = new URLSearchParams();
             filterTags.forEach(t => {
-                // 現在のタグ以外をパラメータに残す
+                clearParams.append('tag', t);
+            });
+            
+            // 解除リンクのhrefを設定
+            const baseUrl = window.location.origin + window.location.pathname;
+            if (clearParams.toString() === '') {
+                // パラメータがない場合はベースURLへ
+                clearLink.href = baseUrl;
+            } else {
+                // パラメータがある場合はパラメータを付けて設定
+                clearLink.href = `${baseUrl}?${clearParams.toString()}`;
+            }
+            
+            copyrightContainer.appendChild(clearLink);
+            tagsWrapper.appendChild(copyrightContainer);
+        }
+        
+        // タグフィルタが設定されている場合
+        filterTags.forEach(tag => {
+            // タグ全体をラップするコンテナ
+            const tagContainer = document.createElement('div');
+            tagContainer.classList.add('active-filter-tag');
+            
+            // タグのテキスト
+            const tagText = document.createElement('span');
+            tagText.textContent = tag;
+            tagContainer.appendChild(tagText);
+            
+            // 解除ボタン (×マーク)
+            const clearLink = document.createElement('a');
+            clearLink.classList.add('filter-clear-button');
+            clearLink.textContent = ' ×';
+            
+            // 解除リンクのURLを生成（選択されたタグがないパラメータ）
+            const clearParams = new URLSearchParams();
+            if (filterCopyright != null) {
+                clearParams.append('copyright', filterCopyright);
+            }
+            filterTags.forEach(t => {
                 if (t !== tag) {
                     clearParams.append('tag', t);
                 }
             });
-
+            
             // 解除リンクのhrefを設定
             const baseUrl = window.location.origin + window.location.pathname;
             if (clearParams.toString() === '') {
-                // 残りのタグがない場合はベースURLへ
+                // パラメータがない場合はベースURLへ
                 clearLink.href = baseUrl;
             } else {
-                // 残りのタグがある場合はパラメータを付けて設定
+                // パラメータがある場合はパラメータを付けて設定
                 clearLink.href = `${baseUrl}?${clearParams.toString()}`;
             }
-
+            
             tagContainer.appendChild(clearLink);
             tagsWrapper.appendChild(tagContainer);
         });
@@ -97,7 +139,7 @@ function WatchListLayout() {
     const watchlistSection = document.getElementById('watchlist');
     watchlistSection.innerHTML = ''; // レイアウト初期化
 
-    if (WatchList == null || WatchList.length == 0) {
+    if (WatchList == null || WatchList.length === 0) {
         watchlistSection.innerHTML = '<p>データを読み込めませんでした。</p>';
         return;
     }
@@ -106,14 +148,30 @@ function WatchListLayout() {
     
     // パラメータからフィルタリング
     let filteredList = WatchList;
-    if (filterTags.length > 0) {
-        filteredList = watchList.filter(item => {
+    if (filterTags.length > 0 || filterCopyright != null) {
+        filteredList = WatchList.filter(item => {
+            // コピーライトフィルタ
+            if (filterCopyright != null) {
+                if (!Array.isArray(item.copyright)) return false;
+                if (!item.copyright.includes(filterCopyright)) return false;
+            }
+            // タグフィルタ
             if (!Array.isArray(item.tag)) return false;
             return filterTags.every(requiredTag => item.tag.includes(requiredTag));
         });
         
-        if (filteredList.length == 0) {
-            watchlistSection.innerHTML = `<p>「${filterTag}」に一致する作品は見つかりませんでした。</p>`;
+        if (filteredList.length === 0) {
+            const notFoundText = document.createElement('p');
+            notFoundText.textContent = "";
+            if (filterCopyright != null) {
+                if (filterTags.length > 0) {
+                    notFoundText.textContent = `「${filterTags.join(' / ')}」のタグ全てに一致する「${filterCopyright}」の作品は見つかりませんでした。`;
+                } else {
+                    notFoundText.textContent = `「${filterCopyright}」の作品は見つかりませんでした。`;
+                }
+            }
+            else notFoundText.textContent += `「${filterTags.join(' / ')}」のタグ全てに一致する作品は見つかりませんでした。`;
+            watchlistSection.appendChild(notFoundText);
             return;
         }
     }
@@ -165,33 +223,68 @@ function WatchListLayout() {
             // タグ一覧
             const tagContainer = document.createElement('div');
             tagContainer.classList.add('tag-container');
-            for (const tagStr of item.tag) {
-                const tagLink = document.createElement('a');
-                tagLink.innerText = tagStr;
-                tagLink.classList.add('item-tag');
-                if (tagStr === 'おすすめ') {
-                    tagLink.classList.add('item-tag-recommend');
-                }
-                
-                // タグが選択中かどうかで分岐
-                if (filterTags.includes(tagStr)) {
-                    // 選択中のタグの場合、ページを更新しないようにする
-                    tagLink.href = `#`;
-                    tagLink.onclick = (e) => {
-                        e.preventDefault();
-                    };
-                } else {
-                    // 未選択のタグの場合、URLにタグを追加
-                    const newParams = new URLSearchParams();
-                    filterTags.forEach(t => newParams.append('tag', t));
-                    newParams.append('tag', tagStr);
+            
+            // コピーライトを追加
+            if (Array.isArray(item.copyright)) {
+                for (const copyrightStr of item.copyright) {
+                    const copyrightLink = document.createElement('a');
+                    copyrightLink.innerText = copyrightStr;
+                    copyrightLink.classList.add('item-copyright');
+                    
+                    const filterValue = copyrightStr;
 
-                    // タグが追加されたURLに更新
-                    tagLink.href = `${baseUrl}?${newParams.toString()}`;
-                    tagLink.onclick = null;
+                    if (filterCopyright === copyrightStr) {
+                        // 選択中の場合、ページを更新しないようにする
+                        copyrightLink.href = `#`;
+                        copyrightLink.onclick = (e) => { e.preventDefault(); };
+                    } else {
+                        // 未選択の場合、URLにパラメータを追加
+                        const newParams = new URLSearchParams();
+                        newParams.append('copyright', copyrightStr);
+                        filterTags.forEach(t => {
+                            newParams.append('tag', t);
+                        });
+                        
+                        // リンク先を設定
+                        copyrightLink.href = `${baseUrl}?${newParams.toString()}`;
+                        copyrightLink.onclick = null;
+                    }
+                    tagContainer.appendChild(copyrightLink);
                 }
-                tagContainer.appendChild(tagLink);
             }
+            
+            // タグの追加
+            if (Array.isArray(item.tag)) {
+                for (const tagStr of item.tag) {
+                    const tagLink = document.createElement('a');
+                    tagLink.innerText = tagStr;
+                    tagLink.classList.add('item-tag');
+                    if (tagStr === 'おすすめ') {
+                        tagLink.classList.add('item-tag-recommend');
+                    }
+
+                    // タグが選択中かどうかで分岐
+                    if (filterTags.includes(tagStr)) {
+                        // 選択中のタグの場合、ページを更新しないようにする
+                        tagLink.href = `#`;
+                        tagLink.onclick = (e) => {
+                            e.preventDefault();
+                        };
+                    } else {
+                        // 未選択のタグの場合、URLにタグを追加
+                        const newParams = new URLSearchParams();
+                        if (filterCopyright != null) newParams.append('copyright', filterCopyright);
+                        filterTags.forEach(t => newParams.append('tag', t));
+                        newParams.append('tag', tagStr);
+                        
+                        // タグが追加されたURLに更新
+                        tagLink.href = `${baseUrl}?${newParams.toString()}`;
+                        tagLink.onclick = null;
+                    }
+                    tagContainer.appendChild(tagLink);
+                }
+            }
+            
             li.appendChild(tagContainer)
             ul.appendChild(li);
         });
