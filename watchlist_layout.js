@@ -6,43 +6,59 @@ document.addEventListener('DOMContentLoaded', LoadWatchListData);
 function LoadWatchListData() {
     const watchListSection = document.getElementById('watchlist');
     watchListSection.innerHTML = '<p>データ読み込み中...</p>';
-
+    
     // URLパラメータからフィルタリングパラメータ取得
     const urlParams = new URLSearchParams(window.location.search);
     filterTags = urlParams.getAll('tag');
     filterCopyright = urlParams.get('copyright');
     FooterBarLayout();
-
+    
     // 分割Jsonデータ取得
-    LoadWatchListJson('watchlist_1999.json', () => {
-        LoadWatchListJson('watchlist_2000-2010.json', () => {
+    _loadLoopWatchListJson([
+        '1950-1969',
+        '1970-1979',
+        '1980-1989',
+        '1990-1999',
+        '2000-2004',
+        '2005-2009'
+    ]);
+    
+    function _loadLoopWatchListJson(periods) {
+        if (!Array.isArray(periods) || periods.length == 0)
+        {
             WatchListLayout();
+            return;
+        }
+        watchListSection.innerHTML = `<p>${periods[0]}年のデータ読み込み中...</p>`;
+        _loadWatchListJson(`./watchlist/watchlist_${periods[0]}.json`, () => {
+            periods.shift();
+            _loadLoopWatchListJson(periods);
         });
-    });
-}
-
-function LoadWatchListJson(filePath, callback) {
-    // Json取得
-    fetch(filePath)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok: ' + response.statusText);
-            }
-            return response.json();
-        })
-        .then(data => {
-            // Jsonに要素があり配列なら追加する
-            if ('watchlist' in data) {
-                if (Array.isArray(data.watchlist)) {
-                    WatchList = data.watchlist.concat(WatchList);
+    }
+    
+    function _loadWatchListJson(filePath, callback) {
+        // Json取得
+        fetch(filePath)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok: ' + response.statusText);
                 }
-            }
-            callback();
-        })
-        .catch(error => {
-            console.error('WatchlistLoadFailed:', error);
-            callback();
-        });
+                return response.json();
+            })
+            .then(data => {
+                // Jsonに要素があり配列なら追加する
+                if ('watchlist' in data) {
+                    if (Array.isArray(data.watchlist)) {
+                        WatchList = data.watchlist.concat(WatchList);
+                    }
+                }
+                callback();
+            })
+            .catch(error => {
+                console.error('WatchlistLoadFailed:', error);
+                callback();
+            });
+    }
 }
 
 function FooterBarLayout() {
