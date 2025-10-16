@@ -30,7 +30,7 @@ function LoadWatchListData() {
             return;
         }
         watchListSection.innerHTML = `<p>${periods[0]}年のデータ読み込み中...</p>`;
-        _loadWatchListJson(`./watchlist/watchlist_${periods[0]}.json`, () => {
+        _loadWatchListJson(`./watchlist_${periods[0]}.json`, () => {
             periods.shift();
             _loadLoopWatchListJson(periods);
         });
