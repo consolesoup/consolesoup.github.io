@@ -2,147 +2,147 @@
   "skill_list": [
     {
       "name": "Unity",
-      "category": [ "3DƒvƒƒOƒ‰ƒ~ƒ“ƒO" ]
+      "category": [ "3Dãƒ—ãƒ­ã‚°ãƒ©ãƒŸãƒ³ã‚°" ]
     },
     {
       "name": "C#",
-      "category": [ "3DƒvƒƒOƒ‰ƒ~ƒ“ƒO" ]
+      "category": [ "3Dãƒ—ãƒ­ã‚°ãƒ©ãƒŸãƒ³ã‚°" ]
     },
     {
       "name": "Animation",
-      "category": [ "3DƒvƒƒOƒ‰ƒ~ƒ“ƒO" ]
+      "category": [ "3Dãƒ—ãƒ­ã‚°ãƒ©ãƒŸãƒ³ã‚°" ]
     },
     {
       "name": "AssetBundle",
-      "category": [ "3DƒvƒƒOƒ‰ƒ~ƒ“ƒO" ]
+      "category": [ "3Dãƒ—ãƒ­ã‚°ãƒ©ãƒŸãƒ³ã‚°" ]
     },
     {
       "name": "RenderPipeline",
-      "category": [ "3DƒvƒƒOƒ‰ƒ~ƒ“ƒO" ]
+      "category": [ "3Dãƒ—ãƒ­ã‚°ãƒ©ãƒŸãƒ³ã‚°" ]
     },
     {
       "name": "Shader",
-      "category": [ "3DƒvƒƒOƒ‰ƒ~ƒ“ƒO" ]
+      "category": [ "3Dãƒ—ãƒ­ã‚°ãƒ©ãƒŸãƒ³ã‚°" ]
     },
     {
       "name": "UniTask",
-      "category": [ "3DƒvƒƒOƒ‰ƒ~ƒ“ƒO" ]
+      "category": [ "3Dãƒ—ãƒ­ã‚°ãƒ©ãƒŸãƒ³ã‚°" ]
     },
     {
       "name": "ARKit",
-      "category": [ "3DƒvƒƒOƒ‰ƒ~ƒ“ƒO", "ƒ‚ƒoƒCƒ‹ƒAƒvƒŠ" ]
+      "category": [ "3Dãƒ—ãƒ­ã‚°ãƒ©ãƒŸãƒ³ã‚°", "ãƒ¢ãƒã‚¤ãƒ«ã‚¢ãƒ—ãƒª" ]
     },
     {
       "name": "ARCore",
-      "category": [ "3DƒvƒƒOƒ‰ƒ~ƒ“ƒO", "ƒ‚ƒoƒCƒ‹ƒAƒvƒŠ" ]
+      "category": [ "3Dãƒ—ãƒ­ã‚°ãƒ©ãƒŸãƒ³ã‚°", "ãƒ¢ãƒã‚¤ãƒ«ã‚¢ãƒ—ãƒª" ]
     },
     {
       "name": "SteamVR SDK",
-      "category": [ "3DƒvƒƒOƒ‰ƒ~ƒ“ƒO" ]
+      "category": [ "3Dãƒ—ãƒ­ã‚°ãƒ©ãƒŸãƒ³ã‚°" ]
     },
     {
       "name": "Photon SDK",
-      "category": [ "3DƒvƒƒOƒ‰ƒ~ƒ“ƒO" ]
+      "category": [ "3Dãƒ—ãƒ­ã‚°ãƒ©ãƒŸãƒ³ã‚°" ]
     },
     {
       "name": "Agora SDK",
-      "category": [ "3DƒvƒƒOƒ‰ƒ~ƒ“ƒO" ]
+      "category": [ "3Dãƒ—ãƒ­ã‚°ãƒ©ãƒŸãƒ³ã‚°" ]
     },
     {
       "name": "Blender",
-      "category": [ "3Dƒ‚ƒfƒŠƒ“ƒO" ]
+      "category": [ "3Dãƒ¢ãƒ‡ãƒªãƒ³ã‚°" ]
     },
     {
       "name": "BlenderAPI for Python",
-      "category": [ "3Dƒ‚ƒfƒŠƒ“ƒO" ]
+      "category": [ "3Dãƒ¢ãƒ‡ãƒªãƒ³ã‚°" ]
     },
     {
       "name": "Maya",
-      "category": [ "3Dƒ‚ƒfƒŠƒ“ƒO" ]
+      "category": [ "3Dãƒ¢ãƒ‡ãƒªãƒ³ã‚°" ]
     },
     {
       "name": "Maya Python API",
-      "category": [ "3Dƒ‚ƒfƒŠƒ“ƒO" ]
+      "category": [ "3Dãƒ¢ãƒ‡ãƒªãƒ³ã‚°" ]
     },
     {
       "name": "Adobe Substance 3D Painter",
-      "category": [ "3Dƒ‚ƒfƒŠƒ“ƒO" ]
+      "category": [ "3Dãƒ¢ãƒ‡ãƒªãƒ³ã‚°" ]
     },
     {
       "name": "Android",
-      "category": [ "ƒ‚ƒoƒCƒ‹ƒAƒvƒŠ" ]
+      "category": [ "ãƒ¢ãƒã‚¤ãƒ«ã‚¢ãƒ—ãƒª" ]
     },
     {
       "name": "Google Play Console",
-      "category": [ "ƒ‚ƒoƒCƒ‹ƒAƒvƒŠ" ]
+      "category": [ "ãƒ¢ãƒã‚¤ãƒ«ã‚¢ãƒ—ãƒª" ]
     },
     {
       "name": "Android Studio",
-      "category": [ "ƒ‚ƒoƒCƒ‹ƒAƒvƒŠ" ]
+      "category": [ "ãƒ¢ãƒã‚¤ãƒ«ã‚¢ãƒ—ãƒª" ]
     },
     {
       "name": "Java",
-      "category": [ "ƒ‚ƒoƒCƒ‹ƒAƒvƒŠ" ]
+      "category": [ "ãƒ¢ãƒã‚¤ãƒ«ã‚¢ãƒ—ãƒª" ]
     },
     {
       "name": "iOS",
-      "category": [ "ƒ‚ƒoƒCƒ‹ƒAƒvƒŠ" ]
+      "category": [ "ãƒ¢ãƒã‚¤ãƒ«ã‚¢ãƒ—ãƒª" ]
     },
     {
       "name": "App Store Connect",
-      "category": [ "ƒ‚ƒoƒCƒ‹ƒAƒvƒŠ" ]
+      "category": [ "ãƒ¢ãƒã‚¤ãƒ«ã‚¢ãƒ—ãƒª" ]
     },
     {
       "name": "Xcode",
-      "category": [ "ƒ‚ƒoƒCƒ‹ƒAƒvƒŠ" ]
+      "category": [ "ãƒ¢ãƒã‚¤ãƒ«ã‚¢ãƒ—ãƒª" ]
     },
     {
       "name": "Swift",
-      "category": [ "ƒ‚ƒoƒCƒ‹ƒAƒvƒŠ" ]
+      "category": [ "ãƒ¢ãƒã‚¤ãƒ«ã‚¢ãƒ—ãƒª" ]
     },
     {
       "name": "Objective-C",
-      "category": [ "ƒ‚ƒoƒCƒ‹ƒAƒvƒŠ" ]
+      "category": [ "ãƒ¢ãƒã‚¤ãƒ«ã‚¢ãƒ—ãƒª" ]
     },
     {
       "name": "C++",
-      "category": [ "ƒ‚ƒoƒCƒ‹ƒAƒvƒŠ" ]
+      "category": [ "ãƒ¢ãƒã‚¤ãƒ«ã‚¢ãƒ—ãƒª" ]
     },
     {
       "name": "Flutter",
-      "category": [ "ƒ‚ƒoƒCƒ‹ƒAƒvƒŠ" ]
+      "category": [ "ãƒ¢ãƒã‚¤ãƒ«ã‚¢ãƒ—ãƒª" ]
     },
     {
       "name": "Dart",
-      "category": [ "ƒ‚ƒoƒCƒ‹ƒAƒvƒŠ" ]
+      "category": [ "ãƒ¢ãƒã‚¤ãƒ«ã‚¢ãƒ—ãƒª" ]
     },
     {
       "name": "React Native",
-      "category": [ "ƒ‚ƒoƒCƒ‹ƒAƒvƒŠ" ]
+      "category": [ "ãƒ¢ãƒã‚¤ãƒ«ã‚¢ãƒ—ãƒª" ]
     },
     {
       "name": "Push Notification",
-      "category": [ "ƒ‚ƒoƒCƒ‹ƒAƒvƒŠ" ]
+      "category": [ "ãƒ¢ãƒã‚¤ãƒ«ã‚¢ãƒ—ãƒª" ]
     },
     {
       "name": "Purchase",
-      "category": [ "ƒ‚ƒoƒCƒ‹ƒAƒvƒŠ" ]
+      "category": [ "ãƒ¢ãƒã‚¤ãƒ«ã‚¢ãƒ—ãƒª" ]
     },
     {
       "name": "GPS",
-      "category": [ "ƒ‚ƒoƒCƒ‹ƒAƒvƒŠ" ]
+      "category": [ "ãƒ¢ãƒã‚¤ãƒ«ã‚¢ãƒ—ãƒª" ]
     },
     {
       "name": "Bluetooth",
-      "category": [ "ƒ‚ƒoƒCƒ‹ƒAƒvƒŠ" ]
+      "category": [ "ãƒ¢ãƒã‚¤ãƒ«ã‚¢ãƒ—ãƒª" ]
     },
     {
       "name": "Firebase Realtime",
-      "category": [ "3DƒvƒƒOƒ‰ƒ~ƒ“ƒO", "ƒ‚ƒoƒCƒ‹ƒAƒvƒŠ" ]
+      "category": [ "3Dãƒ—ãƒ­ã‚°ãƒ©ãƒŸãƒ³ã‚°", "ãƒ¢ãƒã‚¤ãƒ«ã‚¢ãƒ—ãƒª" ]
     },
     {
       "name": "Firebase OAuth",
-      "category": [ "3DƒvƒƒOƒ‰ƒ~ƒ“ƒO", "ƒ‚ƒoƒCƒ‹ƒAƒvƒŠ" ]
+      "category": [ "3Dãƒ—ãƒ­ã‚°ãƒ©ãƒŸãƒ³ã‚°", "ãƒ¢ãƒã‚¤ãƒ«ã‚¢ãƒ—ãƒª" ]
     }
   ]
 }
