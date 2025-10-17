@@ -48,22 +48,14 @@ function FooterBarLayout() {
         // 複数のフィルタリングのコンテナ
         const skillsWrapper = document.createElement('div');
         skillsWrapper.classList.add('active-filter-tag-list');
+        footerBar.appendChild(skillsWrapper);
         
         // スキルフィルタが設定されている場合
         filterSkills.forEach(skill => {
             // スキル全体をラップするコンテナ
-            const skillContainer = document.createElement('div');
+            const skillContainer = document.createElement('a');
             skillContainer.classList.add('active-filter-tag');
-            
-            // スキルのテキスト
-            const skillText = document.createElement('span');
-            skillText.textContent = skill;
-            skillContainer.appendChild(skillText);
-            
-            // 解除ボタン (×マーク)
-            const clearLink = document.createElement('a');
-            clearLink.classList.add('filter-clear-button');
-            clearLink.textContent = ' ×';
+            skillsWrapper.appendChild(skillContainer);
             
             // 解除リンクのURLを生成（選択されたスキルがないパラメータ）
             const clearParams = new URLSearchParams();
@@ -77,16 +69,17 @@ function FooterBarLayout() {
             const baseUrl = window.location.origin + window.location.pathname;
             if (clearParams.toString() === '') {
                 // パラメータがない場合はベースURLへ
-                clearLink.href = baseUrl;
+                skillContainer.href = baseUrl;
             } else {
                 // パラメータがある場合はパラメータを付けて設定
-                clearLink.href = `${baseUrl}?${clearParams.toString()}`;
+                skillContainer.href = `${baseUrl}?${clearParams.toString()}`;
             }
             
-            skillContainer.appendChild(clearLink);
-            skillsWrapper.appendChild(skillContainer);
+            // スキルのテキスト
+            const skillText = document.createElement('span');
+            skillText.textContent = `${skill} ×`;
+            skillContainer.appendChild(skillText);
         });
-        footerBar.appendChild(skillsWrapper);
     }
 }
 

@@ -51,10 +51,14 @@ header .header-center {
 
 section {
     padding: 20px;
-    margin: 20px auto;
+    margin: 20px 10px 20px 10px;
     max-width: 800px; /* 内容の幅を制限して読みやすくする */
     background: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+body > section:last-of-type {
+    margin-bottom: 60px;
 }
 
 section p {
@@ -241,19 +245,9 @@ h3 {
     font-weight: 500;
     display: flex;
     align-items: center;
-}
-
-/* 解除ボタン（×マーク）*/
-.active-filter-tag .filter-clear-button {
-    /* a要素のデフォルトスタイルをリセット */
-    color: #333;
     text-decoration: none;
-    font-size: 1.2em;
-    margin-left: 5px; /* タグ名との間隔 */
-    padding: 0 2px;
-    transition: color 0.2s;
 }
 
-.active-filter-tag .filter-clear-button:hover {
-    color: red; /* ホバーで赤く変化 */
+.active-filter-tag:hover {
+    background-color: #909090;
 }

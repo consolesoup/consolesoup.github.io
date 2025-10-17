@@ -70,23 +70,15 @@ function FooterBarLayout() {
         // 複数のフィルタリングのコンテナ
         const tagsWrapper = document.createElement('div');
         tagsWrapper.classList.add('active-filter-tag-list');
+        footerBar.appendChild(tagsWrapper);
         
         // コピーライトフィルタが設定されている場合
         if (filterCopyright != null) {
             // コピーライト全体をラップするコンテナ
-            const copyrightContainer = document.createElement('div');
+            const copyrightContainer = document.createElement('a');
             copyrightContainer.classList.add('active-filter-tag');
-            
-            // コピーライトのテキスト
-            const copyrightText = document.createElement('span');
-            copyrightText.textContent = filterCopyright;
-            copyrightContainer.appendChild(copyrightText);
-            
-            // 解除ボタン (×マーク)
-            const clearLink = document.createElement('a');
-            clearLink.classList.add('filter-clear-button');
-            clearLink.textContent = ' ×';
-            
+            tagsWrapper.appendChild(copyrightContainer);
+
             // 解除リンクのURLを生成（選択中のタグだけのパラメータ）
             const clearParams = new URLSearchParams();
             filterTags.forEach(t => {
@@ -97,31 +89,24 @@ function FooterBarLayout() {
             const baseUrl = window.location.origin + window.location.pathname;
             if (clearParams.toString() === '') {
                 // パラメータがない場合はベースURLへ
-                clearLink.href = baseUrl;
+                copyrightContainer.href = baseUrl;
             } else {
                 // パラメータがある場合はパラメータを付けて設定
-                clearLink.href = `${baseUrl}?${clearParams.toString()}`;
+                copyrightContainer.href = `${baseUrl}?${clearParams.toString()}`;
             }
             
-            copyrightContainer.appendChild(clearLink);
-            tagsWrapper.appendChild(copyrightContainer);
+            // コピーライトのテキスト
+            const copyrightText = document.createElement('span');
+            copyrightText.textContent = `${filterCopyright} ×`;
+            copyrightContainer.appendChild(copyrightText);
         }
         
         // タグフィルタが設定されている場合
         filterTags.forEach(tag => {
             // タグ全体をラップするコンテナ
-            const tagContainer = document.createElement('div');
+            const tagContainer = document.createElement('a');
             tagContainer.classList.add('active-filter-tag');
-            
-            // タグのテキスト
-            const tagText = document.createElement('span');
-            tagText.textContent = tag;
-            tagContainer.appendChild(tagText);
-            
-            // 解除ボタン (×マーク)
-            const clearLink = document.createElement('a');
-            clearLink.classList.add('filter-clear-button');
-            clearLink.textContent = ' ×';
+            tagsWrapper.appendChild(tagContainer);
             
             // 解除リンクのURLを生成（選択されたタグがないパラメータ）
             const clearParams = new URLSearchParams();
@@ -138,16 +123,17 @@ function FooterBarLayout() {
             const baseUrl = window.location.origin + window.location.pathname;
             if (clearParams.toString() === '') {
                 // パラメータがない場合はベースURLへ
-                clearLink.href = baseUrl;
+                tagContainer.href = baseUrl;
             } else {
                 // パラメータがある場合はパラメータを付けて設定
-                clearLink.href = `${baseUrl}?${clearParams.toString()}`;
+                tagContainer.href = `${baseUrl}?${clearParams.toString()}`;
             }
-            
-            tagContainer.appendChild(clearLink);
-            tagsWrapper.appendChild(tagContainer);
+
+            // タグのテキスト
+            const tagText = document.createElement('span');
+            tagText.textContent = `${tag} ×`;
+            tagContainer.appendChild(tagText);
         });
-        footerBar.appendChild(tagsWrapper);
     }
 }
 
