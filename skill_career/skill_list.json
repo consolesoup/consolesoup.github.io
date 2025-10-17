@@ -143,6 +143,62 @@
     {
       "name": "Firebase OAuth",
       "category": [ "3Dプログラミング", "モバイルアプリ" ]
+    },
+    {
+      "name": "HTML5",
+      "category": [ "Webフロントエンド" ]
+    },
+    {
+      "name": "CSS",
+      "category": [ "Webフロントエンド" ]
+    },
+    {
+      "name": "JavaScript",
+      "category": [ "Webフロントエンド" ]
+    },
+    {
+      "name": "WebGL",
+      "category": [ "Webフロントエンド" ]
+    },
+    {
+      "name": "HTML5 Canvas",
+      "category": [ "Webフロントエンド" ]
+    },
+    {
+      "name": "WordPress",
+      "category": [ "Webフロントエンド" ]
+    },
+    {
+      "name": "BootStrap",
+      "category": [ "Webフロントエンド" ]
+    },
+    {
+      "name": "PHP",
+      "category": [ "Webバックエンド" ]
+    },
+    {
+      "name": "Python",
+      "category": [ "Webバックエンド" ]
+    },
+    {
+      "name": "Google Clouds",
+      "category": [ "Webバックエンド" ]
+    },
+    {
+      "name": "Firebase DataBase",
+      "category": [ "Webバックエンド" ]
+    },
+    {
+      "name": "Firebase Realtime",
+      "category": [ "Webバックエンド" ]
+    },
+    {
+      "name": "AWS S3",
+      "category": [ "Webバックエンド" ]
+    },
+    {
+      "name": "AWS EC2",
+      "category": [ "Webバックエンド" ]
     }
   ]
 }
