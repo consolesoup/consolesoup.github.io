@@ -199,6 +199,86 @@
     {
       "name": "AWS EC2",
       "category": [ "Webバックエンド" ]
+    },
+    {
+      "name": "CLIP STUDIO PAINT",
+      "category": [ "画像加工" ]
+    },
+    {
+      "name": "Adobe Photoshop",
+      "category": [ "画像加工" ]
+    },
+    {
+      "name": "OpenCV for C++",
+      "category": [ "画像加工" ]
+    },
+    {
+      "name": "Visual Studio",
+      "category": [ "その他ツール" ]
+    },
+    {
+      "name": "Git",
+      "category": [ "その他ツール" ]
+    },
+    {
+      "name": "GitHub",
+      "category": [ "その他ツール" ]
+    },
+    {
+      "name": "GitLab",
+      "category": [ "その他ツール" ]
+    },
+    {
+      "name": "SourceTree",
+      "category": [ "その他ツール" ]
+    },
+    {
+      "name": "TortoiseGit",
+      "category": [ "その他ツール" ]
+    },
+    {
+      "name": "Redmine",
+      "category": [ "その他ツール" ]
+    },
+    {
+      "name": "BackLog",
+      "category": [ "その他ツール" ]
+    },
+    {
+      "name": "Jira",
+      "category": [ "その他ツール" ]
+    },
+    {
+      "name": "Confluence",
+      "category": [ "その他ツール" ]
+    },
+    {
+      "name": "Chatwork",
+      "category": [ "その他ツール" ]
+    },
+    {
+      "name": "Slack",
+      "category": [ "その他ツール" ]
+    },
+    {
+      "name": "Microsoft Teams",
+      "category": [ "その他ツール" ]
+    },
+    {
+      "name": "Discord",
+      "category": [ "その他ツール" ]
+    },
+    {
+      "name": "Google Gemini",
+      "category": [ "その他ツール" ]
+    },
+    {
+      "name": "Microsoft Copilot",
+      "category": [ "その他ツール" ]
+    },
+    {
+      "name": "ChatGPT",
+      "category": [ "その他ツール" ]
     }
   ]
 }

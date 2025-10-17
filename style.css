@@ -86,13 +86,13 @@ h3 {
 
 .skill-category {
     margin: 0 0 2px 0;
-    padding-bottom: 5px;
+    padding: 0px;
     color: #333;
     font-size: small;
-    border-bottom: 1px solid #eeeeee;
+    /*border-bottom: 1px solid #eeeeee;*/
 }
 
-.skill-taglist {
+.item-skill-list {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
@@ -101,7 +101,7 @@ h3 {
     border-top: 1px dashed #ccc;
 }
 
-.skill-tag {
+.item-skill {
     background-color: #f0f0f0;
     color: #555;
     padding: 4px 8px;
