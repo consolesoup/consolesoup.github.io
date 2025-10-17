@@ -1,0 +1,148 @@
+{
+  "skill_list": [
+    {
+      "name": "Unity",
+      "category": [ "3Dプログラミング" ]
+    },
+    {
+      "name": "C#",
+      "category": [ "3Dプログラミング" ]
+    },
+    {
+      "name": "Animation",
+      "category": [ "3Dプログラミング" ]
+    },
+    {
+      "name": "AssetBundle",
+      "category": [ "3Dプログラミング" ]
+    },
+    {
+      "name": "RenderPipeline",
+      "category": [ "3Dプログラミング" ]
+    },
+    {
+      "name": "Shader",
+      "category": [ "3Dプログラミング" ]
+    },
+    {
+      "name": "UniTask",
+      "category": [ "3Dプログラミング" ]
+    },
+    {
+      "name": "ARKit",
+      "category": [ "3Dプログラミング", "モバイルアプリ" ]
+    },
+    {
+      "name": "ARCore",
+      "category": [ "3Dプログラミング", "モバイルアプリ" ]
+    },
+    {
+      "name": "SteamVR SDK",
+      "category": [ "3Dプログラミング" ]
+    },
+    {
+      "name": "Photon SDK",
+      "category": [ "3Dプログラミング" ]
+    },
+    {
+      "name": "Agora SDK",
+      "category": [ "3Dプログラミング" ]
+    },
+    {
+      "name": "Blender",
+      "category": [ "3Dモデリング" ]
+    },
+    {
+      "name": "BlenderAPI for Python",
+      "category": [ "3Dモデリング" ]
+    },
+    {
+      "name": "Maya",
+      "category": [ "3Dモデリング" ]
+    },
+    {
+      "name": "Maya Python API",
+      "category": [ "3Dモデリング" ]
+    },
+    {
+      "name": "Adobe Substance 3D Painter",
+      "category": [ "3Dモデリング" ]
+    },
+    {
+      "name": "Android",
+      "category": [ "モバイルアプリ" ]
+    },
+    {
+      "name": "Google Play Console",
+      "category": [ "モバイルアプリ" ]
+    },
+    {
+      "name": "Android Studio",
+      "category": [ "モバイルアプリ" ]
+    },
+    {
+      "name": "Java",
+      "category": [ "モバイルアプリ" ]
+    },
+    {
+      "name": "iOS",
+      "category": [ "モバイルアプリ" ]
+    },
+    {
+      "name": "App Store Connect",
+      "category": [ "モバイルアプリ" ]
+    },
+    {
+      "name": "Xcode",
+      "category": [ "モバイルアプリ" ]
+    },
+    {
+      "name": "Swift",
+      "category": [ "モバイルアプリ" ]
+    },
+    {
+      "name": "Objective-C",
+      "category": [ "モバイルアプリ" ]
+    },
+    {
+      "name": "C++",
+      "category": [ "モバイルアプリ" ]
+    },
+    {
+      "name": "Flutter",
+      "category": [ "モバイルアプリ" ]
+    },
+    {
+      "name": "Dart",
+      "category": [ "モバイルアプリ" ]
+    },
+    {
+      "name": "React Native",
+      "category": [ "モバイルアプリ" ]
+    },
+    {
+      "name": "Push Notification",
+      "category": [ "モバイルアプリ" ]
+    },
+    {
+      "name": "Purchase",
+      "category": [ "モバイルアプリ" ]
+    },
+    {
+      "name": "GPS",
+      "category": [ "モバイルアプリ" ]
+    },
+    {
+      "name": "Bluetooth",
+      "category": [ "モバイルアプリ" ]
+    },
+    {
+      "name": "Firebase Realtime",
+      "category": [ "3Dプログラミング", "モバイルアプリ" ]
+    },
+    {
+      "name": "Firebase OAuth",
+      "category": [ "3Dプログラミング", "モバイルアプリ" ]
+    }
+  ]
+}

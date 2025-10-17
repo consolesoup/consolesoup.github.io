@@ -66,7 +66,54 @@ h3 {
     border-left: 5px solid #007bff; /* ポイントカラー（青）を左端に */
 }
 
-/* 上部固定カテゴリ */
+/*--------------------------------*
+ | Skill_Career
+ *--------------------------------*/
+.skill-list {
+    display: block;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    transition: transform 0.2s;
+    /*border-left: 5px solid #4CAF50;*/
+}
+
+.skill-list:hover {
+    transform: translateY(-3px);
+}
+
+.skill-category {
+    margin: 0 0 2px 0;
+    padding-bottom: 5px;
+    color: #333;
+    font-size: small;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.skill-taglist {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 4px;
+    padding-top: 4px;
+    border-top: 1px dashed #ccc;
+}
+
+.skill-tag {
+    background-color: #f0f0f0;
+    color: #555;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: xx-small;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+/*--------------------------------*
+ | Watchlist
+ *--------------------------------*/
 .sticky-category {
     position: sticky;
     top: 60px;
@@ -159,10 +206,12 @@ h3 {
     text-decoration: none;
 }
 
-/*常にブラウザの下部に固定*/
+/*--------------------------------*
+ | Footer
+ *--------------------------------*/
 .footer-bar {
     position: fixed;
-    bottom: 0;
+    bottom: 0; /*常にブラウザの下部に固定*/
     left: 0;
     width: 100%;
     /* デザイン */
