@@ -12,7 +12,7 @@ function LoadSkillData() {
     FooterBarLayout();
     
     // Jsonデータ取得
-    _loadSkillListJson('./skill_list.json');
+    _loadSkillListJson('./Data/skill_list.json');
     
     function _loadSkillListJson(filePath) {
         // Json取得
