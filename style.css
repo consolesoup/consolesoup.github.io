@@ -51,7 +51,7 @@ header .header-center {
 
 section {
     padding: 20px;
-    margin: 20px 10px 20px 10px;
+    margin: 20px auto 20px auto;
     max-width: 800px; /* “à—e‚Ì•‚ğ§ŒÀ‚µ‚Ä“Ç‚İ‚â‚·‚­‚·‚é */
     background: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
