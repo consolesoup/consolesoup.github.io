@@ -1,6 +1,7 @@
 var WatchList = [];
-var filterTags = [];
 var filterCopyright = null;
+var filterTags = [];
+var filterKeyword = null;
 document.addEventListener('DOMContentLoaded', LoadWatchListData);
 
 function LoadWatchListData() {
@@ -9,8 +10,10 @@ function LoadWatchListData() {
     
     // URLパラメータからフィルタリングパラメータ取得
     const urlParams = new URLSearchParams(window.location.search);
-    filterTags = urlParams.getAll('tag');
     filterCopyright = urlParams.get('copyright');
+    filterTags = urlParams.getAll('tag');
+    filterKeyword = urlParams.get('keyword');
+    if (filterKeyword === "") filterKeyword = null;
     FooterBarLayout();
     
     // 分割Jsonデータ取得
@@ -84,6 +87,7 @@ function FooterBarLayout() {
             filterTags.forEach(t => {
                 clearParams.append('tag', t);
             });
+            if (filterKeyword != null) clearParams.set('keyword', filterKeyword);
             
             // 解除リンクのhrefを設定
             const baseUrl = window.location.origin + window.location.pathname;
@@ -110,14 +114,13 @@ function FooterBarLayout() {
             
             // 解除リンクのURLを生成（選択されたタグがないパラメータ）
             const clearParams = new URLSearchParams();
-            if (filterCopyright != null) {
-                clearParams.append('copyright', filterCopyright);
-            }
+            if (filterCopyright != null) clearParams.append('copyright', filterCopyright);
             filterTags.forEach(t => {
                 if (t !== tag) {
                     clearParams.append('tag', t);
                 }
             });
+            if (filterKeyword != null) clearParams.set('keyword', filterKeyword);
             
             // 解除リンクのhrefを設定
             const baseUrl = window.location.origin + window.location.pathname;
@@ -157,8 +160,22 @@ function WatchListLayout() {
                 if (!Array.isArray(item.copyright)) return false;
                 if (!item.copyright.includes(filterCopyright)) return false;
             }
+            
             // タグフィルタ
             if (!Array.isArray(item.tag)) return false;
+            
+            // キーワードフィルタ
+            if (filterKeyword != null) {
+                const lowerCaseKeyword = filterKeyword.toLowerCase();
+                
+                // タイトル、コメントのいずれかにキーワードが含まれているかチェック
+                const titleMatch = item.title && item.title.toLowerCase().includes(lowerCaseKeyword);
+                const commentMatch = item.comment && item.comment.toLowerCase().includes(lowerCaseKeyword);
+                
+                // タイトルまたはコメントのどちらも一致しない場合は除外
+                if (!titleMatch && !commentMatch) return false;
+            }
+            
             return filterTags.every(requiredTag => item.tag.includes(requiredTag));
         });
         
@@ -246,6 +263,7 @@ function WatchListLayout() {
                         filterTags.forEach(t => {
                             newParams.append('tag', t);
                         });
+                        if (filterKeyword != null) newParams.set('keyword', filterKeyword);
                         
                         // リンク先を設定
                         copyrightLink.href = `${baseUrl}?${newParams.toString()}`;
@@ -276,6 +294,7 @@ function WatchListLayout() {
                         if (filterCopyright != null) newParams.append('copyright', filterCopyright);
                         filterTags.forEach(t => newParams.append('tag', t));
                         newParams.append('tag', tagStr);
+                        if (filterKeyword != null) newParams.set('keyword', filterKeyword);
                         
                         // タグが追加されたURLに更新
                         tagLink.href = `${baseUrl}?${newParams.toString()}`;
