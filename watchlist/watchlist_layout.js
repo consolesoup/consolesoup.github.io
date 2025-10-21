@@ -15,12 +15,12 @@ function LoadWatchListData() {
     
     // 分割Jsonデータ取得
     _loadLoopWatchListJson([
-        '1950-1969',
-        '1970-1979',
-        '1980-1989',
-        '1990-1999',
+        '2005-2009',
         '2000-2004',
-        '2005-2009'
+        '1990-1999',
+        '1980-1989',
+        '1970-1979',
+        '1950-1969',
     ]);
     
     function _loadLoopWatchListJson(periods) {
