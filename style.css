@@ -230,9 +230,17 @@ h3 {
     align-items: center;
 }
 
+/* 検索フォームのスタイル */
+.footer-search-wrapper {
+    display: flex;
+    gap: 5px;
+}
+
+/* フィルタタグリストのスタイル */
 .active-filter-tag-list {
     display: flex;
-    gap: 10px;
+    gap: 5px;
+    margin: auto 10px auto 10px;
 }
 
 /* 選択中のフィルタリングタグのデザイン */

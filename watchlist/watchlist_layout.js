@@ -68,6 +68,43 @@ function FooterBarLayout() {
     const footerBar = document.getElementById('footer-bar');
     footerBar.innerHTML = ''; // 内容をクリア
     
+    // 検索フォームをラップするコンテナ
+    const searchWrapper = document.createElement('div');
+    searchWrapper.classList.add('footer-search-wrapper');
+    footerBar.appendChild(searchWrapper); // フォームをフッターに追加
+    
+    // 検索テキストボックス
+    const searchInput = document.createElement('input');
+    searchInput.type = 'text';
+    searchInput.id = 'keyword-search-input';
+    searchInput.placeholder = 'キーワード検索...';
+    searchInput.value = filterKeyword;
+    searchWrapper.appendChild(searchInput);
+    
+    // 検索ボタン
+    const searchButton = document.createElement('button');
+    searchButton.textContent = '検索';
+    searchButton.id = 'keyword-search-button';
+    searchWrapper.appendChild(searchButton);
+    searchButton.onclick = () => {
+        const newParams = new URLSearchParams();
+        
+        // 選択中のtagとcopyrightパラメータを追加
+        if (filterCopyright != null) newParams.append('copyright', filterCopyright);
+        filterTags.forEach(t => newParams.append('tag', t));
+        
+        // キーワードがあればパラメータに追加
+        const keyword = searchInput.value.trim();
+        if (keyword != null && keyword !== "") newParams.set('keyword', keyword);
+        
+        // パラメータから遷移先のURL作成
+        let newUrl = window.location.origin + window.location.pathname;
+        if (newParams.toString()) newUrl += `?${newParams.toString()}`;
+        
+        // URLが変わっていたらページを遷移する
+        if (window.location.search != newUrl) window.location.href = newUrl;
+    };
+    
     // filterTags配列の要素数でチェック
     if (filterTags.length > 0 || filterCopyright != null) {
         // 複数のフィルタリングのコンテナ
@@ -153,7 +190,7 @@ function WatchListLayout() {
     
     // パラメータからフィルタリング
     let filteredList = WatchList;
-    if (filterTags.length > 0 || filterCopyright != null) {
+    if (filterTags.length > 0 || filterCopyright != null || filterKeyword != null) {
         filteredList = WatchList.filter(item => {
             // コピーライトフィルタ
             if (filterCopyright != null) {
