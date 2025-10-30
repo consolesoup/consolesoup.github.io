@@ -1,12 +1,42 @@
 [
-  "../WatchList/watchlist_1950年代-1960年代.json",
-  "../WatchList/watchlist_1970年代.json",
-  "../WatchList/watchlist_1980年代.json",
-  "../WatchList/watchlist_1990年代.json",
-  "../WatchList/watchlist_2000年代前半.json",
-  "../WatchList/watchlist_2000年代後半.json",
-  "../WatchList/watchlist_2010年代前半.json",
-  "../WatchList/watchlist_2010年代後半.json",
-  "../WatchList/watchlist_2020年代前半.json",
-  "../WatchList/watchlist_2020年代後半.json"
+  {
+    "title": "1950年代-1960年代",
+    "url": "../WatchList/watchlist_1950年代-1960年代.json"
+  },
+  {
+    "title": "1970年代",
+    "url": "../WatchList/watchlist_1970年代.json"
+  },
+  {
+    "title": "1980年代",
+    "url": "../WatchList/watchlist_1980年代.json"
+  },
+  {
+    "title": "1990年代",
+    "url": "../WatchList/watchlist_1990年代.json"
+  },
+  {
+    "title": "2000年代前半",
+    "url": "../WatchList/watchlist_2000年代前半.json"
+  },
+  {
+    "title": "2000年代後半",
+    "url": "../WatchList/watchlist_2000年代後半.json"
+  },
+  {
+    "title": "2010年代前半",
+    "url": "../WatchList/watchlist_2010年代前半.json"
+  },
+  {
+    "title": "2010年代後半",
+    "url": "../WatchList/watchlist_2010年代後半.json"
+  },
+  {
+    "title": "2020年代前半",
+    "url": "../WatchList/watchlist_2020年代前半.json"
+  },
+  {
+    "title": "2020年代後半",
+    "url": "../WatchList/watchlist_2020年代後半.json"
+  }
 ]

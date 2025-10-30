@@ -93,8 +93,12 @@ def get_wiki_contents_list_from_year():
         try:
             with open(jsonFilePath, "w", encoding="utf-8") as f:
                 json.dump(newJsonList, f, ensure_ascii=False, indent=2)
-                saveJsonFileList.append(jsonFilePath)
                 print(f"{jsonFilePath}へ保存しました。")
+                
+                jsonFileData = {}
+                jsonFileData["title"] = yearText
+                jsonFileData["url"] = jsonFilePath
+                saveJsonFileList.append(jsonFileData)
         except Exception as e:
             print(f"×save watchlist_{yearText}.json:{e}")
     
