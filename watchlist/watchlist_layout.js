@@ -18,12 +18,12 @@ function LoadWatchListData() {
     
     // 分割Jsonデータ取得
     _loadLoopWatchListJson([
-        '2005-2009',
-        '2000-2004',
-        '1990-1999',
-        '1980-1989',
-        '1970-1979',
-        '1950-1969',
+        '2000年代後半',
+        '2000年代前半',
+        '1990年代',
+        '1980年代',
+        '1970年代',
+        '1950年代-1960年代',
     ]);
     
     function _loadLoopWatchListJson(periods) {
@@ -32,7 +32,7 @@ function LoadWatchListData() {
             WatchListLayout();
             return;
         }
-        watchListSection.innerHTML = `<p>${periods[0]}年のデータ読み込み中...</p>`;
+        watchListSection.innerHTML = `<p>${periods[0]}のデータ読み込み中...</p>`;
         _loadWatchListJson(`./Data/watchlist_${periods[0]}.json`, () => {
             periods.shift();
             _loadLoopWatchListJson(periods);

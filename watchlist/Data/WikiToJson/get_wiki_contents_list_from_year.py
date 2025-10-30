@@ -5,19 +5,19 @@ import re
 from datetime import datetime
 
 def get_wiki_contents_list_from_year():
-    #----------------------------------
-    # YearListデータの取得
-    #----------------------------------
+    # 年代リストデータの取得
     yearList = []
-    with open("./Data/YearList.json", "r", encoding="utf-8") as f:
-        yearList = json.load(f)
+    try:
+        with open("./Data/YearList.json", "r", encoding="utf-8") as f:
+            yearList = json.load(f)
+    except Exception as e:
+        print(f"×get YearList.json:{e}")
+        return
     #print(yearList)
     
     for yearData in yearList:
         #print(yearData)
-        #----------------------------------
         # 年代別にコンテンツリスト取得
-        #----------------------------------
         if "text" not in yearData: continue
         if "url" not in yearData:
             print(f"Jsonから{yearData.text}のurlが取得できませんでした")
@@ -27,9 +27,7 @@ def get_wiki_contents_list_from_year():
             print(f"{yearData["url"]}のHTMLが取得できませんでした")
             continue
         
-        #----------------------------------
         # コンテンツリストの成型
-        #----------------------------------
         contentsList = []
         # HTMLからSectionタグを検索
         html = BeautifulSoup(htmlText, "html.parser")
@@ -110,6 +108,10 @@ def get_wiki_contents_list_from_year():
                         
                         startTime = datetime.strptime(startTimeText, "%Y年%m月%d日")
                         endTime = datetime.strptime(endTimeText, "%Y年%m月%d日")
+                        
+                        # 終了日のほうが過去になっている場合は開始日と合わせる
+                        if startTime > endTime:
+                            endTime = startTime
                     except Exception as e:
                         print(f"×text to time:{e}\ntimeText[{timeText}]\nfrom[{tds[0].get_text()}]")
                     
@@ -134,9 +136,7 @@ def get_wiki_contents_list_from_year():
                     contents["end_date"] = endTime.strftime("%Y/%m/%d")
                     contentsList.append(contents)
         
-        #----------------------------------
         # コンテンツリストの保存
-        #----------------------------------
         with open(f"./Data/{yearData["text"]}.json", "w", encoding="utf-8") as f:
             json.dump(contentsList, f, ensure_ascii=False, indent=2)
         print(f"{yearData["text"]}のコンテンツリストを保存しました。")

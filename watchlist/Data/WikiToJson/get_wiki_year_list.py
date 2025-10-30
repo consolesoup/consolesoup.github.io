@@ -4,14 +4,14 @@ from bs4 import BeautifulSoup
 
 def get_wiki_year_list():
     #----------------------------------
-    # YearListデータの取得
+    # 年代リストデータの取得
     #----------------------------------
     title = "日本のテレビアニメ作品一覧"
     htmlText = wiki_to_json_common.get_wikipedia_html(title)
     if not htmlText: return
     
     #----------------------------------
-    # YearListデータの成型
+    # 年代リストデータの成型
     #----------------------------------
     yearList = []
     # HTMLからSectionタグを検索
@@ -40,7 +40,7 @@ def get_wiki_year_list():
             yearList.append(linkdata)
     
     #----------------------------------
-    # YearListデータの保存
+    # 年代リストデータの保存
     #----------------------------------
     yearListFileName = "YearList"
     with open(f"./Data/{yearListFileName}.json", "w", encoding="utf-8") as f:
