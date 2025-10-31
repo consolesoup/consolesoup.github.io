@@ -42,6 +42,9 @@ def get_wiki_contents_list_from_year():
             print(f"×get yearText:{e}\nyearText[{yearText}]\nfrom[{yearData["text"]}]")
         #print(yearText)
         
+        inputValue = input(f"{yearText}年のコンテンツリストからJsonを作成して更新しますか？[y/n]:")
+        if inputValue != "y": continue
+        
         jsonList = []
         jsonFilePath = f"../WatchList/watchlist_{yearText}.json"
         try:
@@ -87,14 +90,60 @@ def get_wiki_contents_list_from_year():
                 if "favorite" in jsonData:
                     contentsData["favorite"] = jsonData["favorite"]
             
+            if "url" in contents:
+                htmlText = wiki_to_json_common.get_wikipedia_html(contents["url"])
+                if htmlText:
+                    #print(htmlText)
+                    
+                    copyrightList = []
+                    
+                    # HTMLからSectionタグを検索
+                    html = BeautifulSoup(htmlText, "html.parser")
+                    section_tags = html.find_all("section")
+                    for section_tag in section_tags:
+                        #print(section_tag)
+                        # SectionタグからHeaderタグを検索
+                        header_tags = section_tag.find_all(["h2", "h3"])
+                        for header_tag in header_tags:
+                            #print(header_tag)
+                            header_id = header_tag.get("id")
+                            print(f"●{header_id}●")
+                            
+                            # スタッフ情報から制作陣を取得
+                            if header_id == "スタッフ":
+                                li_tags = section_tag.find_all("li")
+                                for li_tag in li_tags:
+                                    #print(li_tag)
+                                    li_tag_text = li_tag.get_text()
+                                    #print(f"text:{li_tag_text}")
+                                    staffData = li_tag_text.split(" - ")
+                                    index = 0
+                                    for staff in staffData:
+                                        if index == 0:
+                                            # 最初は担当役職なので無視
+                                            index = 1
+                                        else:
+                                            # 2つ目以降は担当者なので追加されていなければ追加
+                                            index = index+1
+                                            if staff not in copyrightList:
+                                                copyrightList.append(staff)
+                            else:
+                                print(section_tag)
+                    
+                    contentsData["copyright"] = copyrightList
+                    #print(copyrightList)
+            else:
+                print(f"Jsonから{yearData.text}のurlが取得できませんでした")
+            
             newJsonList.append(contentsData)
             print(f"　{contentsData["start_date"]}～{contentsData["end_date"]}：{"★" if contentsData["favorite"] else "☆"}-{"●" if contentsData["watch"] else "○"} - {contentsData["title"]}")
-            print(f"　{contentsData["copyright"]}-{contentsData["tag"]}")
+            print(f"　{contentsData["copyright"]}")
+            print(f"　{contentsData["tag"]}")
         
         # Jsonの保存
         try:
             with open(jsonFilePath, "w", encoding="utf-8") as f:
-                json.dump(newJsonList, f, ensure_ascii=False, indent=2)
+                #json.dump(newJsonList, f, ensure_ascii=False, indent=2)
                 print(f"{jsonFilePath}へ保存しました。")
                 
                 jsonFileData = {}
@@ -107,7 +156,7 @@ def get_wiki_contents_list_from_year():
     # 保存したJsonのパスリストを保存
     try:
         with open("../watchlist.json", "w", encoding="utf-8") as f:
-            json.dump(saveJsonFileList, f, ensure_ascii=False, indent=2)
+            #json.dump(saveJsonFileList, f, ensure_ascii=False, indent=2)
             print(f"../watchlist.jsonへ保存しました。")
     except Exception as e:
         print(f"×save watchlist.json:{e}")

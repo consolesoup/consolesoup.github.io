@@ -6,8 +6,7 @@ def get_wiki_year_list():
     #----------------------------------
     # 年代リストデータの取得
     #----------------------------------
-    title = "日本のテレビアニメ作品一覧"
-    htmlText = wiki_to_json_common.get_wikipedia_html(title)
+    htmlText = wiki_to_json_common.get_wikipedia_html("日本のテレビアニメ作品一覧")
     if not htmlText: return
     
     #----------------------------------
@@ -16,28 +15,30 @@ def get_wiki_year_list():
     yearList = []
     # HTMLからSectionタグを検索
     html = BeautifulSoup(htmlText, "html.parser")
-    sections = html.find_all("section")
-    for section in sections:
+    section_tags = html.find_all("section")
+    for section_tag in section_tags:
         # Sectionタグから特定のHeaderタグを探す
         findHeader = False
-        headers = section.find_all(["h2", "h3"])
-        for header in headers:
-            if "年代別" not in header.get("id"): continue
+        header_tags = section_tag.find_all(["h2", "h3"])
+        for header_tag in header_tags:
+            header_id = header_tag.get("id")
+            if "年代別" not in header_id: continue
             findHeader = True
-            #print(header.get("id"))
+            #print(header_id)
             break
         if not findHeader: continue
         
-        # SectionタグからLinkタグを検索
-        links = section.find_all("a")
-        for link in links:
-            text = link.get_text()
+        # Sectionタグからaタグを検索
+        a_tags = section_tag.find_all("a")
+        for a_tag in a_tags:
+            text = a_tag.get_text()
             if "年代" not in text: continue
-            href = link.get("href", "")
+            href = a_tag.get("href", "")
             linkdata = {}
             linkdata["text"] = text
             linkdata["url"] = href
             yearList.append(linkdata)
+            print(text)
     
     #----------------------------------
     # 年代リストデータの保存

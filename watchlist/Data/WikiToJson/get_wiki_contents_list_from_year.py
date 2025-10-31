@@ -19,6 +19,9 @@ def get_wiki_contents_list_from_year():
         #print(yearData)
         # 年代別にコンテンツリスト取得
         if "text" not in yearData: continue
+        inputValue = input(f"{yearData["text"]}から最新の情報を取得して更新しますか？[y/n]:")
+        if inputValue != "y": continue
+        
         if "url" not in yearData:
             print(f"Jsonから{yearData.text}のurlが取得できませんでした")
             continue
@@ -31,35 +34,35 @@ def get_wiki_contents_list_from_year():
         contentsList = []
         # HTMLからSectionタグを検索
         html = BeautifulSoup(htmlText, "html.parser")
-        sections = html.find_all("section")
-        for section in sections:
+        section_tags = html.find_all("section")
+        for section_tag in section_tags:
             # Sectionタグから特定のHeaderタグを探す
             headerYear = 0
-            headers = section.find_all(["h2", "h3"])
-            for header in headers:
-                headerId = header.get("id")
-                index = headerId.find("年")
+            header_tags = section_tag.find_all(["h2", "h3"])
+            for header_tag in header_tags:
+                header_id = header_tag.get("id")
+                index = header_id.find("年")
                 if index == -1: continue
-                #print(headerId)
-                headerYear = int(headerId[:index])
+                #print(header_id)
+                headerYear = int(header_id[:index])
                 #print(headerYear)
                 break
             if headerYear == 0: continue
             
             # Sectionタグから特定のTableタグを検索
-            tables = section.find_all("table")
-            for table in tables:
-                if table.get("class") is None: continue
-                if "wikitable" not in table.get("class"): continue
+            table_tags = section_tag.find_all("table")
+            for table_tag in table_tags:
+                if table_tag.get("class") is None: continue
+                if "wikitable" not in table_tag.get("class"): continue
                 # TableタグからTrタグを検索
-                trs = table.find_all("tr")
-                for tr in trs:
+                tr_tags = table_tag.find_all("tr")
+                for tr_tag in tr_tags:
                     # TrタグからTdタグを検索
-                    tds = tr.find_all("td")
-                    if len(tds) <= 1: continue
+                    td_tags = tr_tag.find_all("td")
+                    if len(td_tags) <= 1: continue
                     
                     # 日付テキストの取得（1月7日 - 4月8日）
-                    timeText = tds[0].get_text()
+                    timeText = td_tags[0].get_text()
                     try:
                         # 不要な文字列を削除
                         timeText = re.sub(r"\[.*?\]", "", timeText)
@@ -69,7 +72,7 @@ def get_wiki_contents_list_from_year():
                         timeText = timeText.replace("-","")
                         timeText = timeText.replace("・","")
                     except Exception as e:
-                        print(f"×get timeText:{e}\ntimeText[{timeText}]\nfrom[{tds[0].get_text()}]")
+                        print(f"×get timeText:{e}\ntimeText[{timeText}]\nfrom[{td_tags[0].get_text()}]")
                     #print(f"{timeText} from {tds[0].get_text()}")
                     
                     # 日付テキストから日付データ生成
@@ -116,20 +119,20 @@ def get_wiki_contents_list_from_year():
                         if startTime > endTime:
                             endTime = startTime
                     except Exception as e:
-                        print(f"×text to time:{e}\ntimeText[{timeText}]\nfrom[{tds[0].get_text()}]")
+                        print(f"×text to time:{e}\ntimeText[{timeText}]\nfrom[{td_tags[0].get_text()}]")
                     
                     # タイトルを取得
                     title = None
                     url = None
                     try:
-                        titleLink = tds[1].find("a")
+                        titleLink = td_tags[1].find("a")
                         if titleLink:
                             title = titleLink.get_text()
                             url = titleLink.get("href")
                         else:
-                            title = tds[1].get_text()
+                            title = td_tags[1].get_text()
                     except Exception as e:
-                        print(f"×{tds[1]}:{e}")
+                        print(f"×{td_tags[1]}:{e}")
                         continue
                     
                     contents = {}
