@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', LoadWatchListData);
 
 function LoadWatchListData() {
     const watchListSection = document.getElementById('watchlist');
-    watchListSection.innerHTML = '<p>データ読み込み中...</p>';
+    watchListSection.innerHTML = '<p>データリスト読み込み中...</p>';
     
     // URLパラメータからフィルタリングパラメータ取得
     const urlParams = new URLSearchParams(window.location.search);
@@ -16,30 +16,48 @@ function LoadWatchListData() {
     if (filterKeyword === "") filterKeyword = null;
     FooterBarLayout();
     
-    // 分割Jsonデータ取得
-    _loadLoopWatchListJson([
-        '2000年代後半',
-        '2000年代前半',
-        '1990年代',
-        '1980年代',
-        '1970年代',
-        '1950年代-1960年代',
-    ]);
+    // ファイルパスリスト取得
+    _fetchJsonData(`./Data/watchlist.json`, (jsonData) => {
+        if (jsonData == null)
+        {
+            watchListSection.innerHTML = '<p>データリストの読み込みに失敗しました...</p>';
+            return;
+        }
+        // json内のパス配列を順番に取得
+        _loadLoopWatchListJson(jsonData);
+    })
     
     function _loadLoopWatchListJson(periods) {
+        // 配列が空になったら次の処理に移動
         if (!Array.isArray(periods) || periods.length == 0)
         {
             WatchListLayout();
             return;
         }
-        watchListSection.innerHTML = `<p>${periods[0]}のデータ読み込み中...</p>`;
-        _loadWatchListJson(`./Data/watchlist_${periods[0]}.json`, () => {
+        
+        // 配列からファイル情報を取得
+        const data = periods[0];
+        const fileTitle = data.title;
+        const filePath = data.url.replace("../", "./Data/");
+        if (filePath == null) {
+            periods.shift();
+            _loadLoopWatchListJson(periods);
+        }
+        
+        // ファイル情報からデータ取得
+        watchListSection.innerHTML = `<p>${fileTitle}のデータ読み込み中...</p>`;
+        _fetchJsonData(filePath, (jsonData) => {
+            if (jsonData != null) {
+                if (Array.isArray(jsonData)) {
+                    WatchList = WatchList.concat(jsonData);
+                }
+            }
             periods.shift();
             _loadLoopWatchListJson(periods);
         });
     }
     
-    function _loadWatchListJson(filePath, callback) {
+    function _fetchJsonData(filePath, callback) {
         // Json取得
         fetch(filePath)
             .then(response => {
@@ -49,17 +67,11 @@ function LoadWatchListData() {
                 return response.json();
             })
             .then(data => {
-                // Jsonに要素があり配列なら追加する
-                if ('watchlist' in data) {
-                    if (Array.isArray(data.watchlist)) {
-                        WatchList = data.watchlist.concat(WatchList);
-                    }
-                }
-                callback();
+                callback(data);
             })
             .catch(error => {
                 console.error('WatchlistLoadFailed:', error);
-                callback();
+                callback(null);
             });
     }
 }
@@ -189,56 +201,52 @@ function WatchListLayout() {
     const baseUrl = window.location.origin + window.location.pathname;
     
     // パラメータからフィルタリング
-    let filteredList = WatchList;
-    if (filterTags.length > 0 || filterCopyright != null || filterKeyword != null) {
-        filteredList = WatchList.filter(item => {
-            // コピーライトフィルタ
-            if (filterCopyright != null) {
-                if (!Array.isArray(item.copyright)) return false;
-                if (!item.copyright.includes(filterCopyright)) return false;
-            }
-            
-            // タグフィルタ
-            if (!Array.isArray(item.tag)) return false;
-            
-            // キーワードフィルタ
-            if (filterKeyword != null) {
-                const lowerCaseKeyword = filterKeyword.toLowerCase();
-                
-                // タイトル、コメントのいずれかにキーワードが含まれているかチェック
-                const titleMatch = item.title && item.title.toLowerCase().includes(lowerCaseKeyword);
-                const commentMatch = item.comment && item.comment.toLowerCase().includes(lowerCaseKeyword);
-                
-                // タイトルまたはコメントのどちらも一致しない場合は除外
-                if (!titleMatch && !commentMatch) return false;
-            }
-            
-            return filterTags.every(requiredTag => item.tag.includes(requiredTag));
-        });
+    let filteredList = WatchList.filter(contents => {
+        // 未視聴のものは含まない
+        if (!contents.watch) return false;
         
-        if (filteredList.length === 0) {
-            const notFoundText = document.createElement('p');
-            notFoundText.textContent = "";
-            if (filterCopyright != null) {
-                if (filterTags.length > 0) {
-                    notFoundText.textContent = `「${filterTags.join(' / ')}」のタグ全てに一致する「${filterCopyright}」の作品は見つかりませんでした。`;
-                } else {
-                    notFoundText.textContent = `「${filterCopyright}」の作品は見つかりませんでした。`;
-                }
-            }
-            else notFoundText.textContent += `「${filterTags.join(' / ')}」のタグ全てに一致する作品は見つかりませんでした。`;
-            watchlistSection.appendChild(notFoundText);
-            return;
+        // コピーライトフィルタ
+        if (filterCopyright != null) {
+            if (!Array.isArray(contents.copyright)) return false;
+            if (!contents.copyright.includes(filterCopyright)) return false;
         }
+        
+        // タグフィルタ
+        if (filterTags.length > 0) {
+            if (!Array.isArray(contents.tag)) return false;
+            if (!filterTags.every(requiredTag => contents.tag.includes(requiredTag))) return false;
+        }
+            
+        // キーワードフィルタ
+        if (filterKeyword != null) {
+            const lowerCaseKeyword = filterKeyword.toLowerCase();
+                
+            // タイトル、コメントのいずれかにキーワードが含まれているかチェック
+            const titleMatch = item.title && item.title.toLowerCase().includes(lowerCaseKeyword);
+            const commentMatch = item.comment && item.comment.toLowerCase().includes(lowerCaseKeyword);
+                
+            // タイトルまたはコメントのどちらも一致しない場合は除外
+            if (!titleMatch && !commentMatch) return false;
+        }
+            
+        return true;
+    });
+    
+    if (filteredList.length === 0) {
+        const notFoundText = document.createElement('p');
+        notFoundText.textContent = `該当する作品は見つかりませんでした。`;
+        watchlistSection.appendChild(notFoundText);
+        return;
     }
     
     // 年代別にグループ分け
-    const groupedByYear = filteredList.reduce((acc, item) => {
-        const year = item.year;
+    const groupedByYear = filteredList.reduce((acc, contents) => {
+        const start_date = new Date(contents.start_date);
+        const year = start_date.getUTCFullYear();
         if (!acc[year]) {
             acc[year] = [];
         }
-        acc[year].push(item);
+        acc[year].push(contents);
         return acc;
     }, {});
     
@@ -247,7 +255,7 @@ function WatchListLayout() {
     
     // ソートされた年代ごとに処理を行う
     sortedYears.forEach(year => {
-        const itemsInYear = groupedByYear[year];
+        const contentsInYear = groupedByYear[year];
         
         // 年代のヘッダーを作成
         const yearHeader = document.createElement('h3');
@@ -258,21 +266,21 @@ function WatchListLayout() {
         // 年代ごとのリストを作成
         const ul = document.createElement('ul');
 
-        // その年代の各アイテムをリストに追加
-        itemsInYear.forEach(item => {
+        // その年代の各コンテンツをリストに追加
+        contentsInYear.forEach(contents => {
             // リストアイテム
             const li = document.createElement('li');
             li.classList.add('item-list');
 
             // タイトル
             const itemTitle = document.createElement('h4');
-            itemTitle.textContent = item.title;
+            itemTitle.textContent = contents.title;
             itemTitle.classList.add('item-title');
             li.appendChild(itemTitle);
             
             // コメント
             const commentText = document.createElement('p');
-            commentText.textContent = item.comment;
+            commentText.textContent = contents.comment;
             commentText.classList.add('item-comment');
             li.appendChild(commentText)
             
@@ -280,9 +288,37 @@ function WatchListLayout() {
             const tagContainer = document.createElement('div');
             tagContainer.classList.add('tag-container');
             
+            // おすすめ追加
+            if (contents.favorite) {
+                const favoriteLink = document.createElement('a');
+                favoriteLink.innerText = "おすすめ";
+                favoriteLink.classList.add('item-tag-recommend');
+                
+                // おすすめが選択中かどうかで分岐
+                if (filterTags.includes(favoriteLink.innerText)) {
+                    // 選択中のタグの場合、ページを更新しないようにする
+                    favoriteLink.href = `#`;
+                    favoriteLink.onclick = (e) => {
+                        e.preventDefault();
+                    };
+                } else {
+                    // 未選択のタグの場合、URLにタグを追加
+                    const newParams = new URLSearchParams();
+                    if (filterCopyright != null) newParams.append('copyright', filterCopyright);
+                    filterTags.forEach(t => newParams.append('tag', t));
+                    newParams.append('tag', favoriteLink.innerText);
+                    if (filterKeyword != null) newParams.set('keyword', filterKeyword);
+                    
+                    // おすすめが追加されたURLに更新
+                    favoriteLink.href = `${baseUrl}?${newParams.toString()}`;
+                    favoriteLink.onclick = null;
+                }
+                tagContainer.appendChild(favoriteLink);
+            }
+            
             // コピーライトを追加
-            if (Array.isArray(item.copyright)) {
-                for (const copyrightStr of item.copyright) {
+            if (Array.isArray(contents.copyright)) {
+                for (const copyrightStr of contents.copyright) {
                     const copyrightLink = document.createElement('a');
                     copyrightLink.innerText = copyrightStr;
                     copyrightLink.classList.add('item-copyright');
@@ -311,12 +347,11 @@ function WatchListLayout() {
             }
             
             // タグの追加
-            if (Array.isArray(item.tag)) {
-                for (const tagStr of item.tag) {
+            if (Array.isArray(contents.tag)) {
+                for (const tagStr of contents.tag) {
                     const tagLink = document.createElement('a');
                     tagLink.innerText = tagStr;
-                    if (tagStr === 'おすすめ') tagLink.classList.add('item-tag-recommend');
-                    else tagLink.classList.add('item-tag');
+                    tagLink.classList.add('item-tag');
 
                     // タグが選択中かどうかで分岐
                     if (filterTags.includes(tagStr)) {
