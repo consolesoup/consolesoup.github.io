@@ -88,6 +88,8 @@ def get_wiki_contents_list_from_year():
                     contentsData["favorite"] = jsonData["favorite"]
             
             newJsonList.append(contentsData)
+            print(f"　{contentsData["start_date"]}～{contentsData["end_date"]}：{"★" if contentsData["favorite"] else "☆"}-{"●" if contentsData["watch"] else "○"} - {contentsData["title"]}")
+            print(f"　{contentsData["copyright"]}-{contentsData["tag"]}")
         
         # Jsonの保存
         try:

@@ -58,18 +58,19 @@ def get_wiki_contents_list_from_year():
                     tds = tr.find_all("td")
                     if len(tds) <= 1: continue
                     
-                    # 日付テキストの取得
+                    # 日付テキストの取得（1月7日 - 4月8日）
                     timeText = tds[0].get_text()
                     try:
                         # 不要な文字列を削除
                         timeText = re.sub(r"\[.*?\]", "", timeText)
-                        timeText = re.sub(r"(.*?)", "", timeText)
+                        timeText = re.sub(r"\(.*?\)", "", timeText)
                         timeText = re.sub(r"（.*?）", "", timeText)
                         timeText = timeText.replace(" ","")
                         timeText = timeText.replace("-","")
                         timeText = timeText.replace("・","")
                     except Exception as e:
                         print(f"×get timeText:{e}\ntimeText[{timeText}]\nfrom[{tds[0].get_text()}]")
+                    #print(f"{timeText} from {tds[0].get_text()}")
                     
                     # 日付テキストから日付データ生成
                     startTime = datetime(headerYear, 1, 1)
@@ -79,6 +80,7 @@ def get_wiki_contents_list_from_year():
                         times = []
                         if "日" in timeText:
                             times = timeText.split("日")
+                        #print(times)
                         
                         # 仮で年始を登録
                         startTimeText = startTime.strftime("%Y年%m月%d日")
@@ -106,6 +108,7 @@ def get_wiki_contents_list_from_year():
                                 else:
                                     endTimeText = f"{headerYear}年{timeText1}日"
                         
+                        #print(f"{startTimeText} - {endTimeText}")
                         startTime = datetime.strptime(startTimeText, "%Y年%m月%d日")
                         endTime = datetime.strptime(endTimeText, "%Y年%m月%d日")
                         
@@ -135,6 +138,7 @@ def get_wiki_contents_list_from_year():
                     contents["start_date"] = startTime.strftime("%Y/%m/%d")
                     contents["end_date"] = endTime.strftime("%Y/%m/%d")
                     contentsList.append(contents)
+                    print(f"　{contents["start_date"]}～{contents["end_date"]}：{contents["title"]}")
         
         # コンテンツリストの保存
         with open(f"./Data/{yearData["text"]}.json", "w", encoding="utf-8") as f:
