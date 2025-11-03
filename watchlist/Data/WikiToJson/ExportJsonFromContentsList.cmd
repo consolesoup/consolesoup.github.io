@@ -9,6 +9,6 @@ IF ERRORLEVEL 1 (
 )
 
 REM Pythonスクリプトを実行
-python export_json_from_contents_list.py
+py export_json_from_contents_list.py
 
 pause

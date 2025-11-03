@@ -1,14 +1,20 @@
-@echo off
+ï»¿@echo off
 chcp 65001
 
-REM •K—v‚Èƒ‰ƒCƒuƒ‰ƒŠ‚ª‚È‚¯‚ê‚ÎƒCƒ“ƒXƒg[ƒ‹
+REM å¿…è¦ãªãƒ©ã‚¤ãƒ–ãƒ©ãƒªãŒãªã‘ã‚Œã°ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«
+py -m pip show requests >nul 2>&1
+IF ERRORLEVEL 1 (
+Â  Â  echo requests ã‚’ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ä¸­...
+Â  Â  py -m pip install requests
+)
+
 pip show beautifulsoup4 >nul 2>&1
 IF ERRORLEVEL 1 (
-    echo beautifulsoup4 ‚ğƒCƒ“ƒXƒg[ƒ‹’†...
+    echo beautifulsoup4 ã‚’ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ä¸­...
     pip install beautifulsoup4
 )
 
-REM PythonƒXƒNƒŠƒvƒg‚ğÀs
-python get_wiki_year_list.py
+REM Pythonã‚¹ã‚¯ãƒªãƒ—ãƒˆã‚’å®Ÿè¡Œ
+py get_wiki_year_list.py
 
 pause
