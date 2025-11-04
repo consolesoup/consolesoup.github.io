@@ -19,6 +19,7 @@ def get_wiki_contents_list_from_year():
     autoYearRequest = False
     inputValue = input(f"全ての年代別のJsonを自動で作成して更新しますか？[y/n]:")
     if inputValue == "y": autoYearRequest = True
+    
     autoWikiRequest = False
     inputValue = input(f"全ての年代別のコンテンツについてWikiページからデータを取得してコンテンツ情報を更新しますか？[y/n]:")
     if inputValue == "y": autoWikiRequest = True
@@ -107,7 +108,13 @@ def get_wiki_contents_list_from_year():
                 if "favorite" in jsonData:
                     contentsData["favorite"] = jsonData["favorite"]
             
-            if autoWikiRequest:
+            wikiRequest = False
+            if autoWikiRequest: wikiRequest = True
+            else:
+                inputValue = input(f"{contentsData["title"]}についてWikiページからデータを取得してコンテンツ情報を更新しますか？[y/n]:")
+                if inputValue == "y": wikiRequest = True
+            
+            if wikiRequest:
                 if "url" in contents:
                     htmlText = wiki_to_json_common.get_wikipedia_html(contents["url"])
                     if htmlText:
@@ -128,6 +135,8 @@ def get_wiki_contents_list_from_year():
                                 print(f"●{header_id}●")
                                 
                                 if header_id == "概要":
+                                    continue
+                                elif header_id == "あらすじ":
                                     continue
                                 elif header_id == "作品一覧":
                                     continue
@@ -157,47 +166,17 @@ def get_wiki_contents_list_from_year():
                                     continue
                                 elif header_id == "背景":
                                     continue
-                                elif header_id == "出演者":
-                                    li_tags = section_tag.find_all("li")
-                                    for li_tag in li_tags:
-                                        #print(li_tag)
-                                        li_tag_text = li_tag.get_text()
-                                        #print(f"text:{li_tag_text}")
-                                        staffDataList = []
-                                        if "：" in li_tag_text:
-                                            staffDataList = li_tag_text.split("：")
-                                        
-                                        if len(staffDataList) == 0:
-                                            print(f"text:{li_tag_text}")
-                                        else:
-                                            # 最初は担当役職なので削除
-                                            position = staffDataList.pop(0)
-                                            # お話
-                                            for staffData in staffDataList:
-                                                # 不要な文字列を削除
-                                                staffData = re.sub(r"\[.*?\]", "", staffData)
-                                                staffData = re.sub(r"\(.*?\)", "", staffData)
-                                                staffData = re.sub(r"（.*?）", "", staffData)
-                                                staffData = staffData.replace("　","")
-                                                staffData = staffData.replace(" ","")
-                                                staffList = []
-                                                if "、" in staffData:
-                                                    staffList = staffData.split("、")
-                                                else:
-                                                    staffList = [staffData]
-                                                
-                                                for staff in staffList:
-                                                    # 担当者が追加されていなければ追加
-                                                    if staff not in copyrightList:
-                                                        copyrightList.append(staff)
-                                                        print(f"{position} : {staff}")
                                 elif header_id == "番組内容":
                                     continue
                                 elif header_id == "備考":
                                     continue
                                 elif header_id == "その後":
                                     continue
-                                elif header_id == "スタッフ":
+                                elif header_id == "声の出演":
+                                    continue
+                                elif header_id == "キャスト":
+                                    continue
+                                elif header_id == "スタッフ" or header_id == "出演者":
                                     li_tags = section_tag.find_all("li")
                                     for li_tag in li_tags:
                                         #print(li_tag)
@@ -214,9 +193,18 @@ def get_wiki_contents_list_from_year():
                                         else:
                                             # 最初は担当役職なので削除
                                             position = staffDataList.pop(0)
-                                            # 原案,作画,演出,音声,声の出演,製作
-                                            # 演奏,原作,担当,構成と絵,音楽
-                                            # 監督,助監督,演出・デザイン・作画,美術
+                                            addPositions = ["原作","原案"]
+                                            if "原作" not in li_tag_text:
+                                                addPositions.append("監督")
+
+                                            addStaff = False
+                                            if "助監督" not in position:
+                                                for addPosition in addPositions:
+                                                    if addStaff:
+                                                        break
+                                                    if addPosition in position:
+                                                        addStaff = True
+                                            
                                             for staffData in staffDataList:
                                                 # 不要な文字列を削除
                                                 staffData = re.sub(r"\[.*?\]", "", staffData)
@@ -233,9 +221,22 @@ def get_wiki_contents_list_from_year():
                                                 for staff in staffList:
                                                     # 担当者が追加されていなければ追加
                                                     if staff not in copyrightList:
-                                                        copyrightList.append(staff)
-                                                        print(f"{position} : {staff}")
+                                                        if addStaff:
+                                                            copyrightList.append(staff)
+                                                            print(f"＋{position} : {staff}")
+                                                        else:
+                                                            print(f"　{position} : {staff}")
+                                elif header_id == "現存する映像":
+                                    continue
+                                elif header_id == "放送時間":
+                                    continue
+                                elif header_id == "主題歌":
+                                    continue
                                 elif header_id == "補足":
+                                    continue
+                                elif header_id == "豆知識":
+                                    continue
+                                elif header_id == "その他":
                                     continue
                                 elif header_id == "脚注":
                                     continue
