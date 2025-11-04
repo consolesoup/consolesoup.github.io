@@ -1,11 +1,11 @@
-﻿@echo off
+@echo off
 chcp 65001
 
 REM 必要なライブラリがなければインストール
-py -m pip show requests >nul 2>&1
+python -m pip show requests >nul 2>&1
 IF ERRORLEVEL 1 (
     echo requests をインストール中...
-    py -m pip install requests
+    python -m pip install requests
 )
 
 pip show beautifulsoup4 >nul 2>&1
@@ -15,6 +15,6 @@ IF ERRORLEVEL 1 (
 )
 
 REM Pythonスクリプトを実行
-py get_wiki_year_list.py
+python get_wiki_year_list.py
 
 pause
