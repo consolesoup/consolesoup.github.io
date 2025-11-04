@@ -143,13 +143,20 @@ def get_wiki_contents_list_from_year():
                         print(f"×{td_tags[1]}:{e}")
                         continue
                     
-                    contents = {}
-                    contents["title"] = title
-                    contents["url"] = url
-                    contents["start_date"] = startTime.strftime("%Y/%m/%d")
-                    contents["end_date"] = endTime.strftime("%Y/%m/%d")
-                    contentsList.append(contents)
-                    print(f"　{contents["start_date"]}～{contents["end_date"]}：{contents["title"]}")
+                    # まだ追加されていないコンテンツの場合はリストに追加する
+                    startTimeText = startTime.strftime("%Y/%m/%d")
+                    endTimeText = endTime.strftime("%Y/%m/%d")
+                    jsonData = next((data for data in contentsList if title in data["title"] and startTimeText in data["start_date"] and endTimeText in data["end_date"]), None)
+                    if jsonData:
+                        print(f"　{jsonData["title"]}は既に追加されているためスキップ")
+                    else:
+                        contents = {}
+                        contents["title"] = title
+                        contents["url"] = url
+                        contents["start_date"] = startTimeText
+                        contents["end_date"] = endTimeText
+                        contentsList.append(contents)
+                        print(f"　{contents["start_date"]}～{contents["end_date"]}：{contents["title"]}")
         
         # コンテンツリストの保存
         with open(f"./Data/{yearData["text"]}.json", "w", encoding="utf-8") as f:
