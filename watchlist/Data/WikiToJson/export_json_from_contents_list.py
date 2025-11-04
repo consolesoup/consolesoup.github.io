@@ -15,6 +15,11 @@ def get_wiki_contents_list_from_year():
         return
     #print(yearList)
     
+    # 最初に自動更新するかどうか確認
+    autoRequest = False
+    inputValue = input(f"全ての年代別のJsonを自動で作成して更新しますか？[y/n]:")
+    if inputValue == "y": autoRequest = True
+    
     saveJsonFileList = []
     for yearData in yearList:
         # コンテンツリスト取得
@@ -40,20 +45,29 @@ def get_wiki_contents_list_from_year():
             yearText = yearText.replace("作品一覧","")
         except Exception as e:
             print(f"×get yearText:{e}\nyearText[{yearText}]\nfrom[{yearData["text"]}]")
+        jsonFilePath = f"../WatchList/watchlist_{yearText}.json"
         #print(yearText)
         
-        inputValue = input(f"{yearText}年のコンテンツリストからJsonを作成して更新しますか？[y/n]:")
-        if inputValue != "y": continue
+        if not autoRequest:
+            inputValue = input(f"{yearText}年のコンテンツリストからJsonを作成して更新しますか？[y/n]:")
+            if inputValue != "y":
+                print(f"{jsonFilePath}は更新せずに既存のものを再利用します。")
+                
+                jsonFileData = {}
+                jsonFileData["title"] = yearText
+                jsonFileData["url"] = jsonFilePath
+                saveJsonFileList.append(jsonFileData)
+                continue
         
+        # 保存されているJsonデータを取得
         jsonList = []
-        jsonFilePath = f"../WatchList/watchlist_{yearText}.json"
         try:
             with open(jsonFilePath, "r", encoding="utf-8") as f:
                 jsonList = json.load(f)
         except Exception as e:
             print(f"×get watchlist_{yearText}.json:{e}")
         
-        # コンテンツリストを詳細にしてJsonデータにする
+        # Jsonデータを最新に更新する
         newJsonList = []
         for contents in contentsList:
             # コンテンツタイトル取得
@@ -90,50 +104,159 @@ def get_wiki_contents_list_from_year():
                 if "favorite" in jsonData:
                     contentsData["favorite"] = jsonData["favorite"]
             
-            if "url" in contents:
-                htmlText = wiki_to_json_common.get_wikipedia_html(contents["url"])
-                if htmlText:
-                    #print(htmlText)
-                    
-                    copyrightList = []
-                    
-                    # HTMLからSectionタグを検索
-                    html = BeautifulSoup(htmlText, "html.parser")
-                    section_tags = html.find_all("section")
-                    for section_tag in section_tags:
-                        #print(section_tag)
-                        # SectionタグからHeaderタグを検索
-                        header_tags = section_tag.find_all(["h2", "h3"])
-                        for header_tag in header_tags:
-                            #print(header_tag)
-                            header_id = header_tag.get("id")
-                            print(f"●{header_id}●")
-                            
-                            # スタッフ情報から制作陣を取得
-                            if header_id == "スタッフ":
-                                li_tags = section_tag.find_all("li")
-                                for li_tag in li_tags:
-                                    #print(li_tag)
-                                    li_tag_text = li_tag.get_text()
-                                    #print(f"text:{li_tag_text}")
-                                    staffData = li_tag_text.split(" - ")
-                                    index = 0
-                                    for staff in staffData:
-                                        if index == 0:
-                                            # 最初は担当役職なので無視
-                                            index = 1
-                                        else:
-                                            # 2つ目以降は担当者なので追加されていなければ追加
-                                            index = index+1
-                                            if staff not in copyrightList:
-                                                copyrightList.append(staff)
-                            else:
-                                print(section_tag)
-                    
-                    contentsData["copyright"] = copyrightList
-                    #print(copyrightList)
+            wikiRequest = False
+            if autoRequest: wikiRequest = True
             else:
-                print(f"Jsonから{yearData.text}のurlが取得できませんでした")
+                inputValue = input(f"{contentsData["title"]}についてWikiページからデータを取得してコンテンツ情報を更新しますか？[y/n]:")
+                if inputValue == "y": wikiRequest = True
+            
+            if wikiRequest:
+                if "url" in contents:
+                    htmlText = wiki_to_json_common.get_wikipedia_html(contents["url"])
+                    if htmlText:
+                        #print(htmlText)
+                    
+                        copyrightList = []
+                    
+                        # HTMLからSectionタグを検索
+                        html = BeautifulSoup(htmlText, "html.parser")
+                        section_tags = html.find_all("section")
+                        for section_tag in section_tags:
+                            #print(section_tag)
+                            # SectionタグからHeaderタグを検索
+                            header2_tags = section_tag.find_all("h2")
+                            for header_tag in header2_tags:
+                                #print(header_tag)
+                                header_id = header_tag.get("id")
+                                print(f"●{header_id}●")
+                                
+                                if header_id == "概要":
+                                    continue
+                                elif header_id == "作品一覧":
+                                    continue
+                                elif header_id == "当時のテレビ欄での記載":
+                                    continue
+                                elif header_id == "「発見」の経緯":
+                                    continue
+                                elif header_id == "オープニング（演出）":
+                                    continue
+                                elif header_id == "エンディング（演出）":
+                                    continue
+                                elif header_id == "視聴率":
+                                    continue
+                                elif header_id == "各話リスト":
+                                    continue
+                                elif header_id == "商品化権の概念の確立":
+                                    continue
+                                elif header_id == "制作秘話":
+                                    continue
+                                elif header_id == "劇場版":
+                                    continue
+                                elif header_id == "評価":
+                                    continue
+                                elif header_id == "放送局":
+                                    continue
+                                elif header_id == "ネット配信":
+                                    continue
+                                elif header_id == "背景":
+                                    continue
+                                elif header_id == "出演者":
+                                    li_tags = section_tag.find_all("li")
+                                    for li_tag in li_tags:
+                                        #print(li_tag)
+                                        li_tag_text = li_tag.get_text()
+                                        #print(f"text:{li_tag_text}")
+                                        staffDataList = []
+                                        if "：" in li_tag_text:
+                                            staffDataList = li_tag_text.split("：")
+                                        
+                                        if len(staffDataList) == 0:
+                                            print(f"text:{li_tag_text}")
+                                        else:
+                                            # 最初は担当役職なので削除
+                                            position = staffDataList.pop(0)
+                                            # お話
+                                            for staffData in staffDataList:
+                                                # 不要な文字列を削除
+                                                staffData = re.sub(r"\[.*?\]", "", staffData)
+                                                staffData = re.sub(r"\(.*?\)", "", staffData)
+                                                staffData = re.sub(r"（.*?）", "", staffData)
+                                                staffData = staffData.replace("　","")
+                                                staffData = staffData.replace(" ","")
+                                                staffList = []
+                                                if "、" in staffData:
+                                                    staffList = staffData.split("、")
+                                                else:
+                                                    staffList = [staffData]
+                                                
+                                                for staff in staffList:
+                                                    # 担当者が追加されていなければ追加
+                                                    if staff not in copyrightList:
+                                                        copyrightList.append(staff)
+                                                        print(f"{position} : {staff}")
+                                elif header_id == "番組内容":
+                                    continue
+                                elif header_id == "備考":
+                                    continue
+                                elif header_id == "その後":
+                                    continue
+                                elif header_id == "スタッフ":
+                                    li_tags = section_tag.find_all("li")
+                                    for li_tag in li_tags:
+                                        #print(li_tag)
+                                        li_tag_text = li_tag.get_text()
+                                        #print(f"text:{li_tag_text}")
+                                        staffDataList = []
+                                        if " - " in li_tag_text:
+                                            staffDataList = li_tag_text.split(" - ")
+                                        elif "：" in li_tag_text:
+                                            staffDataList = li_tag_text.split("：")
+                                        
+                                        if len(staffDataList) == 0:
+                                            print(f"text:{li_tag_text}")
+                                        else:
+                                            # 最初は担当役職なので削除
+                                            position = staffDataList.pop(0)
+                                            # 原案,作画,演出,音声,声の出演,製作
+                                            # 演奏,原作,担当,構成と絵,音楽
+                                            # 監督,助監督,演出・デザイン・作画,美術
+                                            for staffData in staffDataList:
+                                                # 不要な文字列を削除
+                                                staffData = re.sub(r"\[.*?\]", "", staffData)
+                                                staffData = re.sub(r"\(.*?\)", "", staffData)
+                                                staffData = re.sub(r"（.*?）", "", staffData)
+                                                staffData = staffData.replace("　","")
+                                                staffData = staffData.replace(" ","")
+                                                staffList = []
+                                                if "、" in staffData:
+                                                    staffList = staffData.split("、")
+                                                else:
+                                                    staffList = [staffData]
+                                                
+                                                for staff in staffList:
+                                                    # 担当者が追加されていなければ追加
+                                                    if staff not in copyrightList:
+                                                        copyrightList.append(staff)
+                                                        print(f"{position} : {staff}")
+                                elif header_id == "補足":
+                                    continue
+                                elif header_id == "脚注":
+                                    continue
+                                elif header_id == "参考文献":
+                                    continue
+                                elif header_id == "関連項目":
+                                    continue
+                                elif header_id == "外部リンク":
+                                    continue
+                                else:
+                                    print(section_tag)
+                        
+                        contentsData["copyright"] = copyrightList
+                        #print(copyrightList)
+                else:
+                    print(f"Jsonから{yearData.text}のurlが取得できませんでした")
+            else:
+                print(f"作成済みのコンテンツ情報を参考にコンテンツ情報を作成しました。")
             
             newJsonList.append(contentsData)
             print(f"　{contentsData["start_date"]}～{contentsData["end_date"]}：{"★" if contentsData["favorite"] else "☆"}-{"●" if contentsData["watch"] else "○"} - {contentsData["title"]}")
@@ -143,7 +266,7 @@ def get_wiki_contents_list_from_year():
         # Jsonの保存
         try:
             with open(jsonFilePath, "w", encoding="utf-8") as f:
-                #json.dump(newJsonList, f, ensure_ascii=False, indent=2)
+                json.dump(newJsonList, f, ensure_ascii=False, indent=2)
                 print(f"{jsonFilePath}へ保存しました。")
                 
                 jsonFileData = {}
@@ -156,7 +279,7 @@ def get_wiki_contents_list_from_year():
     # 保存したJsonのパスリストを保存
     try:
         with open("../watchlist.json", "w", encoding="utf-8") as f:
-            #json.dump(saveJsonFileList, f, ensure_ascii=False, indent=2)
+            json.dump(saveJsonFileList, f, ensure_ascii=False, indent=2)
             print(f"../watchlist.jsonへ保存しました。")
     except Exception as e:
         print(f"×save watchlist.json:{e}")
