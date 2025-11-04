@@ -15,12 +15,20 @@ def get_wiki_contents_list_from_year():
         return
     #print(yearList)
     
+    # 最初に自動更新するかどうか確認
+    autoRequest = False
+    inputValue = input(f"全ての年代別のリストデータを自動で最新の情報を取得して更新しますか？[y/n]:")
+    if inputValue == "y": autoRequest = True
+    
     for yearData in yearList:
         #print(yearData)
         # 年代別にコンテンツリスト取得
         if "text" not in yearData: continue
-        inputValue = input(f"{yearData["text"]}から最新の情報を取得して更新しますか？[y/n]:")
-        if inputValue != "y": continue
+        
+        # 自動更新が無効の場合は更新するか確認する
+        if not autoRequest:
+            inputValue = input(f"{yearData["text"]}から最新の情報を取得して更新しますか？[y/n]:")
+            if inputValue != "y": continue
         
         if "url" not in yearData:
             print(f"Jsonから{yearData.text}のurlが取得できませんでした")
