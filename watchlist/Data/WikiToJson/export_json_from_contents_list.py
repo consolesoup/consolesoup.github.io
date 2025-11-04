@@ -16,9 +16,12 @@ def get_wiki_contents_list_from_year():
     #print(yearList)
     
     # 最初に自動更新するかどうか確認
-    autoRequest = False
+    autoYearRequest = False
     inputValue = input(f"全ての年代別のJsonを自動で作成して更新しますか？[y/n]:")
-    if inputValue == "y": autoRequest = True
+    if inputValue == "y": autoYearRequest = True
+    autoWikiRequest = False
+    inputValue = input(f"全ての年代別のコンテンツについてWikiページからデータを取得してコンテンツ情報を更新しますか？[y/n]:")
+    if inputValue == "y": autoWikiRequest = True
     
     saveJsonFileList = []
     for yearData in yearList:
@@ -48,7 +51,7 @@ def get_wiki_contents_list_from_year():
         jsonFilePath = f"../WatchList/watchlist_{yearText}.json"
         #print(yearText)
         
-        if not autoRequest:
+        if not autoYearRequest:
             inputValue = input(f"{yearText}年のコンテンツリストからJsonを作成して更新しますか？[y/n]:")
             if inputValue != "y":
                 print(f"{jsonFilePath}は更新せずに既存のものを再利用します。")
@@ -104,13 +107,7 @@ def get_wiki_contents_list_from_year():
                 if "favorite" in jsonData:
                     contentsData["favorite"] = jsonData["favorite"]
             
-            wikiRequest = False
-            if autoRequest: wikiRequest = True
-            else:
-                inputValue = input(f"{contentsData["title"]}についてWikiページからデータを取得してコンテンツ情報を更新しますか？[y/n]:")
-                if inputValue == "y": wikiRequest = True
-            
-            if wikiRequest:
+            if autoWikiRequest:
                 if "url" in contents:
                     htmlText = wiki_to_json_common.get_wikipedia_html(contents["url"])
                     if htmlText:
