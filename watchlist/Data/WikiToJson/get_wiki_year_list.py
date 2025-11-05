@@ -3,15 +3,11 @@ import json
 from bs4 import BeautifulSoup
 
 def get_wiki_year_list():
-    #----------------------------------
     # 年代リストデータの取得
-    #----------------------------------
     htmlText = wiki_to_json_common.get_wikipedia_html("日本のテレビアニメ作品一覧")
     if not htmlText: return
     
-    #----------------------------------
     # 年代リストデータの成型
-    #----------------------------------
     yearList = []
     # HTMLからSectionタグを検索
     html = BeautifulSoup(htmlText, "html.parser")
@@ -40,12 +36,7 @@ def get_wiki_year_list():
             yearList.append(linkdata)
             print(text)
     
-    #----------------------------------
     # 年代リストデータの保存
-    #----------------------------------
-    yearListFileName = "YearList"
-    with open(f"./Data/{yearListFileName}.json", "w", encoding="utf-8") as f:
-        json.dump(yearList, f, ensure_ascii=False, indent=2)
-    print(f"{yearListFileName} にリンクを保存しました。")
+    wiki_to_json_common.save_json_file("./Data/YearList.json",yearList)
 
 get_wiki_year_list()

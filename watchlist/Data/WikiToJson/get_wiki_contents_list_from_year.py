@@ -6,12 +6,8 @@ from datetime import datetime
 
 def get_wiki_contents_list_from_year():
     # 年代リストデータの取得
-    yearList = []
-    try:
-        with open("./Data/YearList.json", "r", encoding="utf-8") as f:
-            yearList = json.load(f)
-    except Exception as e:
-        print(f"×get YearList.json:{e}")
+    yearList = wiki_to_json_common.load_json_file("./Data/YearList.json")
+    if not isinstance(yearList,list):
         return
     #print(yearList)
     
@@ -159,8 +155,6 @@ def get_wiki_contents_list_from_year():
                         print(f"　{contents["start_date"]}～{contents["end_date"]}：{contents["title"]}")
         
         # コンテンツリストの保存
-        with open(f"./Data/{yearData["text"]}.json", "w", encoding="utf-8") as f:
-            json.dump(contentsList, f, ensure_ascii=False, indent=2)
-        print(f"{yearData["text"]}のコンテンツリストを保存しました。")
+        wiki_to_json_common.save_json_file(f"./Data/{yearData["text"]}.json",contentsList)
 
 get_wiki_contents_list_from_year()

@@ -1,6 +1,8 @@
 ﻿import requests
 import urllib.parse
+import json
 
+# Wikiページ情報のHTML取得
 def get_wikipedia_html(title):
     if not title or title == None:
         print(f"×PageTitle is None")
@@ -27,4 +29,24 @@ def get_wikipedia_html(title):
         return response.text
     else:
         print(f"{title} のHTML取得に失敗 [{response.status_code}]")
+        return None
+
+# Jsonファイルの保存
+def save_json_file(path, data):
+    try:
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
+            print(f"{path}へ保存しました。")
+            return True
+    except Exception as e:
+        print(f"×save json file:{path} - {e}")
+        return False
+
+# Jsonファイルのロード
+def load_json_file(path):
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except Exception as e:
+        print(f"×get YearList.json:{e}")
         return None
