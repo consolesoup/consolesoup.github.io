@@ -1,4 +1,5 @@
-﻿import wiki_to_json_common
+﻿from turtle import position
+import wiki_to_json_common
 import json
 from bs4 import BeautifulSoup
 import re
@@ -159,12 +160,12 @@ def update_wiki_contents_data(contentsData:dict, url:str):
     #print(htmlText)
     html = BeautifulSoup(htmlText, "html.parser")
     
-    contentsData["copyright"] = get_copyright_from_wiki(html)
+    contentsData["copyright"] = get_copyright_from_wiki(html,contentsData["title"])
     
     return contentsData
 
 # WikiページからCopyrightを作成
-def get_copyright_from_wiki(html:BeautifulSoup):
+def get_copyright_from_wiki(html:BeautifulSoup,title:str):
     print("------Copyright from Wiki------")
     copyrightList = []
     
@@ -174,31 +175,154 @@ def get_copyright_from_wiki(html:BeautifulSoup):
         tbodyTag = tableTag.find("tbody")
         if tbodyTag:
             trTags = tbodyTag.find_all("tr")
-            animeTrFlag = False
+            addPositions = []
             for trTag in trTags:
+                #print(trTag)
+                # テーブルを行ごとに取得
                 thTag = trTag.find("th")
                 if not thTag: continue
                 
-                thText = thTag.get_text()
-                if "アニメ" in thText:
+                th_colspan = thTag.get("colspan")
+                if th_colspan != None:
+                    thText = thTag.get_text()
                     print(f"〇{thText}")
-                    animeTrFlag = True
-                elif animeTrFlag:
+                    # どの役職をCopyrightとして追加するか
+                    if title == thText:
+                        addPositions = ["原作","監督","製作","制作"]
+                    elif "アニメ" in thText:
+                        addPositions = ["原作","監督","製作","制作","アニメーション制作"]
+                    elif "漫画" in thText:
+                        addPositions = ["作者","原作","原案","作画","出版社","掲載誌"]
+                    else:
+                        addPositions = []
+                else:
                     tdTag = trTag.find("td")
-                    if tdTag:
-                        if "原作" in thText:
-                            print(f"＋{thText}：{tdTag.get_text()}")
-                        elif "監督" in thText:
-                            print(f"＋{thText}：{tdTag.get_text()}")
-                        elif "製作" in thText:
-                            print(f"＋{thText}：{tdTag.get_text()}")
-                        elif "制作" in thText:
-                            print(f"＋{thText}：{tdTag.get_text()}")
-                        else: print(f"　{thText}：{tdTag.get_text()}")
-                else: print(f"　{thText}")
+                    if not tdTag: continue
+                    
+                    # 役職情報の取得
+                    thText = thTag.get_text(separator="[BR]", strip=True)
+                    positionText = remove_parentheses_text(thText,["（）"])
+                    
+                    # 役職リストの取得
+                    positionTexts = []
+                    if "・" in positionText: positionTexts = re.split(r"・", positionText)
+                    if len(positionTexts) == 0: positionTexts = [positionText]
+                    positions = []
+                    for position in positionTexts:
+                        position = position.strip()
+                        if position.endswith("など"): position = position[:-2]
+                        if position:
+                            positions.append(position)
+                    
+                    # 名前情報の取得
+                    tdText = tdTag.get_text(separator="[BR]", strip=True)
+                    nameText = remove_parentheses_text(tdText,["（）"])
+                    
+                    # 名前リストの取得
+                    nameTexts = []
+                    if "[BR]" in nameText: nameTexts = re.split(r"\[BR\]|、", nameText)
+                    else: nameTexts = [nameText]
+                    
+                    names = []
+                    for name in nameTexts:
+                        name = name.strip()
+                        if name.startswith("→ "): name = name[2:]
+                        if name.endswith("など"): name = name[:-2]
+                        if name.endswith("ほか"): name = name[:-2]
+                        if name:
+                            names.append(name)
+                    
+                    # Copyrightとして追加する必要があるか判別
+                    addCopyright = False
+                    for position in positions:
+                        if addCopyright: break
+                        for addPosition in addPositions:
+                            if addPosition == position:
+                                addCopyright = True
+                                break
+                    
+                    if addCopyright:
+                        for name in names:
+                            for position in positions:
+                                copyrightList = add_copyright_list(copyrightList,name,position)
+                        print(f"＋{positions}：{names}")
+                    else: print(f"　{positions}：{names}")
+                    
+                    # 変更履歴をログ出力
+                    if positionText != thText:
+                        print(f"　　{positionText} ← {thText}")
+                    if positions != [positionText]:
+                        print(f"　　{positions} ← {positionText}")
+                    if nameText != tdText:
+                        print(f"　　{nameText} ← {tdText}")
+                    if names != [nameText]:
+                        print(f"　　{names} ← {nameText}")
         else: print(f"table(infobox) find not tbody: {tableTag}")
     else: print("html find not table(infobox)")
     
     return copyrightList
+
+def add_copyright_list(copyrightList:list,name:str,position:str):
+    # リストから一致するデータを取得
+    index = -1
+    copyrightData = {}
+    copyrightData["name"] = name
+    for i, copyright in enumerate(copyrightList):
+        if "name" not in copyright:
+            continue
+        if copyright["name"] == name:
+            copyrightData = copyright
+            index = i
+            break
+    
+    # データの役職リストの型チェック
+    if "positions" not in copyrightData:
+        copyrightData["positions"] = []
+    if not isinstance(copyrightData["positions"],list):
+        copyrightData["positions"] = []
+    
+    # データの役職リストに役職を追加
+    if position not in copyrightData["positions"]:
+        copyrightData["positions"].append(position)
+    
+    if 0 <= index and index < len(copyrightList):
+        copyrightList[index] = copyrightData
+    else: copyrightList.append(copyrightData)
+    
+    return copyrightList
+
+# 文字列から括弧とその中の文字を消す
+def remove_parentheses_text(text:str,parentheses:list):
+    removeText = ""
+    parenthesesCount = {}
+    for keyText in parentheses:
+        if len(keyText) < 2:
+            continue
+        parenthesesCount[keyText] = 0
+    
+    # 括弧とその中の文字以外を取得
+    for char in text:
+        # 括弧が始まるか
+        for keyText in parenthesesCount.keys():
+            if char == keyText[0]:
+                parenthesesCount[keyText] = parenthesesCount[keyText]+1
+                        
+        # 括弧の中にいるか
+        inParentheses = False
+        for keyText in parenthesesCount.keys():
+            if parenthesesCount[keyText] > 0:
+                inParentheses = True
+                break
+                        
+        # 括弧の外の文字なら追加
+        if not inParentheses:
+            removeText = removeText+char
+                        
+        # 括弧が終わるか
+        for keyText in parenthesesCount.keys():
+            if char == keyText[1]:
+                parenthesesCount[keyText] = parenthesesCount[keyText]-1
+    
+    return removeText
 
 get_wiki_contents_list_from_year()
