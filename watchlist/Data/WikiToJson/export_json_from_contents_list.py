@@ -69,6 +69,8 @@ def get_wiki_contents_list_from_year():
             if "start_date" not in contents: continue
             if "end_date" not in contents: continue
             
+            print(f"======{contentsData["title"]}======")
+            
             # コンテンツ情報の初期化
             contentsData = initialize_contents_data(contents)
             
@@ -79,7 +81,6 @@ def get_wiki_contents_list_from_year():
             wikiRequest = False
             if autoWikiRequest: wikiRequest = True
             else:
-                print("===============================")
                 inputValue = input(f"{contentsData["title"]}についてWikiページからデータを取得してコンテンツ情報を更新しますか？[y/n]:")
                 if inputValue == "y": wikiRequest = True
             
@@ -166,10 +167,10 @@ def update_wiki_contents_data(contentsData:dict, url:str):
 
 # WikiページからCopyrightを作成
 def get_copyright_from_wiki(html:BeautifulSoup,title:str):
-    print("------Copyright from Wiki------")
     copyrightList = []
     
     # infoboxのテーブルタグから作品情報を取得
+    print("------Copyright from infobox in Wiki------")
     tableTag = html.find("table", class_="infobox")
     if tableTag:
         tbodyTag = tableTag.find("tbody")
@@ -200,33 +201,33 @@ def get_copyright_from_wiki(html:BeautifulSoup,title:str):
                     if not tdTag: continue
                     
                     # 役職情報の取得
-                    thText = thTag.get_text(separator="[BR]", strip=True)
-                    positionText = remove_parentheses_text(thText,["（）"])
+                    thText = thTag.get_text(separator="<br>", strip=True)
+                    positionText = remove_parentheses_text(thText,["（）","[]"])
                     
                     # 役職リストの取得
-                    positionTexts = []
-                    if "・" in positionText: positionTexts = re.split(r"・", positionText)
+                    positionTexts = re.split(r"・", positionText)
                     if len(positionTexts) == 0: positionTexts = [positionText]
+                    
                     positions = []
                     for position in positionTexts:
-                        position = position.strip()
+                        position = position.replace(" ","").replace("　","")
                         if position.endswith("など"): position = position[:-2]
                         if position:
                             positions.append(position)
                     
                     # 名前情報の取得
-                    tdText = tdTag.get_text(separator="[BR]", strip=True)
-                    nameText = remove_parentheses_text(tdText,["（）"])
+                    tdText = tdTag.get_text(separator="<br>", strip=True)
+                    nameText = remove_parentheses_text(tdText,["（）","[]","『』"])
                     
                     # 名前リストの取得
-                    nameTexts = []
-                    if "[BR]" in nameText: nameTexts = re.split(r"\[BR\]|、", nameText)
-                    else: nameTexts = [nameText]
+                    nameTexts = re.split(r"<br>|、", nameText)
+                    if len(nameTexts) == 0: nameTexts = [nameText]
                     
                     names = []
                     for name in nameTexts:
-                        name = name.strip()
-                        if name.startswith("→ "): name = name[2:]
+                        name = name.replace(" ","").replace("　","")
+                        if name.startswith("→"): name = name[1:]
+                        if name.endswith("→"): name = name[:-1]
                         if name.endswith("など"): name = name[:-2]
                         if name.endswith("ほか"): name = name[:-2]
                         if name:
