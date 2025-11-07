@@ -4,7 +4,21 @@
     "start_date": "1958/07/14",
     "end_date": "1958/07/14",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "鷲角博",
+        "positions": [
+          "原作",
+          "監督"
+        ]
+      },
+      {
+        "name": "日本テレビ",
+        "positions": [
+          "製作"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -64,7 +78,14 @@
     "start_date": "1963/04/07",
     "end_date": "1965/04/01",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "手塚治虫",
+        "positions": [
+          "原作"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -74,7 +95,33 @@
     "start_date": "1963/09/04",
     "end_date": "1964/02/23",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "小島功",
+        "positions": [
+          "作者",
+          "原作"
+        ]
+      },
+      {
+        "name": "徳間書店",
+        "positions": [
+          "出版社"
+        ]
+      },
+      {
+        "name": "アサヒ芸能",
+        "positions": [
+          "掲載誌"
+        ]
+      },
+      {
+        "name": "エイケン",
+        "positions": [
+          "製作"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -84,7 +131,26 @@
     "start_date": "1963/10/20",
     "end_date": "1965/11/24",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "横山光輝",
+        "positions": [
+          "原作"
+        ]
+      },
+      {
+        "name": "渡辺米彦",
+        "positions": [
+          "監督"
+        ]
+      },
+      {
+        "name": "エイケン",
+        "positions": [
+          "製作"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -94,7 +160,51 @@
     "start_date": "1963/11/07",
     "end_date": "1964/12/31",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "平井和正",
+        "positions": [
+          "原作",
+          "原案"
+        ]
+      },
+      {
+        "name": "桑田次郎",
+        "positions": [
+          "作画"
+        ]
+      },
+      {
+        "name": "講談社",
+        "positions": [
+          "出版社"
+        ]
+      },
+      {
+        "name": "週刊少年マガジン",
+        "positions": [
+          "掲載誌"
+        ]
+      },
+      {
+        "name": "河島治之",
+        "positions": [
+          "監督"
+        ]
+      },
+      {
+        "name": "エイケン",
+        "positions": [
+          "アニメーション制作"
+        ]
+      },
+      {
+        "name": "TBS",
+        "positions": [
+          "製作"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -104,7 +214,20 @@
     "start_date": "1963/11/25",
     "end_date": "1965/08/16",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "大野寛夫",
+        "positions": [
+          "原作"
+        ]
+      },
+      {
+        "name": "東映",
+        "positions": [
+          "アニメーション制作"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -134,7 +257,20 @@
     "start_date": "1964/06/07",
     "end_date": "1965/08/31",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "白土三平",
+        "positions": [
+          "原作"
+        ]
+      },
+      {
+        "name": "東映",
+        "positions": [
+          "アニメーション制作"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -144,7 +280,39 @@
     "start_date": "1964/08/03",
     "end_date": "1965/09/27",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "手塚治虫",
+        "positions": [
+          "作者",
+          "原作"
+        ]
+      },
+      {
+        "name": "集英社",
+        "positions": [
+          "出版社"
+        ]
+      },
+      {
+        "name": "少年ブック",
+        "positions": [
+          "掲載誌"
+        ]
+      },
+      {
+        "name": "浜本征三",
+        "positions": [
+          "監督"
+        ]
+      },
+      {
+        "name": "東京ムービー",
+        "positions": [
+          "アニメーション制作"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -154,7 +322,21 @@
     "start_date": "1965/01/03",
     "end_date": "1965/01/03",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "ロバート・ルイス・スチーブンソン",
+        "positions": [
+          "原作"
+        ]
+      },
+      {
+        "name": "手塚プロダクション",
+        "positions": [
+          "アニメーション制作",
+          "製作"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -164,7 +346,32 @@
     "start_date": "1965/01/07",
     "end_date": "1966/01/20",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "久松文雄",
+        "positions": [
+          "原作"
+        ]
+      },
+      {
+        "name": "河島治之",
+        "positions": [
+          "監督"
+        ]
+      },
+      {
+        "name": "エイケン",
+        "positions": [
+          "アニメーション制作"
+        ]
+      },
+      {
+        "name": "TBS",
+        "positions": [
+          "製作"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -174,7 +381,78 @@
     "start_date": "1965/02/01",
     "end_date": "1965/11/29",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "深川鉄次",
+        "positions": [
+          "原作"
+        ]
+      },
+      {
+        "name": "後藤みねお",
+        "positions": [
+          "原作",
+          "作画"
+        ]
+      },
+      {
+        "name": "太田欣二",
+        "positions": [
+          "原作"
+        ]
+      },
+      {
+        "name": "福本智雄",
+        "positions": [
+          "原作"
+        ]
+      },
+      {
+        "name": "黒田隆",
+        "positions": [
+          "原作"
+        ]
+      },
+      {
+        "name": "保波順",
+        "positions": [
+          "原作"
+        ]
+      },
+      {
+        "name": "倉橋こうじ",
+        "positions": [
+          "原作"
+        ]
+      },
+      {
+        "name": "東映",
+        "positions": [
+          "アニメーション制作",
+          "製作",
+          "原作",
+          "原案"
+        ]
+      },
+      {
+        "name": "井上英沖",
+        "positions": [
+          "作画"
+        ]
+      },
+      {
+        "name": "講談社",
+        "positions": [
+          "出版社"
+        ]
+      },
+      {
+        "name": "ぼくら",
+        "positions": [
+          "掲載誌"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -184,7 +462,27 @@
     "start_date": "1965/04/04",
     "end_date": "1965/04/18",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "フジテレビ",
+        "positions": [
+          "アニメーション制作",
+          "製作"
+        ]
+      },
+      {
+        "name": "杉山卓",
+        "positions": [
+          "原作"
+        ]
+      },
+      {
+        "name": "セヴン・アーツ・プロダクションズ",
+        "positions": [
+          "製作"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -204,7 +502,54 @@
     "start_date": "1965/05/04",
     "end_date": "1967/03/28",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "福本和也",
+        "positions": [
+          "原作",
+          "原案"
+        ]
+      },
+      {
+        "name": "宮腰義勝",
+        "positions": [
+          "原作",
+          "作画"
+        ]
+      },
+      {
+        "name": "TBS",
+        "positions": [
+          "製作",
+          "原作",
+          "原案"
+        ]
+      },
+      {
+        "name": "エイケン",
+        "positions": [
+          "製作"
+        ]
+      },
+      {
+        "name": "講談社",
+        "positions": [
+          "出版社"
+        ]
+      },
+      {
+        "name": "週刊少年マガジン",
+        "positions": [
+          "掲載誌"
+        ]
+      },
+      {
+        "name": "別冊少年マガジン",
+        "positions": [
+          "掲載誌"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -214,7 +559,32 @@
     "start_date": "1965/05/08",
     "end_date": "1966/04/28",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "吉田竜夫",
+        "positions": [
+          "原作"
+        ]
+      },
+      {
+        "name": "笹川浩",
+        "positions": [
+          "監督"
+        ]
+      },
+      {
+        "name": "タツノコプロ",
+        "positions": [
+          "製作"
+        ]
+      },
+      {
+        "name": "読売広告社",
+        "positions": [
+          "製作"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -224,7 +594,20 @@
     "start_date": "1965/05/31",
     "end_date": "1965/11/04",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "岡部一彦",
+        "positions": [
+          "原作"
+        ]
+      },
+      {
+        "name": "フジテレビ",
+        "positions": [
+          "アニメーション制作"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -234,7 +617,39 @@
     "start_date": "1965/06/03",
     "end_date": "1966/05/27",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "吉倉正一郎",
+        "positions": [
+          "原作",
+          "原案"
+        ]
+      },
+      {
+        "name": "エイケン",
+        "positions": [
+          "アニメーション制作"
+        ]
+      },
+      {
+        "name": "井上英沖",
+        "positions": [
+          "作画"
+        ]
+      },
+      {
+        "name": "光文社",
+        "positions": [
+          "出版社"
+        ]
+      },
+      {
+        "name": "少年",
+        "positions": [
+          "掲載誌"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -244,7 +659,45 @@
     "start_date": "1965/06/06",
     "end_date": "1966/06/27",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "手塚治虫",
+        "positions": [
+          "作者",
+          "監督"
+        ]
+      },
+      {
+        "name": "講談社",
+        "positions": [
+          "出版社"
+        ]
+      },
+      {
+        "name": "週刊少年マガジン",
+        "positions": [
+          "掲載誌"
+        ]
+      },
+      {
+        "name": "小学館",
+        "positions": [
+          "出版社"
+        ]
+      },
+      {
+        "name": "週刊少年サンデー",
+        "positions": [
+          "掲載誌"
+        ]
+      },
+      {
+        "name": "手塚プロダクション",
+        "positions": [
+          "アニメーション制作"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -254,7 +707,51 @@
     "start_date": "1965/08/29",
     "end_date": "1967/06/28",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "藤子不二雄",
+        "positions": [
+          "原作"
+        ]
+      },
+      {
+        "name": "長浜忠夫",
+        "positions": [
+          "監督"
+        ]
+      },
+      {
+        "name": "シンエイ動画",
+        "positions": [
+          "アニメーション制作",
+          "製作"
+        ]
+      },
+      {
+        "name": "東京ムービー",
+        "positions": [
+          "製作"
+        ]
+      },
+      {
+        "name": "原田益次",
+        "positions": [
+          "監督"
+        ]
+      },
+      {
+        "name": "テレビ朝日",
+        "positions": [
+          "製作"
+        ]
+      },
+      {
+        "name": "ADKHD",
+        "positions": [
+          "製作"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -264,7 +761,88 @@
     "start_date": "1965/10/06",
     "end_date": "1966/09/28",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "手塚治虫",
+        "positions": [
+          "作者",
+          "原作"
+        ]
+      },
+      {
+        "name": "学童社",
+        "positions": [
+          "出版社"
+        ]
+      },
+      {
+        "name": "漫画少年",
+        "positions": [
+          "掲載誌"
+        ]
+      },
+      {
+        "name": "手塚プロダクション",
+        "positions": [
+          "製作",
+          "アニメーション制作"
+        ]
+      },
+      {
+        "name": "山本暎一",
+        "positions": [
+          "製作"
+        ]
+      },
+      {
+        "name": "宇井孝司",
+        "positions": [
+          "監督"
+        ]
+      },
+      {
+        "name": "テレビ東京",
+        "positions": [
+          "製作"
+        ]
+      },
+      {
+        "name": "日本経済社",
+        "positions": [
+          "製作"
+        ]
+      },
+      {
+        "name": "学研",
+        "positions": [
+          "製作"
+        ]
+      },
+      {
+        "name": "平田敏夫",
+        "positions": [
+          "監督"
+        ]
+      },
+      {
+        "name": "マッドハウス",
+        "positions": [
+          "アニメーション制作"
+        ]
+      },
+      {
+        "name": "日本コロムビア",
+        "positions": [
+          "製作"
+        ]
+      },
+      {
+        "name": "谷口悟朗",
+        "positions": [
+          "監督"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -274,7 +852,20 @@
     "start_date": "1965/11/01",
     "end_date": "1966/04/25",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "森やすじ",
+        "positions": [
+          "原作"
+        ]
+      },
+      {
+        "name": "東映",
+        "positions": [
+          "アニメーション制作"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -284,7 +875,82 @@
     "start_date": "1965/12/14",
     "end_date": "1966/12/06",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "山野浩一",
+        "positions": [
+          "原作",
+          "原案"
+        ]
+      },
+      {
+        "name": "伊奈たかし",
+        "positions": [
+          "作画"
+        ]
+      },
+      {
+        "name": "少年画報社",
+        "positions": [
+          "出版社"
+        ]
+      },
+      {
+        "name": "週刊少年キング",
+        "positions": [
+          "掲載誌"
+        ]
+      },
+      {
+        "name": "新倉雅美",
+        "positions": [
+          "監督"
+        ]
+      },
+      {
+        "name": "岡迫亘弘",
+        "positions": [
+          "監督"
+        ]
+      },
+      {
+        "name": "正延宏三",
+        "positions": [
+          "監督"
+        ]
+      },
+      {
+        "name": "富野喜幸",
+        "positions": [
+          "監督"
+        ]
+      },
+      {
+        "name": "池羽厚生",
+        "positions": [
+          "監督"
+        ]
+      },
+      {
+        "name": "浅野良一",
+        "positions": [
+          "監督"
+        ]
+      },
+      {
+        "name": "日本放送映画KK",
+        "positions": [
+          "アニメーション制作",
+          "製作"
+        ]
+      },
+      {
+        "name": "日本テレビ",
+        "positions": [
+          "製作"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -294,7 +960,84 @@
     "start_date": "1966/02/05",
     "end_date": "1967/03/04",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "赤塚不二夫",
+        "positions": [
+          "作者",
+          "原作"
+        ]
+      },
+      {
+        "name": "フジオ・プロ",
+        "positions": [
+          "作者"
+        ]
+      },
+      {
+        "name": "小学館",
+        "positions": [
+          "出版社"
+        ]
+      },
+      {
+        "name": "週刊少年サンデー",
+        "positions": [
+          "掲載誌"
+        ]
+      },
+      {
+        "name": "永沢詢",
+        "positions": [
+          "監督"
+        ]
+      },
+      {
+        "name": "チルドレンズ・コーナー",
+        "positions": [
+          "アニメーション制作",
+          "製作"
+        ]
+      },
+      {
+        "name": "スタジオゼロ",
+        "positions": [
+          "アニメーション制作",
+          "製作"
+        ]
+      },
+      {
+        "name": "毎日放送",
+        "positions": [
+          "製作"
+        ]
+      },
+      {
+        "name": "鴫野彰",
+        "positions": [
+          "監督"
+        ]
+      },
+      {
+        "name": "スタジオぴえろ",
+        "positions": [
+          "アニメーション制作",
+          "製作"
+        ]
+      },
+      {
+        "name": "フジテレビ",
+        "positions": [
+          "製作"
+        ]
+      },
+      {
+        "name": "読売広告社",
+        "positions": [
+          "製作"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -304,7 +1047,75 @@
     "start_date": "1966/04/23",
     "end_date": "1967/03/24",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "スタジオゼロ",
+        "positions": [
+          "原作",
+          "原案"
+        ]
+      },
+      {
+        "name": "芹川有吾",
+        "positions": [
+          "監督"
+        ]
+      },
+      {
+        "name": "田宮武",
+        "positions": [
+          "監督"
+        ]
+      },
+      {
+        "name": "眞野好央",
+        "positions": [
+          "監督"
+        ]
+      },
+      {
+        "name": "東映",
+        "positions": [
+          "アニメーション制作"
+        ]
+      },
+      {
+        "name": "風田朗",
+        "positions": [
+          "作画"
+        ]
+      },
+      {
+        "name": "講談社",
+        "positions": [
+          "出版社"
+        ]
+      },
+      {
+        "name": "週刊少年マガジン",
+        "positions": [
+          "掲載誌"
+        ]
+      },
+      {
+        "name": "吉谷竜二",
+        "positions": [
+          "作画"
+        ]
+      },
+      {
+        "name": "秋田書店",
+        "positions": [
+          "出版社"
+        ]
+      },
+      {
+        "name": "冒険王",
+        "positions": [
+          "掲載誌"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -314,7 +1125,52 @@
     "start_date": "1966/05/02",
     "end_date": "1966/11/28",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "石森章太郎",
+        "positions": [
+          "原作",
+          "原案"
+        ]
+      },
+      {
+        "name": "東映",
+        "positions": [
+          "アニメーション制作",
+          "製作"
+        ]
+      },
+      {
+        "name": "いずみあすか",
+        "positions": [
+          "作画"
+        ]
+      },
+      {
+        "name": "少年画報社",
+        "positions": [
+          "出版社"
+        ]
+      },
+      {
+        "name": "週刊少年キング",
+        "positions": [
+          "掲載誌"
+        ]
+      },
+      {
+        "name": "秋田書店",
+        "positions": [
+          "出版社"
+        ]
+      },
+      {
+        "name": "まんが王",
+        "positions": [
+          "掲載誌"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -324,7 +1180,33 @@
     "start_date": "1966/05/05",
     "end_date": "1967/08/31",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "ちばてつや",
+        "positions": [
+          "作者",
+          "原作"
+        ]
+      },
+      {
+        "name": "講談社",
+        "positions": [
+          "出版社"
+        ]
+      },
+      {
+        "name": "週刊少年マガジン",
+        "positions": [
+          "掲載誌"
+        ]
+      },
+      {
+        "name": "ピー・プロダクション",
+        "positions": [
+          "アニメーション制作"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -334,7 +1216,39 @@
     "start_date": "1966/06/03",
     "end_date": "1967/02/21",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "仁田信夫",
+        "positions": [
+          "原作",
+          "原案"
+        ]
+      },
+      {
+        "name": "エイケン",
+        "positions": [
+          "アニメーション制作"
+        ]
+      },
+      {
+        "name": "楠高治",
+        "positions": [
+          "作画"
+        ]
+      },
+      {
+        "name": "集英社",
+        "positions": [
+          "出版社"
+        ]
+      },
+      {
+        "name": "少年ブック",
+        "positions": [
+          "掲載誌"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -344,7 +1258,21 @@
     "start_date": "1966/07/01",
     "end_date": "1970/08/02",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "おとぎプロダクション",
+        "positions": [
+          "アニメーション制作",
+          "製作"
+        ]
+      },
+      {
+        "name": "毎日放送",
+        "positions": [
+          "製作"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -354,7 +1282,75 @@
     "start_date": "1966/10/04",
     "end_date": "1968/09/27",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "森田拳次",
+        "positions": [
+          "作者",
+          "原作"
+        ]
+      },
+      {
+        "name": "少年画報社",
+        "positions": [
+          "出版社"
+        ]
+      },
+      {
+        "name": "少年画報",
+        "positions": [
+          "掲載誌"
+        ]
+      },
+      {
+        "name": "斧宏",
+        "positions": [
+          "監督"
+        ]
+      },
+      {
+        "name": "サンプロダクション",
+        "positions": [
+          "アニメーション制作"
+        ]
+      },
+      {
+        "name": "シンエイ動画",
+        "positions": [
+          "アニメーション制作"
+        ]
+      },
+      {
+        "name": "大広",
+        "positions": [
+          "製作"
+        ]
+      },
+      {
+        "name": "奥脇雅晴",
+        "positions": [
+          "監督"
+        ]
+      },
+      {
+        "name": "東京ムービー",
+        "positions": [
+          "アニメーション制作"
+        ]
+      },
+      {
+        "name": "トムス",
+        "positions": [
+          "製作"
+        ]
+      },
+      {
+        "name": "よみうりテレビ",
+        "positions": [
+          "製作"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -364,7 +1360,88 @@
     "start_date": "1966/10/05",
     "end_date": "1967/03/29",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "手塚治虫",
+        "positions": [
+          "作者",
+          "原作"
+        ]
+      },
+      {
+        "name": "学童社",
+        "positions": [
+          "出版社"
+        ]
+      },
+      {
+        "name": "漫画少年",
+        "positions": [
+          "掲載誌"
+        ]
+      },
+      {
+        "name": "手塚プロダクション",
+        "positions": [
+          "製作",
+          "アニメーション制作"
+        ]
+      },
+      {
+        "name": "山本暎一",
+        "positions": [
+          "製作"
+        ]
+      },
+      {
+        "name": "宇井孝司",
+        "positions": [
+          "監督"
+        ]
+      },
+      {
+        "name": "テレビ東京",
+        "positions": [
+          "製作"
+        ]
+      },
+      {
+        "name": "日本経済社",
+        "positions": [
+          "製作"
+        ]
+      },
+      {
+        "name": "学研",
+        "positions": [
+          "製作"
+        ]
+      },
+      {
+        "name": "平田敏夫",
+        "positions": [
+          "監督"
+        ]
+      },
+      {
+        "name": "マッドハウス",
+        "positions": [
+          "アニメーション制作"
+        ]
+      },
+      {
+        "name": "日本コロムビア",
+        "positions": [
+          "製作"
+        ]
+      },
+      {
+        "name": "谷口悟朗",
+        "positions": [
+          "監督"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -374,7 +1451,27 @@
     "start_date": "1966/10/06",
     "end_date": "1966/12/29",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "フジテレビ",
+        "positions": [
+          "アニメーション制作",
+          "製作"
+        ]
+      },
+      {
+        "name": "杉山卓",
+        "positions": [
+          "原作"
+        ]
+      },
+      {
+        "name": "セヴン・アーツ・プロダクションズ",
+        "positions": [
+          "製作"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -384,7 +1481,46 @@
     "start_date": "1966/11/14",
     "end_date": "1967/04/15",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "岡本光輝",
+        "positions": [
+          "原作",
+          "原案"
+        ]
+      },
+      {
+        "name": "よこたとくお",
+        "positions": [
+          "作画"
+        ]
+      },
+      {
+        "name": "少年画報社",
+        "positions": [
+          "出版社"
+        ]
+      },
+      {
+        "name": "週刊少年キング",
+        "positions": [
+          "掲載誌"
+        ]
+      },
+      {
+        "name": "日本放送映画",
+        "positions": [
+          "アニメーション制作",
+          "製作"
+        ]
+      },
+      {
+        "name": "日本テレビ",
+        "positions": [
+          "製作"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -394,7 +1530,39 @@
     "start_date": "1966/12/05",
     "end_date": "1968/12/30",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "横山光輝",
+        "positions": [
+          "作者"
+        ]
+      },
+      {
+        "name": "集英社",
+        "positions": [
+          "出版社"
+        ]
+      },
+      {
+        "name": "りぼん",
+        "positions": [
+          "掲載誌"
+        ]
+      },
+      {
+        "name": "東映",
+        "positions": [
+          "アニメーション制作",
+          "製作"
+        ]
+      },
+      {
+        "name": "テレビ朝日",
+        "positions": [
+          "製作"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -414,7 +1582,20 @@
     "start_date": "1967/01/07",
     "end_date": "1967/09/30",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "手塚治虫",
+        "positions": [
+          "原作"
+        ]
+      },
+      {
+        "name": "手塚プロダクション",
+        "positions": [
+          "製作"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -444,7 +1625,34 @@
     "start_date": "1967/04/01",
     "end_date": "1968/03/30",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "ムロタニツネ象",
+        "positions": [
+          "原作"
+        ]
+      },
+      {
+        "name": "放送動画制作",
+        "positions": [
+          "アニメーション制作",
+          "製作"
+        ]
+      },
+      {
+        "name": "チルドレンズ・コーナー",
+        "positions": [
+          "アニメーション制作",
+          "製作"
+        ]
+      },
+      {
+        "name": "毎日放送",
+        "positions": [
+          "製作"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -455,8 +1663,74 @@
     "end_date": "1968/04/14",
     "comment": "実家でネット放送の過去作として見てた。",
     "copyright": [
-      "小学館",
-      "藤子・F・不二雄"
+      {
+        "name": "藤子不二雄",
+        "positions": [
+          "作者",
+          "原作"
+        ]
+      },
+      {
+        "name": "小学館",
+        "positions": [
+          "出版社"
+        ]
+      },
+      {
+        "name": "週刊少年サンデー",
+        "positions": [
+          "掲載誌"
+        ]
+      },
+      {
+        "name": "月刊コロコロコミック",
+        "positions": [
+          "掲載誌"
+        ]
+      },
+      {
+        "name": "小学館の学年別学習雑誌",
+        "positions": [
+          "掲載誌"
+        ]
+      },
+      {
+        "name": "鈴木伸一",
+        "positions": [
+          "監督"
+        ]
+      },
+      {
+        "name": "シンエイ動画",
+        "positions": [
+          "アニメーション制作",
+          "製作"
+        ]
+      },
+      {
+        "name": "スタジオゼロ",
+        "positions": [
+          "アニメーション制作"
+        ]
+      },
+      {
+        "name": "東京ムービー",
+        "positions": [
+          "製作"
+        ]
+      },
+      {
+        "name": "原田益次",
+        "positions": [
+          "監督"
+        ]
+      },
+      {
+        "name": "テレビ朝日",
+        "positions": [
+          "製作"
+        ]
+      }
     ],
     "tag": [
       "ギャグ",
@@ -471,7 +1745,58 @@
     "start_date": "1967/04/02",
     "end_date": "1968/03/31",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "吉田竜夫",
+        "positions": [
+          "原作",
+          "製作"
+        ]
+      },
+      {
+        "name": "タツノコプロ",
+        "positions": [
+          "製作",
+          "原作"
+        ]
+      },
+      {
+        "name": "福島宏之",
+        "positions": [
+          "監督"
+        ]
+      },
+      {
+        "name": "冨永恒雄",
+        "positions": [
+          "監督"
+        ]
+      },
+      {
+        "name": "テレビ東京",
+        "positions": [
+          "製作"
+        ]
+      },
+      {
+        "name": "読売広告社",
+        "positions": [
+          "製作"
+        ]
+      },
+      {
+        "name": "スタジオロン",
+        "positions": [
+          "アニメーション制作"
+        ]
+      },
+      {
+        "name": "成嶋弘毅",
+        "positions": [
+          "製作"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -481,7 +1806,58 @@
     "start_date": "1967/04/02",
     "end_date": "1968/04/07",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "手塚治虫",
+        "positions": [
+          "作者",
+          "原作",
+          "原案"
+        ]
+      },
+      {
+        "name": "講談社",
+        "positions": [
+          "出版社"
+        ]
+      },
+      {
+        "name": "少女クラブ",
+        "positions": [
+          "掲載誌"
+        ]
+      },
+      {
+        "name": "なかよし",
+        "positions": [
+          "掲載誌"
+        ]
+      },
+      {
+        "name": "北野英明",
+        "positions": [
+          "作画"
+        ]
+      },
+      {
+        "name": "少女フレンド",
+        "positions": [
+          "掲載誌"
+        ]
+      },
+      {
+        "name": "手塚プロダクション",
+        "positions": [
+          "製作"
+        ]
+      },
+      {
+        "name": "フジテレビ",
+        "positions": [
+          "製作"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -491,7 +1867,51 @@
     "start_date": "1967/04/04",
     "end_date": "1967/12/26",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "豊田有恒",
+        "positions": [
+          "原作"
+        ]
+      },
+      {
+        "name": "久松文雄",
+        "positions": [
+          "原作",
+          "作者"
+        ]
+      },
+      {
+        "name": "河島治之",
+        "positions": [
+          "監督"
+        ]
+      },
+      {
+        "name": "エイケン",
+        "positions": [
+          "アニメーション制作"
+        ]
+      },
+      {
+        "name": "TBS",
+        "positions": [
+          "製作"
+        ]
+      },
+      {
+        "name": "小学館",
+        "positions": [
+          "出版社"
+        ]
+      },
+      {
+        "name": "週刊少年サンデー",
+        "positions": [
+          "掲載誌"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -511,7 +1931,20 @@
     "start_date": "1967/07/03",
     "end_date": "1967/09/18",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "つのだじろう",
+        "positions": [
+          "原作"
+        ]
+      },
+      {
+        "name": "東映",
+        "positions": [
+          "製作"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -521,7 +1954,63 @@
     "start_date": "1967/09/07",
     "end_date": "1968/01/25",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "石森章太郎",
+        "positions": [
+          "作者",
+          "原作"
+        ]
+      },
+      {
+        "name": "集英社",
+        "positions": [
+          "出版社"
+        ]
+      },
+      {
+        "name": "小学館",
+        "positions": [
+          "出版社"
+        ]
+      },
+      {
+        "name": "少年ブック",
+        "positions": [
+          "掲載誌"
+        ]
+      },
+      {
+        "name": "りぼん",
+        "positions": [
+          "掲載誌"
+        ]
+      },
+      {
+        "name": "小学館コミックス",
+        "positions": [
+          "掲載誌"
+        ]
+      },
+      {
+        "name": "石黒光一",
+        "positions": [
+          "監督"
+        ]
+      },
+      {
+        "name": "布上善雄",
+        "positions": [
+          "監督"
+        ]
+      },
+      {
+        "name": "ピー・プロダクション",
+        "positions": [
+          "アニメーション制作"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -531,7 +2020,54 @@
     "start_date": "1967/09/18",
     "end_date": "1968/03/16",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "岡本光輝",
+        "positions": [
+          "原作",
+          "原案"
+        ]
+      },
+      {
+        "name": "片岡忠三",
+        "positions": [
+          "監督"
+        ]
+      },
+      {
+        "name": "日本放送映画KK",
+        "positions": [
+          "アニメーション制作",
+          "製作"
+        ]
+      },
+      {
+        "name": "日本テレビ",
+        "positions": [
+          "製作",
+          "原作",
+          "原案"
+        ]
+      },
+      {
+        "name": "中城けんたろう",
+        "positions": [
+          "作画"
+        ]
+      },
+      {
+        "name": "秋田書店",
+        "positions": [
+          "出版社"
+        ]
+      },
+      {
+        "name": "冒険王",
+        "positions": [
+          "掲載誌"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -541,7 +2077,51 @@
     "start_date": "1967/10/02",
     "end_date": "1968/03/25",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "うしおそうじ",
+        "positions": [
+          "原作",
+          "原案"
+        ]
+      },
+      {
+        "name": "ピー・プロダクション",
+        "positions": [
+          "アニメーション制作"
+        ]
+      },
+      {
+        "name": "永井豪",
+        "positions": [
+          "作画"
+        ]
+      },
+      {
+        "name": "講談社",
+        "positions": [
+          "出版社"
+        ]
+      },
+      {
+        "name": "ぼくら",
+        "positions": [
+          "掲載誌"
+        ]
+      },
+      {
+        "name": "篠田ひでお",
+        "positions": [
+          "作画"
+        ]
+      },
+      {
+        "name": "たのしい幼稚園",
+        "positions": [
+          "掲載誌"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -551,7 +2131,59 @@
     "start_date": "1967/10/04",
     "end_date": "1967/12/27",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "真田喬次郎",
+        "positions": [
+          "原作",
+          "原案"
+        ]
+      },
+      {
+        "name": "小泉太郎",
+        "positions": [
+          "原作",
+          "原案"
+        ]
+      },
+      {
+        "name": "石川喬司",
+        "positions": [
+          "原作",
+          "原案"
+        ]
+      },
+      {
+        "name": "川崎のぼる",
+        "positions": [
+          "作画"
+        ]
+      },
+      {
+        "name": "集英社",
+        "positions": [
+          "出版社"
+        ]
+      },
+      {
+        "name": "少年ブック",
+        "positions": [
+          "掲載誌"
+        ]
+      },
+      {
+        "name": "河島治之",
+        "positions": [
+          "監督"
+        ]
+      },
+      {
+        "name": "エイケン",
+        "positions": [
+          "アニメーション制作"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -561,7 +2193,33 @@
     "start_date": "1967/10/07",
     "end_date": "1968/09/25",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "笹川ひろし",
+        "positions": [
+          "原作"
+        ]
+      },
+      {
+        "name": "タツノコプロ",
+        "positions": [
+          "アニメーション制作",
+          "製作"
+        ]
+      },
+      {
+        "name": "アニメフレンド",
+        "positions": [
+          "製作"
+        ]
+      },
+      {
+        "name": "読売広告社",
+        "positions": [
+          "製作"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -571,7 +2229,21 @@
     "start_date": "1968/01/03",
     "end_date": "1969/03/30",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "水木しげる",
+        "positions": [
+          "原作"
+        ]
+      },
+      {
+        "name": "東映",
+        "positions": [
+          "アニメーション制作",
+          "製作"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -601,7 +2273,57 @@
     "start_date": "1968/02/01",
     "end_date": "1968/09/26",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "江戸川乱歩",
+        "positions": [
+          "原作",
+          "原案"
+        ]
+      },
+      {
+        "name": "林重行",
+        "positions": [
+          "監督"
+        ]
+      },
+      {
+        "name": "手塚プロダクション",
+        "positions": [
+          "アニメーション制作"
+        ]
+      },
+      {
+        "name": "大野ゆたか",
+        "positions": [
+          "作画"
+        ]
+      },
+      {
+        "name": "光文社",
+        "positions": [
+          "出版社"
+        ]
+      },
+      {
+        "name": "講談社",
+        "positions": [
+          "出版社"
+        ]
+      },
+      {
+        "name": "少年",
+        "positions": [
+          "掲載誌"
+        ]
+      },
+      {
+        "name": "ぼくら",
+        "positions": [
+          "掲載誌"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -611,7 +2333,33 @@
     "start_date": "1968/03/30",
     "end_date": "1971/09/18",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "梶原一騎",
+        "positions": [
+          "原作"
+        ]
+      },
+      {
+        "name": "川崎のぼる",
+        "positions": [
+          "原作"
+        ]
+      },
+      {
+        "name": "東京ムービー",
+        "positions": [
+          "アニメーション制作",
+          "製作"
+        ]
+      },
+      {
+        "name": "読売テレビ",
+        "positions": [
+          "製作"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -621,7 +2369,46 @@
     "start_date": "1968/04/01",
     "end_date": "1968/09/30",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "川崎のぼる",
+        "positions": [
+          "作者",
+          "原作"
+        ]
+      },
+      {
+        "name": "小学館",
+        "positions": [
+          "出版社"
+        ]
+      },
+      {
+        "name": "週刊少年サンデー",
+        "positions": [
+          "掲載誌"
+        ]
+      },
+      {
+        "name": "杉山卓",
+        "positions": [
+          "監督"
+        ]
+      },
+      {
+        "name": "手塚プロダクション",
+        "positions": [
+          "アニメーション制作",
+          "製作"
+        ]
+      },
+      {
+        "name": "フジテレビ",
+        "positions": [
+          "製作"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -631,7 +2418,58 @@
     "start_date": "1968/04/05",
     "end_date": "1968/09/27",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "石ノ森章太郎",
+        "positions": [
+          "原作"
+        ]
+      },
+      {
+        "name": "東映",
+        "positions": [
+          "アニメーション制作",
+          "製作"
+        ]
+      },
+      {
+        "name": "高橋良輔",
+        "positions": [
+          "監督"
+        ]
+      },
+      {
+        "name": "サンライズ",
+        "positions": [
+          "アニメーション制作"
+        ]
+      },
+      {
+        "name": "テレビ朝日",
+        "positions": [
+          "製作"
+        ]
+      },
+      {
+        "name": "川越淳",
+        "positions": [
+          "監督"
+        ]
+      },
+      {
+        "name": "ジャパンヴィステック",
+        "positions": [
+          "アニメーション制作",
+          "製作"
+        ]
+      },
+      {
+        "name": "テレビ東京",
+        "positions": [
+          "製作"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -641,7 +2479,33 @@
     "start_date": "1968/04/06",
     "end_date": "1968/09/29",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "ちばてつや",
+        "positions": [
+          "作者",
+          "原作"
+        ]
+      },
+      {
+        "name": "講談社",
+        "positions": [
+          "出版社"
+        ]
+      },
+      {
+        "name": "少女フレンド",
+        "positions": [
+          "掲載誌"
+        ]
+      },
+      {
+        "name": "東映",
+        "positions": [
+          "アニメーション制作"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -651,7 +2515,27 @@
     "start_date": "1968/04/06",
     "end_date": "1968/09/28",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "ムロタニツネ象",
+        "positions": [
+          "原作"
+        ]
+      },
+      {
+        "name": "放送動画制作",
+        "positions": [
+          "アニメーション制作",
+          "製作"
+        ]
+      },
+      {
+        "name": "毎日放送",
+        "positions": [
+          "製作"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -661,7 +2545,39 @@
     "start_date": "1968/04/21",
     "end_date": "1969/03/23",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "藤子不二雄",
+        "positions": [
+          "原作"
+        ]
+      },
+      {
+        "name": "大隅正秋",
+        "positions": [
+          "監督"
+        ]
+      },
+      {
+        "name": "シンエイ動画",
+        "positions": [
+          "アニメーション制作"
+        ]
+      },
+      {
+        "name": "スタジオゼロ",
+        "positions": [
+          "アニメーション制作",
+          "製作"
+        ]
+      },
+      {
+        "name": "東京ムービー",
+        "positions": [
+          "製作"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -671,7 +2587,45 @@
     "start_date": "1968/09/03",
     "end_date": "1969/03/25",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "白土三平",
+        "positions": [
+          "作者",
+          "原作"
+        ]
+      },
+      {
+        "name": "光文社",
+        "positions": [
+          "出版社"
+        ]
+      },
+      {
+        "name": "講談社",
+        "positions": [
+          "出版社"
+        ]
+      },
+      {
+        "name": "月刊少年",
+        "positions": [
+          "掲載誌"
+        ]
+      },
+      {
+        "name": "エイケン",
+        "positions": [
+          "製作"
+        ]
+      },
+      {
+        "name": "TBS",
+        "positions": [
+          "製作"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -681,7 +2635,65 @@
     "start_date": "1968/09/30",
     "end_date": "1969/03/29",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "梶原一騎",
+        "positions": [
+          "原作",
+          "原案"
+        ]
+      },
+      {
+        "name": "荘司としお",
+        "positions": [
+          "作画",
+          "原作"
+        ]
+      },
+      {
+        "name": "秋田書店",
+        "positions": [
+          "出版社"
+        ]
+      },
+      {
+        "name": "冒険王",
+        "positions": [
+          "掲載誌"
+        ]
+      },
+      {
+        "name": "週刊少年チャンピオン",
+        "positions": [
+          "掲載誌"
+        ]
+      },
+      {
+        "name": "木下蓮三",
+        "positions": [
+          "監督"
+        ]
+      },
+      {
+        "name": "富野喜幸",
+        "positions": [
+          "監督"
+        ]
+      },
+      {
+        "name": "日本テレビ動画",
+        "positions": [
+          "アニメーション制作",
+          "製作"
+        ]
+      },
+      {
+        "name": "日本テレビ",
+        "positions": [
+          "製作"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -691,7 +2703,20 @@
     "start_date": "1968/10/02",
     "end_date": "1969/03/26",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "吉田竜夫",
+        "positions": [
+          "原作"
+        ]
+      },
+      {
+        "name": "タツノコプロ",
+        "positions": [
+          "アニメーション制作"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -701,7 +2726,32 @@
     "start_date": "1968/10/03",
     "end_date": "1969/09/24",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "石森章太郎",
+        "positions": [
+          "作者"
+        ]
+      },
+      {
+        "name": "小学館",
+        "positions": [
+          "出版社"
+        ]
+      },
+      {
+        "name": "週刊少年サンデー",
+        "positions": [
+          "掲載誌"
+        ]
+      },
+      {
+        "name": "ビッグコミック",
+        "positions": [
+          "掲載誌"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -710,10 +2760,35 @@
     "title": "バンパイヤ",
     "start_date": "1968/10/03",
     "end_date": "1969/03/29",
-    "comment": "",
-    "copyright": [],
+    "comment": "原作漫画が好きで少しだけアニメを見ていた。",
+    "copyright": [
+      {
+        "name": "手塚治虫",
+        "positions": [
+          "作者"
+        ]
+      },
+      {
+        "name": "小学館",
+        "positions": [
+          "出版社"
+        ]
+      },
+      {
+        "name": "週刊少年サンデー",
+        "positions": [
+          "掲載誌"
+        ]
+      },
+      {
+        "name": "少年ブック",
+        "positions": [
+          "掲載誌"
+        ]
+      }
+    ],
     "tag": [],
-    "watch": false,
+    "watch": true,
     "favorite": false
   },
   {
@@ -721,7 +2796,75 @@
     "start_date": "1968/10/07",
     "end_date": "1969/03/31",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "足立明",
+        "positions": [
+          "原作"
+        ]
+      },
+      {
+        "name": "第一動画",
+        "positions": [
+          "アニメーション制作"
+        ]
+      },
+      {
+        "name": "ADKHD",
+        "positions": [
+          "原作"
+        ]
+      },
+      {
+        "name": "原田浩",
+        "positions": [
+          "監督"
+        ]
+      },
+      {
+        "name": "スタジオコメット",
+        "positions": [
+          "アニメーション制作",
+          "製作"
+        ]
+      },
+      {
+        "name": "NAS",
+        "positions": [
+          "製作"
+        ]
+      },
+      {
+        "name": "ソニー・ピクチャーズエンタテインメント",
+        "positions": [
+          "製作"
+        ]
+      },
+      {
+        "name": "エイベックス・エンタテインメント",
+        "positions": [
+          "製作"
+        ]
+      },
+      {
+        "name": "小高義規",
+        "positions": [
+          "監督"
+        ]
+      },
+      {
+        "name": "ランドック・スタジオ",
+        "positions": [
+          "アニメーション制作"
+        ]
+      },
+      {
+        "name": "BEM製作委員会",
+        "positions": [
+          "製作"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -731,7 +2874,44 @@
     "start_date": "1968/10/21",
     "end_date": "1969/03/29",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "フジテレビ",
+        "positions": [
+          "アニメーション制作"
+        ]
+      },
+      {
+        "name": "チルドレンズ・コーナー",
+        "positions": [
+          "アニメーション制作"
+        ]
+      },
+      {
+        "name": "NEZUPRODUCTION",
+        "positions": [
+          "アニメーション制作"
+        ]
+      },
+      {
+        "name": "スタジオ・ビーズ",
+        "positions": [
+          "アニメーション制作"
+        ]
+      },
+      {
+        "name": "ワーナー・ブラザース＝セヴン・アーツ",
+        "positions": [
+          "製作"
+        ]
+      },
+      {
+        "name": "OrioloFilmStudios,Inc.",
+        "positions": [
+          "製作"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -771,7 +2951,27 @@
     "start_date": "1969/03/31",
     "end_date": "1969/10/04",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "青木たかし",
+        "positions": [
+          "原作",
+          "監督"
+        ]
+      },
+      {
+        "name": "池野文雄",
+        "positions": [
+          "監督"
+        ]
+      },
+      {
+        "name": "フジテレビ",
+        "positions": [
+          "製作"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -781,7 +2981,64 @@
     "start_date": "1969/04/01",
     "end_date": "1969/09/23",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "藤子不二雄",
+        "positions": [
+          "作者",
+          "原作"
+        ]
+      },
+      {
+        "name": "小学館",
+        "positions": [
+          "出版社"
+        ]
+      },
+      {
+        "name": "小学館の学年別学習雑誌",
+        "positions": [
+          "掲載誌"
+        ]
+      },
+      {
+        "name": "よいこ",
+        "positions": [
+          "掲載誌"
+        ]
+      },
+      {
+        "name": "幼稚園",
+        "positions": [
+          "掲載誌"
+        ]
+      },
+      {
+        "name": "週刊少年サンデー",
+        "positions": [
+          "掲載誌"
+        ]
+      },
+      {
+        "name": "シンエイ動画",
+        "positions": [
+          "アニメーション制作"
+        ]
+      },
+      {
+        "name": "スタジオゼロ",
+        "positions": [
+          "アニメーション制作",
+          "製作"
+        ]
+      },
+      {
+        "name": "東京ムービー",
+        "positions": [
+          "製作"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -801,7 +3058,52 @@
     "start_date": "1969/04/04",
     "end_date": "1970/12/25",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "赤塚不二夫",
+        "positions": [
+          "作者",
+          "原作"
+        ]
+      },
+      {
+        "name": "フジオ・プロ",
+        "positions": [
+          "作者"
+        ]
+      },
+      {
+        "name": "小学館",
+        "positions": [
+          "出版社"
+        ]
+      },
+      {
+        "name": "週刊少年サンデー",
+        "positions": [
+          "掲載誌"
+        ]
+      },
+      {
+        "name": "東映",
+        "positions": [
+          "アニメーション制作",
+          "製作"
+        ]
+      },
+      {
+        "name": "NET",
+        "positions": [
+          "製作"
+        ]
+      },
+      {
+        "name": "テレビ朝日",
+        "positions": [
+          "製作"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -811,7 +3113,27 @@
     "start_date": "1969/04/06",
     "end_date": "1969/09/28",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "手塚治虫",
+        "positions": [
+          "原作"
+        ]
+      },
+      {
+        "name": "手塚プロダクション",
+        "positions": [
+          "アニメーション制作",
+          "製作"
+        ]
+      },
+      {
+        "name": "フジテレビ",
+        "positions": [
+          "製作"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -821,7 +3143,76 @@
     "start_date": "1969/04/06",
     "end_date": "1969/09/28",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "白土三平",
+        "positions": [
+          "作者",
+          "原作",
+          "原案"
+        ]
+      },
+      {
+        "name": "小学館",
+        "positions": [
+          "出版社"
+        ]
+      },
+      {
+        "name": "週刊少年サンデー",
+        "positions": [
+          "掲載誌"
+        ]
+      },
+      {
+        "name": "ビッグコミック",
+        "positions": [
+          "掲載誌"
+        ]
+      },
+      {
+        "name": "ビッグゴールド",
+        "positions": [
+          "掲載誌"
+        ]
+      },
+      {
+        "name": "岡本鉄二",
+        "positions": [
+          "作画"
+        ]
+      },
+      {
+        "name": "小林利雄",
+        "positions": [
+          "原作"
+        ]
+      },
+      {
+        "name": "渡辺米彦",
+        "positions": [
+          "監督"
+        ]
+      },
+      {
+        "name": "山本功",
+        "positions": [
+          "監督"
+        ]
+      },
+      {
+        "name": "村山修",
+        "positions": [
+          "監督"
+        ]
+      },
+      {
+        "name": "エイケン",
+        "positions": [
+          "アニメーション制作"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -831,7 +3222,33 @@
     "start_date": "1969/04/28",
     "end_date": "1969/09/26",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "佐賀潜",
+        "positions": [
+          "原作"
+        ]
+      },
+      {
+        "name": "岡部英二",
+        "positions": [
+          "監督"
+        ]
+      },
+      {
+        "name": "東京ムービー",
+        "positions": [
+          "アニメーション制作",
+          "製作"
+        ]
+      },
+      {
+        "name": "名古屋テレビ",
+        "positions": [
+          "製作"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -851,7 +3268,38 @@
     "start_date": "1969/09/29",
     "end_date": "1970/03/28",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "本宮ひろ志",
+        "positions": [
+          "作者"
+        ]
+      },
+      {
+        "name": "集英社",
+        "positions": [
+          "出版社"
+        ]
+      },
+      {
+        "name": "週刊少年ジャンプ",
+        "positions": [
+          "掲載誌"
+        ]
+      },
+      {
+        "name": "若林忠雄",
+        "positions": [
+          "監督"
+        ]
+      },
+      {
+        "name": "日本テレビ動画",
+        "positions": [
+          "アニメーション制作"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -861,7 +3309,27 @@
     "start_date": "1969/09/29",
     "end_date": "1970/03/28",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "青木たかし",
+        "positions": [
+          "原作",
+          "監督"
+        ]
+      },
+      {
+        "name": "池野文雄",
+        "positions": [
+          "監督"
+        ]
+      },
+      {
+        "name": "フジテレビ",
+        "positions": [
+          "製作"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -871,7 +3339,59 @@
     "start_date": "1969/10/02",
     "end_date": "1971/09/30",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "梶原一騎",
+        "positions": [
+          "原作",
+          "原案"
+        ]
+      },
+      {
+        "name": "辻なおき",
+        "positions": [
+          "作画",
+          "原作"
+        ]
+      },
+      {
+        "name": "講談社",
+        "positions": [
+          "出版社"
+        ]
+      },
+      {
+        "name": "ぼくら",
+        "positions": [
+          "掲載誌"
+        ]
+      },
+      {
+        "name": "週刊ぼくらマガジン",
+        "positions": [
+          "掲載誌"
+        ]
+      },
+      {
+        "name": "週刊少年マガジン",
+        "positions": [
+          "掲載誌"
+        ]
+      },
+      {
+        "name": "東映",
+        "positions": [
+          "アニメーション制作",
+          "製作"
+        ]
+      },
+      {
+        "name": "よみうりテレビ",
+        "positions": [
+          "製作"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -882,9 +3402,25 @@
     "end_date": "1969/10/05",
     "comment": "実家暮らしの時に夕方にリアルタイムで見てた。",
     "copyright": [
-      "朝日新聞",
-      "朝日新聞社",
-      "長谷川町子"
+      {
+        "name": "長谷川町子",
+        "positions": [
+          "原作"
+        ]
+      },
+      {
+        "name": "エイケン",
+        "positions": [
+          "アニメーション制作",
+          "製作"
+        ]
+      },
+      {
+        "name": "フジテレビ",
+        "positions": [
+          "製作"
+        ]
+      }
     ],
     "tag": [
       "日常系"
@@ -897,7 +3433,47 @@
     "start_date": "1969/10/05",
     "end_date": "1970/09/27",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "吉田竜夫",
+        "positions": [
+          "原作",
+          "製作"
+        ]
+      },
+      {
+        "name": "笹川ひろし",
+        "positions": [
+          "監督"
+        ]
+      },
+      {
+        "name": "タツノコプロ",
+        "positions": [
+          "アニメーション制作",
+          "製作",
+          "原作"
+        ]
+      },
+      {
+        "name": "濁川敦",
+        "positions": [
+          "監督"
+        ]
+      },
+      {
+        "name": "日本アニメーション",
+        "positions": [
+          "アニメーション制作"
+        ]
+      },
+      {
+        "name": "読売テレビ",
+        "positions": [
+          "製作"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -907,7 +3483,51 @@
     "start_date": "1969/10/05",
     "end_date": "1970/12/27",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "トーベ・ヤンソン",
+        "positions": [
+          "原作"
+        ]
+      },
+      {
+        "name": "大隅正秋",
+        "positions": [
+          "監督"
+        ]
+      },
+      {
+        "name": "りんたろう",
+        "positions": [
+          "監督"
+        ]
+      },
+      {
+        "name": "シンエイ動画",
+        "positions": [
+          "アニメーション制作"
+        ]
+      },
+      {
+        "name": "手塚プロダクション",
+        "positions": [
+          "アニメーション制作",
+          "製作"
+        ]
+      },
+      {
+        "name": "フジテレビ",
+        "positions": [
+          "製作"
+        ]
+      },
+      {
+        "name": "東京ムービー",
+        "positions": [
+          "製作"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -917,7 +3537,14 @@
     "start_date": "1969/10/20",
     "end_date": "1970/01/17",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "時報映画",
+        "positions": [
+          "製作"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
@@ -927,7 +3554,70 @@
     "start_date": "1969/12/07",
     "end_date": "1971/11/28",
     "comment": "",
-    "copyright": [],
+    "copyright": [
+      {
+        "name": "浦野千賀子",
+        "positions": [
+          "作者",
+          "原作",
+          "原案"
+        ]
+      },
+      {
+        "name": "集英社",
+        "positions": [
+          "出版社"
+        ]
+      },
+      {
+        "name": "週刊マーガレット",
+        "positions": [
+          "掲載誌"
+        ]
+      },
+      {
+        "name": "小沢花音",
+        "positions": [
+          "作画"
+        ]
+      },
+      {
+        "name": "マーガレット",
+        "positions": [
+          "掲載誌"
+        ]
+      },
+      {
+        "name": "黒川文男",
+        "positions": [
+          "監督"
+        ]
+      },
+      {
+        "name": "岡部英二",
+        "positions": [
+          "監督"
+        ]
+      },
+      {
+        "name": "吉田茂承",
+        "positions": [
+          "監督"
+        ]
+      },
+      {
+        "name": "竹内啓雄",
+        "positions": [
+          "監督"
+        ]
+      },
+      {
+        "name": "東京ムービー",
+        "positions": [
+          "アニメーション制作"
+        ]
+      }
+    ],
     "tag": [],
     "watch": false,
     "favorite": false
