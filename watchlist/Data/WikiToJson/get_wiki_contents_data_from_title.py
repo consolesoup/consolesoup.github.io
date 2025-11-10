@@ -61,7 +61,7 @@ def get_wiki_contents_data_from_title():
                     # Wikiからコンテンツ情報を最新に更新する
                     contentsData = update_wiki_contents_data(contentsData,contentsTitleData["url"])
                 else:
-                    print(f"{'\033[31m'}Jsonから{contentsData["title"]}のurlが取得できませんでした{'\033[0m'}")
+                    print(f"✖{'\033[31m'}Jsonから{contentsData["title"]}のurlが取得できませんでした{'\033[0m'}")
             else:
                 print(f"コンテンツタイトルから仮のコンテンツ詳細情報を作成しました。")
             
@@ -171,13 +171,13 @@ def get_copyright_from_wiki(html:BeautifulSoup,contentsData:dict):
                     # thタグの取得
                     thTag = trTag.find("th")
                     if not thTag:
-                        print(f"{'\033[31m'}{key}のtrタグからthタグが取得できませんでした\n{trTag}{'\033[0m'}")
+                        print(f"✖{'\033[31m'}{key}のtrタグからthタグが取得できませんでした\n{trTag}{'\033[0m'}")
                         continue
                     
                     # tdタグの取得
                     tdTag = trTag.find("td")
                     if not tdTag:
-                        print(f"{'\033[31m'}{key}のtrタグからtdタグが取得できませんでした\n{trTag}{'\033[0m'}")
+                        print(f"✖{'\033[31m'}{key}のtrタグからtdタグが取得できませんでした\n{trTag}{'\033[0m'}")
                         continue
                     
                     # thタグから役職リストを取得
@@ -200,8 +200,8 @@ def get_copyright_from_wiki(html:BeautifulSoup,contentsData:dict):
                         print(f"＋{positions}：{names}")
                     else:
                         print(f"　{positions}：{names}")
-        else: print(f"　table(infobox) find not tbody: {tableTag}")
-    else: print("　html find not table(infobox)")
+        else: print(f"　✖table(infobox) find not tbody: {tableTag}")
+    else: print("　✖html find not table(infobox)")
     
     return copyrightList
 
@@ -323,7 +323,7 @@ def get_names_from_tag(tag:BeautifulSoup):
         if name == "虫プロダクション" or name == "虫プロ商事" or name == "手塚プロダクション":
             name = "手塚プロ"
         if name == "竜の子プロダクション":
-            nema = "タツノコプロ"
+            name = "タツノコプロ"
         if name == "日本テレビ放送網":
             name = "日本テレビ"
         if name == "フジテレビ・エンタプライズ":
