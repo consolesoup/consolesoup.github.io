@@ -13,7 +13,7 @@ def get_wiki_contents_list_from_year():
     
     # 最初に自動更新するかどうか確認
     autoRequest = False
-    inputValue = input(f"全ての年代別のリストデータを自動で最新の情報を取得して更新しますか？[y/n]:")
+    inputValue = input(f"全ての年代別のコンテンツタイトルのリストを自動で取得した最新情報に更新しますか？[y/n]:")
     if inputValue == "y": autoRequest = True
     
     for yearData in yearList:
@@ -23,7 +23,7 @@ def get_wiki_contents_list_from_year():
         
         # 自動更新が無効の場合は更新するか確認する
         if not autoRequest:
-            inputValue = input(f"{yearData["text"]}から最新の情報を取得して更新しますか？[y/n]:")
+            inputValue = input(f"{yearData["text"]}のコンテンツタイトルを自動で取得した最新情報に更新しますか？[y/n]:")
             if inputValue != "y": continue
         
         if "url" not in yearData:
@@ -155,6 +155,6 @@ def get_wiki_contents_list_from_year():
                         print(f"　{contents["start_date"]}～{contents["end_date"]}：{contents["title"]}")
         
         # コンテンツリストの保存
-        wiki_to_json_common.save_json_file(f"./Data/{yearData["text"]}.json",contentsList)
+        wiki_to_json_common.save_json_file(f"./Data/ContentsTitleList/{yearData["text"]}.json",contentsList)
 
 get_wiki_contents_list_from_year()

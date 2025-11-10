@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 import re
 from datetime import datetime
 
-def get_wiki_contents_list_from_year():
+def get_wiki_contents_data_from_title():
     # 年代リストデータの取得
     yearList = wiki_to_json_common.load_json_file("./Data/YearList.json")
     if not isinstance(yearList,list):
@@ -13,101 +13,67 @@ def get_wiki_contents_list_from_year():
     #print(yearList)
     
     # 最初に自動更新するかどうか確認
-    autoYearRequest = False
-    inputValue = input(f"全ての年代別のJsonを自動で作成して更新しますか？[y/n]:")
-    if inputValue == "y": autoYearRequest = True
+    autoRequest = False
+    inputValue = input(f"全ての年代別のコンテンツ詳細データを全件自動で最新情報に更新しますか？[y/n]:")
+    if inputValue == "y": autoRequest = True
     
-    autoWikiRequest = False
-    inputValue = input(f"全ての年代別のコンテンツについてWikiページからデータを取得してコンテンツ情報を更新しますか？[y/n]:")
-    if inputValue == "y": autoWikiRequest = True
-    
-    saveJsonFileList = []
     for yearData in yearList:
-        # コンテンツリスト取得
         if "text" not in yearData: continue
-        contentsList = wiki_to_json_common.load_json_file(f"./Data/{yearData["text"]}.json")
-        if not isinstance(contentsList,list):
-            return
+        
+        # 自動更新が無効の場合は更新するか確認する
+        if not autoRequest:
+            inputValue = input(f"{yearData["text"]}のコンテンツ詳細データを最新情報に更新しますか？[y/n]:")
+            if inputValue != "y": continue
+        
+        yearAutoRequest = False
+        if autoRequest: yearAutoRequest = True
+        else:
+            inputValue = input(f"{yearData["text"]}のコンテンツ詳細データを全件自動で最新情報に更新しますか？[y/n]:")
+            if inputValue == "y": yearAutoRequest = True
+        
+        # コンテンツタイトルリスト取得
+        contentsTitleListPath = f"./Data/ContentsTitleList/{yearData["text"]}.json"
+        contentsTitleList = wiki_to_json_common.load_json_file(contentsTitleListPath)
+        if not isinstance(contentsTitleList,list): continue
         #print(contentsList)
         
-        # 作成済みJson取得
-        yearText = yearData["text"]
-        try:
-            yearText = yearText.replace("(","")
-            yearText = yearText.replace(")","")
-            yearText = yearText.replace(" ","")
-            yearText = yearText.replace("の","")
-            yearText = yearText.replace("日本","")
-            yearText = yearText.replace("テレビアニメ","")
-            yearText = yearText.replace("作品一覧","")
-        except Exception as e:
-            print(f"×get yearText:{e}\nyearText[{yearText}]\nfrom[{yearData["text"]}]")
-        jsonFilePath = f"../WatchList/watchlist_{yearText}.json"
-        #print(yearText)
-        
-        if not autoYearRequest:
-            inputValue = input(f"{yearText}年のコンテンツリストからJsonを作成して更新しますか？[y/n]:")
-            if inputValue != "y":
-                print(f"{jsonFilePath}は更新せずに既存のものを再利用します。")
-                
-                jsonFileData = {}
-                jsonFileData["title"] = yearText
-                jsonFileData["url"] = jsonFilePath
-                saveJsonFileList.append(jsonFileData)
-                continue
-        
-        # 保存されているJsonデータをキャッシュデータとして取得
-        cacheDataList = wiki_to_json_common.load_json_file(jsonFilePath)
-        if not isinstance(cacheDataList,list):
-            cacheDataList = []
-        
-        # Jsonデータを最新に更新する
+        # コンテンツ詳細データを最新に更新する
         contentsDataList = []
-        for contents in contentsList:
+        for contentsTitleData in contentsTitleList:
             # コンテンツのバリデーションチェック
-            if "title" not in contents: continue
-            if "start_date" not in contents: continue
-            if "end_date" not in contents: continue
+            if "title" not in contentsTitleData: continue
+            if "start_date" not in contentsTitleData: continue
+            if "end_date" not in contentsTitleData: continue
             
-            print(f"======{contentsData["title"]}======")
+            print(f"======{contentsTitleData["title"]}======")
             
             # コンテンツ情報の初期化
-            contentsData = initialize_contents_data(contents)
+            contentsData = initialize_contents_data(contentsTitleData)
             
-            # 作成済みの同じコンテンツデータ取得
-            contentsData = override_cache_contents_data(contentsData,cacheDataList)
-            
-            # Wikiから最新の情報を取得するかどうか
-            wikiRequest = False
-            if autoWikiRequest: wikiRequest = True
+            # 自動更新が無効の場合は更新するか確認する
+            contentsAutoRequest = False
+            if yearAutoRequest: contentsAutoRequest = True
             else:
-                inputValue = input(f"{contentsData["title"]}についてWikiページからデータを取得してコンテンツ情報を更新しますか？[y/n]:")
-                if inputValue == "y": wikiRequest = True
+                inputValue = input(f"{contentsData["title"]}についてWikiページからデータを取得してコンテンツ詳細情報を更新しますか？[y/n]:")
+                if inputValue == "y": contentsAutoRequest = True
             
-            if wikiRequest:
-                if "url" in contents:
+            if contentsAutoRequest:
+                if "url" in contentsTitleData:
                     # Wikiからコンテンツ情報を最新に更新する
-                    contentsData = update_wiki_contents_data(contentsData,contents["url"])
+                    contentsData = update_wiki_contents_data(contentsData,contentsTitleData["url"])
                 else:
                     print(f"Jsonから{contentsData["title"]}のurlが取得できませんでした")
             else:
-                print(f"作成済みのコンテンツ情報を参考にコンテンツ情報を作成しました。")
+                print(f"コンテンツタイトルから仮のコンテンツ詳細情報を作成しました。")
             
             contentsDataList.append(contentsData)
             print("------Export ContentsData------")
-            print(f"{contentsData["start_date"]}～{contentsData["end_date"]}：{"★" if contentsData["favorite"] else "☆"}-{"●" if contentsData["watch"] else "○"} - {contentsData["title"]}")
+            print(f"{contentsData["start_date"]}～{contentsData["end_date"]}：{contentsData["title"]}")
             print(f"{contentsData["copyright"]}")
             print(f"{contentsData["tag"]}")
         
-        # Jsonの保存
-        if wiki_to_json_common.save_json_file(jsonFilePath,contentsDataList):
-            jsonFileData = {}
-            jsonFileData["title"] = yearText
-            jsonFileData["url"] = jsonFilePath
-            saveJsonFileList.append(jsonFileData)
-    
-    # 保存したJsonのパスリストを保存
-    wiki_to_json_common.save_json_file("../watchlist.json",saveJsonFileList)
+        # コンテンツ詳細データリストの保存
+        wiki_to_json_common.save_json_file(f"./Data/ContentsDataList/{yearData["text"]}.json",contentsDataList)
 
 # コンテンツ情報の初期化
 def initialize_contents_data(contents:dict):
@@ -122,34 +88,8 @@ def initialize_contents_data(contents:dict):
         contentsData["end_date"] = contents["end_date"]
     
     # コメント/コピーライト/タグを初期化
-    contentsData["comment"] = ""
     contentsData["copyright"] = []
     contentsData["tag"] = []
-    contentsData["watch"] = False
-    contentsData["favorite"] = False
-    return contentsData
-
-# コンテンツ情報へキャッシュデータから必要な情報を引き継ぎ
-def override_cache_contents_data(contentsData:dict, cacheDataList:list):
-    # キャッシュデータがlist型で中身がある場合のみ引き継ぎできる
-    if len(cacheDataList) == 0:
-        return contentsData
-    
-    # キャッシュデータから一致するコンテンツ情報を取得
-    jsonData = next((cacheData for cacheData in cacheDataList if contentsData["title"] == cacheData["title"]), None)
-    if jsonData:
-        # print(jsonData)
-        # 設定をコピー
-        if "comment" in jsonData:
-            contentsData["comment"] = jsonData["comment"]
-        if "copyright" in jsonData:
-            contentsData["copyright"] = jsonData["copyright"]
-        if "tag" in jsonData:
-            contentsData["tag"] = jsonData["tag"]
-        if "watch" in jsonData:
-            contentsData["watch"] = jsonData["watch"]
-        if "favorite" in jsonData:
-            contentsData["favorite"] = jsonData["favorite"]
     return contentsData
 
 # Wikiからコンテンツ情報を最新に更新する
@@ -326,4 +266,4 @@ def remove_parentheses_text(text:str,parentheses:list):
     
     return removeText
 
-get_wiki_contents_list_from_year()
+get_wiki_contents_data_from_title()

@@ -30,8 +30,23 @@ def get_wiki_year_list():
             text = a_tag.get_text()
             if "年代" not in text: continue
             href = a_tag.get("href", "")
+            if not href: continue
+            
+            yearText = text
+            try:
+                yearText = yearText.replace("(","")
+                yearText = yearText.replace(")","")
+                yearText = yearText.replace(" ","")
+                yearText = yearText.replace("の","")
+                yearText = yearText.replace("日本","")
+                yearText = yearText.replace("テレビアニメ","")
+                yearText = yearText.replace("作品一覧","")
+            except Exception as e:
+                print(f"×get yearText({yearText}):{e}")
+                continue
+            
             linkdata = {}
-            linkdata["text"] = text
+            linkdata["text"] = yearText
             linkdata["url"] = href
             yearList.append(linkdata)
             print(text)

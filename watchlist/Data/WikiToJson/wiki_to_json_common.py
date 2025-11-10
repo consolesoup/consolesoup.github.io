@@ -1,5 +1,6 @@
 ﻿import requests
 import urllib.parse
+import os
 import json
 
 # Wikiページ情報のHTML取得
@@ -33,6 +34,16 @@ def get_wikipedia_html(title):
 
 # Jsonファイルの保存
 def save_json_file(path, data):
+    # 保存先フォルダが存在しなければ新規作成
+    try:
+        dirpath = os.path.dirname(path)
+        if not os.path.isdir(dirpath):
+            os.makedirs(dirpath)
+    except Exception as e:
+        print(f"×save folder:{dirpath} - {e}")
+        return False
+    
+    # ファイル保存処理
     try:
         with open(path, "w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
@@ -44,9 +55,18 @@ def save_json_file(path, data):
 
 # Jsonファイルのロード
 def load_json_file(path):
+    # ファイルが存在するかどうか
+    try:
+        if not os.path.isfile(path):
+            return False
+    except Exception as e:
+        print(f"×file not found:{path} - {e}")
+        return False
+    
+    # Jsonデータの取得
     try:
         with open(path, "r", encoding="utf-8") as f:
             return json.load(f)
     except Exception as e:
-        print(f"×get YearList.json:{e}")
+        print(f"×get json {path}:{e}")
         return None

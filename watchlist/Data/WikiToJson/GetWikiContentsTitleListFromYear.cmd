@@ -15,6 +15,6 @@ IF ERRORLEVEL 1 (
 )
 
 REM Pythonスクリプトを実行
-py get_wiki_contents_list_from_year.py
+python get_wiki_contents_title_list_from_year.py
 
 pause

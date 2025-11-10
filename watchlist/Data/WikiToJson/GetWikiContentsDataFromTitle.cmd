@@ -15,6 +15,6 @@ IF ERRORLEVEL 1 (
 )
 
 REM Pythonスクリプトを実行
-py export_json_from_contents_list.py
+python get_wiki_contents_data_from_title.py
 
 pause
