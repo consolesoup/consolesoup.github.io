@@ -150,6 +150,7 @@ def get_copyright_from_wiki(html:BeautifulSoup,contentsData:dict):
                     if inOrigin: addPositions.append("原作")
                     else: addPositions.append("監督")
                     
+                    # アニメの場合は放送時期が違うデータの可能性があるので開始日で比較
                     if "start_date" in contentsData:
                         startDateYear = datetime.strptime(contentsData["start_date"], "%Y/%m/%d").year
                         inBroadcastTime = False
