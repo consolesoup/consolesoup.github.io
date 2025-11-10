@@ -6,7 +6,7 @@ import json
 # Wikiページ情報のHTML取得
 def get_wikipedia_html(title):
     if not title or title == None:
-        print(f"×PageTitle is None")
+        print(f"{'\033[31m'}×PageTitle is None{'\033[0m'}")
         return None
     
     baseUrl = "https://ja.wikipedia.org/api/rest_v1/page/html/"
@@ -15,11 +15,11 @@ def get_wikipedia_html(title):
         encoded_title = urllib.parse.quote(title)
         url = baseUrl+encoded_title
     except Exception as e:
-        print(f"×Url Encode - {title}:{e}")
+        print(f"{'\033[31m'}×Url Encode - {title}:{e}{'\033[0m'}")
         return None
     
     if url == None or url == baseUrl:
-        print(f"×Url Failed - {url}:{e}")
+        print(f"{'\033[31m'}×Url Failed - {url}:{e}{'\033[0m'}")
         return None
     
     headers = {
@@ -29,7 +29,7 @@ def get_wikipedia_html(title):
     if response.status_code == 200:
         return response.text
     else:
-        print(f"{title} のHTML取得に失敗 [{response.status_code}]")
+        print(f"{'\033[31m'}{title} のHTML取得に失敗 [{response.status_code}]{'\033[0m'}")
         return None
 
 # Jsonファイルの保存
@@ -40,7 +40,7 @@ def save_json_file(path, data):
         if not os.path.isdir(dirpath):
             os.makedirs(dirpath)
     except Exception as e:
-        print(f"×save folder:{dirpath} - {e}")
+        print(f"{'\033[31m'}×save folder:{dirpath} - {e}{'\033[0m'}")
         return False
     
     # ファイル保存処理
@@ -50,7 +50,7 @@ def save_json_file(path, data):
             print(f"{path}へ保存しました。")
             return True
     except Exception as e:
-        print(f"×save json file:{path} - {e}")
+        print(f"{'\033[31m'}×save json file:{path} - {e}{'\033[0m'}")
         return False
 
 # Jsonファイルのロード
@@ -60,7 +60,7 @@ def load_json_file(path):
         if not os.path.isfile(path):
             return False
     except Exception as e:
-        print(f"×file not found:{path} - {e}")
+        print(f"{'\033[31m'}×file not found:{path} - {e}{'\033[0m'}")
         return False
     
     # Jsonデータの取得
@@ -68,5 +68,5 @@ def load_json_file(path):
         with open(path, "r", encoding="utf-8") as f:
             return json.load(f)
     except Exception as e:
-        print(f"×get json {path}:{e}")
+        print(f"{'\033[31m'}×get json {path}:{e}{'\033[0m'}")
         return None
