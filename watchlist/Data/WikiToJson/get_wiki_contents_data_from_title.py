@@ -299,21 +299,54 @@ def get_datas_from_table_td_tag(tag:BeautifulSoup):
         if data.endswith("など"): data = data[:-2]
         if data.endswith("ほか"): data = data[:-2]
         if not data: continue
+        elif data == "企画室": continue
+        elif data == "第一部-第三部：": continue
+        elif data == "第四部-第六部：": continue
         
-        if data == "虫プロダクション" or data == "虫プロ商事" or data == "手塚プロダクション":
-            data = "手塚プロ"
-        if data == "竜の子プロダクション":
-            data = "タツノコプロ"
-        if data == "日本テレビ放送網":
+        if data == "ムロタニ・ツネ象":
+            data = "ムロタニツネ象"
+        elif data == "武内つなよし/スタジオBell":
+            data = "武内つなよし"
+        elif data == "東京テレビ動画":
+            data = "日本テレビ動画"
+        elif data == "日本テレビ放送網":
             data = "日本テレビ"
-        if data == "フジテレビ・エンタプライズ":
-            data = "フジテレビ"
-        if data == "東映動画":
+        elif data == "テレビ東京メディアネット":
+            data = "テレビ東京"
+        elif data == "NET" or data == "NET日本教育テレビ":
+            data = "テレビ朝日"
+        elif data == "日本文華社":
+            data = "ぶんか社"
+        elif data == "円谷映像":
+            data = "円谷プロ"
+        elif data == "和光プロダクション":
+            data = "ワコープロ"
+        elif data == "創映社" or data == "サンライズスタジオ":
+            data = "サンライズ"
+        elif data == "竜の子プロダクション":
+            data = "タツノコプロ"
+        elif data == "虫プロダクション" or data == "虫プロ商事":
+            data = "手塚プロダクション"
+        elif data == "東映動画":
             data = "東映"
-        if data == "東京ムービー新社" or data == "TMS":
+        elif data == "国際放映":
+            data = "東宝"
+        elif data == "ズイヨー映像":
+            data = "瑞鷹"
+        elif data == "TMS" or data == "東京ムービー新社":
             data = "トムス"
-        if data == "スタジオ・ゼロ":
+        elif data == "TCJ" or data == "TCJ動画センター":
+            data = "エイケン"
+        elif data == "旭通信社" or data == "第一動画" or data == "アサツーディ・ケイ" or data == "ADKエモーションズ":
+            data = "ADKHD"
+        elif data == "スタジオ・ゼロ":
             data = "スタジオゼロ"
+        elif data == "Aプロダクション" or data == "Aプロ":
+            data = "シンエイ動画"
+        elif data == "フジテレビ・エンタプライズ" or data == "テレビ動画":
+            data = "フジテレビ"
+        elif "小学一年生" in data or "小学二年生" in data or "小学三年生" in data or "小学四年生" in data or "小学五年生" in data or "小学六年生" in data:
+            data = "小学館の学年別学習雑誌"
         
         datas.append(data)
     
