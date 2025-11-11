@@ -101,139 +101,117 @@ def update_wiki_contents_data(contentsData:dict, url:str):
     #print(htmlText)
     html = BeautifulSoup(htmlText, "html.parser")
     
-    contentsData["copyright"] = get_copyright_from_wiki(html,contentsData)
-    
-    return contentsData
-
-# WikiページからCopyrightを作成
-def get_copyright_from_wiki(html:BeautifulSoup,contentsData:dict):
-    copyrightList = []
-    
     # infoboxのテーブルタグから作品情報を取得
     print("--------------------------------------------------")
-    print("〇Copyright from infobox in Wiki")
+    print("〇Get InfoboxData from Wiki")
+    infoDataDict = {}
     tableTag = html.find("table", class_="infobox")
     if tableTag:
         tbodyTag = tableTag.find("tbody")
         if tbodyTag:
             # テーブルの中身をセル結合されたブロックごとに分別
             infoDataDict = {}
-            infoTitle = "None"
-            inOrigin = False
+            mergedHeader = "None"
             trTags = tbodyTag.find_all("tr")
             for trTag in trTags:
                 #print(trTag)
                 # テーブルを行ごとに取得
                 thTag = trTag.find("th")
-                if not thTag: continue
+                if not thTag:
+                    # テンプレートにはthタグがないのが正常なので無視
+                    if "./Template" not in str(trTag):
+                        print(f"✖{'\033[31m'}{mergedHeader}のtrタグからthタグが取得できませんでした\n{trTag}{'\033[0m'}")
+                    continue
                 
                 th_colspan = thTag.get("colspan")
-                if th_colspan != None: infoTitle = thTag.get_text()
+                if th_colspan != None:
+                   mergedHeader = thTag.get_text()
                 else:
-                    if infoTitle not in infoDataDict or not isinstance(infoDataDict[infoTitle],list):
-                       infoDataDict[infoTitle] = []
+                    # ブロックごとのリスト作成
+                    if mergedHeader not in infoDataDict or not isinstance(infoDataDict[mergedHeader],list):
+                       infoDataDict[mergedHeader] = []
                     
-                    infoDataDict[infoTitle].append(trTag)
-                    if "原作" in trTag.get_text(): inOrigin = True
-            
-            # InfoDatasから情報取得
-            for key in infoDataDict.keys():
-                print(f"◇{key}")
-                addPositions = []
-                inBroadcastTime = True
-                
-                infoDataList = infoDataDict[key]
-                if not isinstance(infoDataList,list): continue
-                
-                if "アニメ" in key:
-                    addPositions = ["製作","制作","アニメーション制作"]
-                    if inOrigin: addPositions.append("原作")
-                    else: addPositions.append("監督")
-                    
-                    # アニメの場合は放送時期が違うデータの可能性があるので開始日で比較
-                    if "start_date" in contentsData:
-                        startDateYear = datetime.strptime(contentsData["start_date"], "%Y/%m/%d").year
-                        inBroadcastTime = False
-                        for trTag in infoDataList:
-                            if "放送期間" not in trTag.get_text(): continue
-                            if str(startDateYear) not in trTag.get_text(): continue
-                            inBroadcastTime = True
-                elif "漫画" in key:
-                    addPositions = ["作者","原作","原案","作画","出版社","掲載誌"]
-                elif "title" in contentsData and contentsData["title"] in key and "映画" not in key:
-                    addPositions = ["制作","製作"]
-                    if inOrigin: addPositions.append("原作")
-                    else: addPositions.append("監督")
-                else: continue
-                print(f"追加対象：{addPositions}")
-                
-                for trTag in infoDataList:
-                    # thタグの取得
-                    thTag = trTag.find("th")
-                    if not thTag:
-                        print(f"✖{'\033[31m'}{key}のtrタグからthタグが取得できませんでした\n{trTag}{'\033[0m'}")
-                        continue
+                    # 各列のデータ作成
+                    infoData = {}
                     
                     # tdタグの取得
                     tdTag = trTag.find("td")
                     if not tdTag:
-                        print(f"✖{'\033[31m'}{key}のtrタグからtdタグが取得できませんでした\n{trTag}{'\033[0m'}")
+                        print(f"✖{'\033[31m'}{mergedHeader}のtrタグからtdタグが取得できませんでした\n{trTag}{'\033[0m'}")
                         continue
                     
-                    # thタグから役職リストを取得
-                    positions = get_positions_from_tag(thTag)
-                    # tdタグから名前リストを取得
-                    names = get_names_from_tag(tdTag)
-                    
-                    # コピーライトに追加する情報かどうか
-                    addCopyright = False
-                    for addPosition in addPositions:
-                        if addPosition in positions:
-                            addCopyright = True
-                            break
-                    
-                    if addCopyright and inBroadcastTime:
-                        # 重複しないようにリストに追加
-                        for name in names:
-                            for position in positions:
-                                copyrightList = add_copyright_list(copyrightList,name,position)
-                        print(f"＋{positions}：{names}")
-                    else:
-                        print(f"　{positions}：{names}")
+                    infoData["header"] = get_headers_from_table_th_tag(thTag)
+                    infoData["data"] = get_datas_from_table_td_tag(tdTag)
+                    infoDataDict[mergedHeader].append(infoData)
         else: print(f"　✖table(infobox) find not tbody: {tableTag}")
     else: print("　✖html find not table(infobox)")
     
-    return copyrightList
-
-# コピーライト情報リストにデータ追加
-def add_copyright_list(copyrightList:list,name:str,position:str):
-    # リストから一致するデータを取得
-    index = -1
-    copyrightData = {}
-    copyrightData["name"] = name
-    for i, copyright in enumerate(copyrightList):
-        if "name" not in copyright:
-            continue
-        if copyright["name"] == name:
-            copyrightData = copyright
-            index = i
-            break
+    # infoboxのテーブルタグの作品情報からデータ取得
+    if len(infoDataDict.keys()) > 0:
+        print("--------------------------------------------------")
+        print("〇Get ContentsData from InfoboxData")
+        for mergedHeader in infoDataDict.keys():
+            infoDataList = infoDataDict[mergedHeader]
+            if not isinstance(infoDataList,list):
+                print(f"◇{mergedHeader}：not list")
+                continue
+            
+            # 結合セルのヘッダーから何の情報か判別
+            copyrightHeaders = []
+            if "アニメ" in mergedHeader:
+                copyrightHeaders = ["製作","制作","アニメーション制作"]
+                if "原作" in str(infoDataList): copyrightHeaders.append("原作")
+                else: copyrightHeaders.append("監督")
+                
+                # アニメの場合は放送時期が違うデータの可能性があるので開始日で比較
+                if "start_date" in contentsData:
+                    startDateYear = datetime.strptime(contentsData["start_date"], "%Y/%m/%d").year
+                    # 放送期間が書いてあるのに放送開始年が書いてない場合は期間外とする
+                    if "放送期間" in str(infoDataList):
+                        if str(startDateYear) not in str(infoDataList):
+                            copyrightHeaders = []
+                
+                print(f"◇{mergedHeader}：アニメ")
+            elif "漫画" in mergedHeader:
+                copyrightHeaders = ["作者","原作","原案","作画","出版社","掲載誌"]
+                
+                print(f"◇{mergedHeader}：漫画")
+            else:
+                # ヘッダーにコンテンツ名が含まれている場合は一応追加する
+                if "title" in contentsData:
+                    if  contentsData["title"] in mergedHeader:
+                        copyrightHeaders = ["制作","製作"]
+                        if "原作" in str(infoDataList): copyrightHeaders.append("原作")
+                        else: copyrightHeaders.append("監督")
+                
+                # ただし劇場版の作品は除外する
+                if "映画" in mergedHeader: copyrightHeaders = []
+                if "劇場版" in mergedHeader: copyrightHeaders = []
+                
+                print(f"◇{mergedHeader}：不明")
+            
+            # 追加項目が無い場合はスキップ
+            if len(copyrightHeaders) == 0: continue
+            print(f"Copyright：{copyrightHeaders}")
+            
+            for infoData in infoDataList:
+                if "header" not in infoData or "data" not in infoData:
+                    continue
+                
+                # コピーライトに追加する情報かどうか
+                addCopyright = False
+                for copyrightHeader in copyrightHeaders:
+                    if copyrightHeader in infoData["header"]:
+                        addCopyright = True
+                        break
+                
+                if addCopyright:
+                    # 重複しないようにリストに追加
+                    for header in infoData["header"]:
+                        for data in infoData["data"]:
+                            contentsData["copyright"] = add_copyright_list(contentsData["copyright"],data,header)
     
-    # データの役職リストの型チェック
-    if "positions" not in copyrightData:
-        copyrightData["positions"] = []
-    if not isinstance(copyrightData["positions"],list):
-        copyrightData["positions"] = []
-    
-    # データの役職リストに役職を追加
-    if position not in copyrightData["positions"]:
-        copyrightData["positions"].append(position)
-    
-    if 0 <= index and index < len(copyrightList):
-        copyrightList[index] = copyrightData
-    else: copyrightList.append(copyrightData)
-    
-    return copyrightList
+    return contentsData
 
 # 文字列から括弧とその中の文字を消す
 def remove_parentheses_text(text:str,parentheses:list):
@@ -269,83 +247,115 @@ def remove_parentheses_text(text:str,parentheses:list):
     
     return removeText
 
-# infoboxのtable-thタグの文字列から役職情報を取得
-def get_positions_from_tag(tag:BeautifulSoup):
+# infoboxのtable-thタグの文字列からヘッダー情報を取得
+def get_headers_from_table_th_tag(tag:BeautifulSoup):
     # タグから文字列取得
     tagText = tag.get_text(separator="<br>", strip=True)
-    positionText = remove_parentheses_text(tagText,["（）","[]"])
+    headerText = remove_parentheses_text(tagText,["（）","[]"])
     
     # 区切り文字で配列化
-    positionTexts = re.split(r"<br>|・", positionText)
-    if len(positionTexts) == 0: positionTexts = [positionText]
+    headerTexts = re.split(r"<br>|・", headerText)
+    if len(headerTexts) == 0: headerTexts = [headerText]
     
-    # 配列から役職リストを作成
-    positions = []
-    for position in positionTexts:
-        position = position.replace(" ","").replace("　","")
-        if position.endswith("など"): position = position[:-2]
-        if not position: continue
-        positions.append(position)
+    # 配列からヘッダーリストを作成
+    headers = []
+    for header in headerTexts:
+        header = header.replace(" ","").replace("　","")
+        if header.endswith("など"): header = header[:-2]
+        if not header: continue
+        headers.append(header)
     
-    message = f"　役職：{positions}"
-    if positions != positionTexts:
-        message += f" ← {positionTexts}"
-    if positionTexts != [positionText]:
-        message += f" ← {positionText}"
-    if positionText != tagText:
+    message = f"ヘッダー：{headers}"
+    if headers != headerTexts:
+        message += f" ← {headerTexts}"
+    if headerTexts != [headerText]:
+        message += f" ← {headerText}"
+    if headerText != tagText:
         message += f" ← {tagText}"
     print(message)
     
-    return positions
+    return headers
 
-# infoboxのtable-tdタグの文字列から名前情報を取得
-def get_names_from_tag(tag:BeautifulSoup):
+# infoboxのtable-tdタグの文字列からデータ情報を取得
+def get_datas_from_table_td_tag(tag:BeautifulSoup):
     # タグから文字列取得
     tagText = tag.get_text(separator="<br>", strip=True)
-    nameText = remove_parentheses_text(tagText,["（）","()","[]","「」","『』"])
-    nameText = nameText.replace("<br>と<br>","<br>")
-    nameText = nameText.replace("<br>・","<br>")
+    dataText = remove_parentheses_text(tagText,["（）","()","[]","「」","『』"])
+    dataText = dataText.replace("<br>と<br>","<br>")
+    dataText = dataText.replace("<br>・","<br>")
+    dataText = dataText.replace("年<br>","年")
+    dataText = dataText.replace("<br>-","、")
     
     # 区切り文字で配列化
-    nameTexts = re.split(r"<br>|、", nameText)
-    if len(nameTexts) == 0: nameTexts = [nameText]
+    dataTexts = re.split(r"<br>|、", dataText)
+    if len(dataTexts) == 0: dataTexts = [dataText]
     
-    # 配列から名前リストを作成
-    names = []
-    for name in nameTexts:
-        name = name.replace(" ","").replace("　","")
-        if name.startswith("→"): name = name[1:]
-        if name.endswith("→"): name = name[:-1]
-        if name.endswith("など"): name = name[:-2]
-        if name.endswith("ほか"): name = name[:-2]
-        if not name: continue
+    # 配列からデータリストを作成
+    datas = []
+    for data in dataTexts:
+        data = data.replace(" ","").replace("　","")
+        if data.startswith("→"): data = data[1:]
+        if data.endswith("→"): data = data[:-1]
+        if data.endswith("など"): data = data[:-2]
+        if data.endswith("ほか"): data = data[:-2]
+        if not data: continue
         
-        if name == "虫プロダクション" or name == "虫プロ商事" or name == "手塚プロダクション":
-            name = "手塚プロ"
-        if name == "竜の子プロダクション":
-            name = "タツノコプロ"
-        if name == "日本テレビ放送網":
-            name = "日本テレビ"
-        if name == "フジテレビ・エンタプライズ":
-            name = "フジテレビ"
-        if name == "東映動画":
-            name = "東映"
-        if name == "東京ムービー新社" or name == "TMS":
-            name = "トムス"
-        if name == "スタジオ・ゼロ":
-            name = "スタジオゼロ"
+        if data == "虫プロダクション" or data == "虫プロ商事" or data == "手塚プロダクション":
+            data = "手塚プロ"
+        if data == "竜の子プロダクション":
+            data = "タツノコプロ"
+        if data == "日本テレビ放送網":
+            data = "日本テレビ"
+        if data == "フジテレビ・エンタプライズ":
+            data = "フジテレビ"
+        if data == "東映動画":
+            data = "東映"
+        if data == "東京ムービー新社" or data == "TMS":
+            data = "トムス"
+        if data == "スタジオ・ゼロ":
+            data = "スタジオゼロ"
         
-        names.append(name)
+        datas.append(data)
     
-    message = f"　名前：{names}"
-    if names != nameTexts:
-        message += f" ← {nameTexts}"
-    if nameTexts != [nameText]:
-        message += f" ← {nameText}"
-    if nameText != tagText:
+    message = f"データ　：{datas}"
+    if datas != dataTexts:
+        message += f" ← {dataTexts}"
+    if dataTexts != [dataText]:
+        message += f" ← {dataText}"
+    if dataText != tagText:
         message += f" ← {tagText}"
     print(message)
     
-    return names
+    return datas
+
+# コピーライト情報リストにデータ追加
+def add_copyright_list(copyrightList:list,name:str,position:str):
+    # リストから一致するデータを取得
+    index = -1
+    copyrightData = {}
+    copyrightData["name"] = name
+    for i, copyright in enumerate(copyrightList):
+        if "name" not in copyright:
+            continue
+        if copyright["name"] == name:
+            copyrightData = copyright
+            index = i
+            break
+    
+    # データの役職リストの型チェック
+    if "positions" not in copyrightData:
+        copyrightData["positions"] = []
+    if not isinstance(copyrightData["positions"],list):
+        copyrightData["positions"] = []
+    
+    # データの役職リストに役職を追加
+    if position not in copyrightData["positions"]:
+        copyrightData["positions"].append(position)
+    
+    if 0 <= index and index < len(copyrightList):
+        copyrightList[index] = copyrightData
+    else: copyrightList.append(copyrightData)
+    
+    return copyrightList
 
 get_wiki_contents_data_from_title()
