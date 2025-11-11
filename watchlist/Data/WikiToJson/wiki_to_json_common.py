@@ -14,22 +14,30 @@ def get_wikipedia_html(title):
     try:
         encoded_title = urllib.parse.quote(title)
         url = baseUrl+encoded_title
+        
+        if url == None or url == baseUrl:
+            print(f"✖{'\033[31m'}Url Failed - {url}:{e}{'\033[0m'}")
+            return None
     except Exception as e:
         print(f"✖{'\033[31m'}Url Encode - {title}:{e}{'\033[0m'}")
         return None
     
-    if url == None or url == baseUrl:
-        print(f"✖{'\033[31m'}Url Failed - {url}:{e}{'\033[0m'}")
+    try:
+        headers = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Python/requests"
+        }
+        response = requests.get(url, headers=headers, timeout=10)
+        response.raise_for_status()
+        if response.text:
+            return response.text
+        else:
+            print(f"✖{'\033[31m'}{title} のHTML取得に失敗 [{response.status_code}]{'\033[0m'}")
+            return None
+    except requests.exceptions.ConnectTimeout:
+        print(f"⚠{'\033[31m'}接続タイムアウト: {url}{'\033[0m'}")
         return None
-    
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Python/requests"
-    }
-    response = requests.get(url, headers=headers)
-    if response.status_code == 200:
-        return response.text
-    else:
-        print(f"✖{'\033[31m'}{title} のHTML取得に失敗 [{response.status_code}]{'\033[0m'}")
+    except requests.exceptions.RequestException as e:
+        print(f"✖{'\033[31m'}リクエストエラー: {e}{'\033[0m'}")
         return None
 
 # Jsonファイルの保存
