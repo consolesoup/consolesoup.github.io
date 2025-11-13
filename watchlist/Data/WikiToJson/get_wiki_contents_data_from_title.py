@@ -1,16 +1,14 @@
-﻿from turtle import position
-import wiki_to_json_common
-import json
+﻿import JsonUtility
 from bs4 import BeautifulSoup
 import re
 from datetime import datetime
 
 def get_wiki_contents_data_from_title():
     # 年代リストデータの取得
-    yearList = wiki_to_json_common.load_json_file("./Data/YearList.json")
+    yearList = JsonUtility.load_json_file("./Data/YearList.json")
     if not isinstance(yearList,list):
         return
-    #print(yearList)
+    #JsonUtility.Log(yearList)
     
     # 最初に自動更新するかどうか確認
     autoRequest = False
@@ -32,10 +30,10 @@ def get_wiki_contents_data_from_title():
             if inputValue == "y": yearAutoRequest = True
         
         # コンテンツタイトルリスト取得
-        contentsTitleListPath = f"./Data/ContentsTitleList/{yearData["text"]}.json"
-        contentsTitleList = wiki_to_json_common.load_json_file(contentsTitleListPath)
+        contentsTitleListPath = f"./Data/ContentsTitleList_{yearData["text"]}.json"
+        contentsTitleList = JsonUtility.load_json_file(contentsTitleListPath)
         if not isinstance(contentsTitleList,list): continue
-        #print(contentsList)
+        #JsonUtility.Log(contentsList)
         
         # コンテンツ詳細データを最新に更新する
         contentsDataList = []
@@ -44,7 +42,7 @@ def get_wiki_contents_data_from_title():
             if "title" not in contentsTitleData: continue
             if "start_date" not in contentsTitleData: continue
             if "end_date" not in contentsTitleData: continue
-            print("==================================================")
+            JsonUtility.Log("==================================================")
             
             # コンテンツ情報の初期化
             contentsData = initialize_contents_data(contentsTitleData)
@@ -61,19 +59,22 @@ def get_wiki_contents_data_from_title():
                     # Wikiからコンテンツ情報を最新に更新する
                     contentsData = update_wiki_contents_data(contentsData,contentsTitleData["url"])
                 else:
-                    print(f"✖{'\033[31m'}Jsonから{contentsData["title"]}のurlが取得できませんでした{'\033[0m'}")
+                    JsonUtility.Log(f"✖{'\033[31m'}Jsonから{contentsData["title"]}のurlが取得できませんでした{'\033[0m'}")
             else:
-                print(f"コンテンツタイトルから仮のコンテンツ詳細情報を作成しました。")
+                JsonUtility.Log(f"コンテンツタイトルから仮のコンテンツ詳細情報を作成しました。")
             
             contentsDataList.append(contentsData)
-            print("--------------------------------------------------")
-            print("〇Export ContentsData")
-            print(f"　{contentsData["start_date"]}～{contentsData["end_date"]}：{contentsData["title"]}")
-            print(f"　{contentsData["copyright"]}")
-            print(f"　{contentsData["tag"]}")
+            JsonUtility.Log("--------------------------------------------------")
+            JsonUtility.Log("〇Export ContentsData")
+            JsonUtility.Log(f"　{contentsData["start_date"]}～{contentsData["end_date"]}：{contentsData["title"]}")
+            JsonUtility.Log(f"　{contentsData["copyright"]}")
+            JsonUtility.Log(f"　{contentsData["tag"]}")
         
         # コンテンツ詳細データリストの保存
-        wiki_to_json_common.save_json_file(f"./Data/ContentsDataList/{yearData["text"]}.json",contentsDataList)
+        JsonUtility.save_json_file(f"./Data/ContentsDataList_{yearData["text"]}.json",contentsDataList)
+        
+        # ログファイル出力
+        JsonUtility.SaveLogFile(f"./Data/Log/ContentsDataList_{yearData["text"]}_Log.txt")
 
 # コンテンツ情報の初期化
 def initialize_contents_data(contents:dict):
@@ -95,15 +96,15 @@ def initialize_contents_data(contents:dict):
 # Wikiからコンテンツ情報を最新に更新する
 def update_wiki_contents_data(contentsData:dict, url:str):
     # HTMLのテキストを取得
-    htmlText = wiki_to_json_common.get_wikipedia_html(url)
+    htmlText = JsonUtility.get_wikipedia_html(url)
     if not isinstance(htmlText,str):
         return contentsData
-    #print(htmlText)
+    #JsonUtility.Log(htmlText)
     html = BeautifulSoup(htmlText, "html.parser")
     
     # infoboxのテーブルタグから作品情報を取得
-    print("--------------------------------------------------")
-    print("〇Get InfoboxData from Wiki")
+    JsonUtility.Log("--------------------------------------------------")
+    JsonUtility.Log("〇Get InfoboxData from Wiki")
     infoDataDict = {}
     tableTag = html.find("table", class_="infobox")
     if tableTag:
@@ -114,13 +115,13 @@ def update_wiki_contents_data(contentsData:dict, url:str):
             mergedHeader = "None"
             trTags = tbodyTag.find_all("tr")
             for trTag in trTags:
-                #print(trTag)
+                #JsonUtility.Log(trTag)
                 # テーブルを行ごとに取得
                 thTag = trTag.find("th")
                 if not thTag:
                     # テンプレートにはthタグがないのが正常なので無視
                     if "./Template" not in str(trTag):
-                        print(f"✖{'\033[31m'}{mergedHeader}のtrタグからthタグが取得できませんでした\n{trTag}{'\033[0m'}")
+                        JsonUtility.Log(f"✖{'\033[31m'}{mergedHeader}のtrタグからthタグが取得できませんでした\n{trTag}{'\033[0m'}")
                     continue
                 
                 th_colspan = thTag.get("colspan")
@@ -137,23 +138,23 @@ def update_wiki_contents_data(contentsData:dict, url:str):
                     # tdタグの取得
                     tdTag = trTag.find("td")
                     if not tdTag:
-                        print(f"✖{'\033[31m'}{mergedHeader}のtrタグからtdタグが取得できませんでした\n{trTag}{'\033[0m'}")
+                        JsonUtility.Log(f"✖{'\033[31m'}{mergedHeader}のtrタグからtdタグが取得できませんでした\n{trTag}{'\033[0m'}")
                         continue
                     
                     infoData["header"] = get_headers_from_table_th_tag(thTag)
                     infoData["data"] = get_datas_from_table_td_tag(tdTag)
                     infoDataDict[mergedHeader].append(infoData)
-        else: print(f"　✖table(infobox) find not tbody: {tableTag}")
-    else: print("　✖html find not table(infobox)")
+        else: JsonUtility.Log(f"　✖table(infobox) find not tbody: {tableTag}")
+    else: JsonUtility.Log("　✖html find not table(infobox)")
     
     # infoboxのテーブルタグの作品情報からデータ取得
     if len(infoDataDict.keys()) > 0:
-        print("--------------------------------------------------")
-        print("〇Get ContentsData from InfoboxData")
+        JsonUtility.Log("--------------------------------------------------")
+        JsonUtility.Log("〇Get ContentsData from InfoboxData")
         for mergedHeader in infoDataDict.keys():
             infoDataList = infoDataDict[mergedHeader]
             if not isinstance(infoDataList,list):
-                print(f"◇{mergedHeader}：not list")
+                JsonUtility.Log(f"◇{mergedHeader}：not list")
                 continue
             
             # 結合セルのヘッダーから何の情報か判別
@@ -171,11 +172,11 @@ def update_wiki_contents_data(contentsData:dict, url:str):
                         if str(startDateYear) not in str(infoDataList):
                             copyrightHeaders = []
                 
-                print(f"◇{mergedHeader}：アニメ")
+                JsonUtility.Log(f"◇{mergedHeader}：アニメ")
             elif "漫画" in mergedHeader:
                 copyrightHeaders = ["作者","原作","原案","作画","出版社","掲載誌"]
                 
-                print(f"◇{mergedHeader}：漫画")
+                JsonUtility.Log(f"◇{mergedHeader}：漫画")
             else:
                 # ヘッダーにコンテンツ名が含まれている場合は一応追加する
                 if "title" in contentsData:
@@ -188,11 +189,11 @@ def update_wiki_contents_data(contentsData:dict, url:str):
                 if "映画" in mergedHeader: copyrightHeaders = []
                 if "劇場版" in mergedHeader: copyrightHeaders = []
                 
-                print(f"◇{mergedHeader}：不明")
+                JsonUtility.Log(f"◇{mergedHeader}：不明")
             
             # 追加項目が無い場合はスキップ
             if len(copyrightHeaders) == 0: continue
-            print(f"Copyright：{copyrightHeaders}")
+            JsonUtility.Log(f"Copyright：{copyrightHeaders}")
             
             for infoData in infoDataList:
                 if "header" not in infoData or "data" not in infoData:
@@ -272,7 +273,7 @@ def get_headers_from_table_th_tag(tag:BeautifulSoup):
         message += f" ← {headerText}"
     if headerText != tagText:
         message += f" ← {tagText}"
-    print(message)
+    JsonUtility.Log(message)
     
     return headers
 
@@ -357,7 +358,7 @@ def get_datas_from_table_td_tag(tag:BeautifulSoup):
         message += f" ← {dataText}"
     if dataText != tagText:
         message += f" ← {tagText}"
-    print(message)
+    JsonUtility.Log(message)
     
     return datas
 

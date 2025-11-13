@@ -1,15 +1,14 @@
-﻿import wiki_to_json_common
-import json
+﻿import JsonUtility
 from bs4 import BeautifulSoup
 import re
 from datetime import datetime
 
 def get_wiki_contents_list_from_year():
     # 年代リストデータの取得
-    yearList = wiki_to_json_common.load_json_file("./Data/YearList.json")
+    yearList = JsonUtility.load_json_file("./Data/YearList.json")
     if not isinstance(yearList,list):
         return
-    #print(yearList)
+    #JsonUtility.Log(yearList)
     
     # 最初に自動更新するかどうか確認
     autoRequest = False
@@ -17,7 +16,7 @@ def get_wiki_contents_list_from_year():
     if inputValue == "y": autoRequest = True
     
     for yearData in yearList:
-        #print(yearData)
+        #JsonUtility.Log(yearData)
         # 年代別にコンテンツリスト取得
         if "text" not in yearData: continue
         
@@ -27,11 +26,11 @@ def get_wiki_contents_list_from_year():
             if inputValue != "y": continue
         
         if "url" not in yearData:
-            print(f"Jsonから{yearData.text}のurlが取得できませんでした")
+            JsonUtility.Log(f"Jsonから{yearData.text}のurlが取得できませんでした")
             continue
-        htmlText = wiki_to_json_common.get_wikipedia_html(yearData["url"])
+        htmlText = JsonUtility.get_wikipedia_html(yearData["url"])
         if not htmlText:
-            print(f"{yearData["url"]}のHTMLが取得できませんでした")
+            JsonUtility.Log(f"{yearData["url"]}のHTMLが取得できませんでした")
             continue
         
         # コンテンツリストの成型
@@ -47,9 +46,9 @@ def get_wiki_contents_list_from_year():
                 header_id = header_tag.get("id")
                 index = header_id.find("年")
                 if index == -1: continue
-                #print(header_id)
+                #JsonUtility.Log(header_id)
                 headerYear = int(header_id[:index])
-                #print(headerYear)
+                #JsonUtility.Log(headerYear)
                 break
             if headerYear == 0: continue
             
@@ -76,8 +75,8 @@ def get_wiki_contents_list_from_year():
                         timeText = timeText.replace("-","")
                         timeText = timeText.replace("・","")
                     except Exception as e:
-                        print(f"×get timeText:{e}\ntimeText[{timeText}]\nfrom[{td_tags[0].get_text()}]")
-                    #print(f"{timeText} from {tds[0].get_text()}")
+                        JsonUtility.Log(f"×get timeText:{e}\ntimeText[{timeText}]\nfrom[{td_tags[0].get_text()}]")
+                    #JsonUtility.Log(f"{timeText} from {tds[0].get_text()}")
                     
                     # 日付テキストから日付データ生成
                     startTime = datetime(headerYear, 1, 1)
@@ -87,7 +86,7 @@ def get_wiki_contents_list_from_year():
                         times = []
                         if "日" in timeText:
                             times = timeText.split("日")
-                        #print(times)
+                        #JsonUtility.Log(times)
                         
                         # 仮で年始を登録
                         startTimeText = startTime.strftime("%Y年%m月%d日")
@@ -115,7 +114,7 @@ def get_wiki_contents_list_from_year():
                                 else:
                                     endTimeText = f"{headerYear}年{timeText1}日"
                         
-                        #print(f"{startTimeText} - {endTimeText}")
+                        #JsonUtility.Log(f"{startTimeText} - {endTimeText}")
                         startTime = datetime.strptime(startTimeText, "%Y年%m月%d日")
                         endTime = datetime.strptime(endTimeText, "%Y年%m月%d日")
                         
@@ -123,7 +122,7 @@ def get_wiki_contents_list_from_year():
                         if startTime > endTime:
                             endTime = startTime
                     except Exception as e:
-                        print(f"×text to time:{e}\ntimeText[{timeText}]\nfrom[{td_tags[0].get_text()}]")
+                        JsonUtility.Log(f"×text to time:{e}\ntimeText[{timeText}]\nfrom[{td_tags[0].get_text()}]")
                     
                     # タイトルを取得
                     title = None
@@ -136,7 +135,7 @@ def get_wiki_contents_list_from_year():
                         else:
                             title = td_tags[1].get_text()
                     except Exception as e:
-                        print(f"×{td_tags[1]}:{e}")
+                        JsonUtility.Log(f"×{td_tags[1]}:{e}")
                         continue
                     
                     # まだ追加されていないコンテンツの場合はリストに追加する
@@ -144,7 +143,7 @@ def get_wiki_contents_list_from_year():
                     endTimeText = endTime.strftime("%Y/%m/%d")
                     jsonData = next((data for data in contentsList if title in data["title"] and startTimeText in data["start_date"] and endTimeText in data["end_date"]), None)
                     if jsonData:
-                        print(f"　{jsonData["title"]}は既に追加されているためスキップ")
+                        JsonUtility.Log(f"　{title}（{startTimeText}～{endTimeText}）は既に追加されているためスキップ")
                     else:
                         contents = {}
                         contents["title"] = title
@@ -152,9 +151,12 @@ def get_wiki_contents_list_from_year():
                         contents["start_date"] = startTimeText
                         contents["end_date"] = endTimeText
                         contentsList.append(contents)
-                        print(f"　{contents["start_date"]}～{contents["end_date"]}：{contents["title"]}")
+                        JsonUtility.Log(f"　{contents["start_date"]}～{contents["end_date"]}：{contents["title"]}")
         
         # コンテンツリストの保存
-        wiki_to_json_common.save_json_file(f"./Data/ContentsTitleList/{yearData["text"]}.json",contentsList)
+        JsonUtility.save_json_file(f"./Data/ContentsTitleList_{yearData["text"]}.json",contentsList)
+        
+        # ログファイル出力
+        JsonUtility.SaveLogFile(f"./Data/Log/ContentsTitleList_{yearData["text"]}_Log.txt")
 
 get_wiki_contents_list_from_year()

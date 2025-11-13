@@ -1,10 +1,9 @@
-﻿import wiki_to_json_common
-import json
+﻿import JsonUtility
 from bs4 import BeautifulSoup
 
 def get_wiki_year_list():
     # 年代リストデータの取得
-    htmlText = wiki_to_json_common.get_wikipedia_html("日本のテレビアニメ作品一覧")
+    htmlText = JsonUtility.get_wikipedia_html("日本のテレビアニメ作品一覧")
     if not htmlText: return
     
     # 年代リストデータの成型
@@ -20,7 +19,7 @@ def get_wiki_year_list():
             header_id = header_tag.get("id")
             if "年代別" not in header_id: continue
             findHeader = True
-            #print(header_id)
+            #JsonUtility.Log(header_id)
             break
         if not findHeader: continue
         
@@ -42,16 +41,19 @@ def get_wiki_year_list():
                 yearText = yearText.replace("テレビアニメ","")
                 yearText = yearText.replace("作品一覧","")
             except Exception as e:
-                print(f"×get yearText({yearText}):{e}")
+                JsonUtility.Log(f"×get yearText({yearText}):{e}")
                 continue
             
             linkdata = {}
             linkdata["text"] = yearText
             linkdata["url"] = href
             yearList.append(linkdata)
-            print(text)
+            JsonUtility.Log(text)
     
     # 年代リストデータの保存
-    wiki_to_json_common.save_json_file("./Data/YearList.json",yearList)
+    JsonUtility.save_json_file("./Data/YearList.json",yearList)
+    
+    # ログファイル出力
+    JsonUtility.SaveLogFile("./Data/Log/YearList_Log.txt")
 
 get_wiki_year_list()
