@@ -49,7 +49,9 @@ def get_wiki_contents_data_from_title():
             
             # 自動更新が無効の場合は更新するか確認する
             contentsAutoRequest = False
-            if yearAutoRequest: contentsAutoRequest = True
+            if yearAutoRequest:
+                JsonUtility.Log(f"{contentsData["title"]}について自動でWikiページからデータを取得してコンテンツ詳細情報を更新")
+                contentsAutoRequest = True
             else:
                 inputValue = input(f"{contentsData["title"]}についてWikiページからデータを取得してコンテンツ詳細情報を更新しますか？[y/n]:")
                 if inputValue == "y": contentsAutoRequest = True
@@ -284,8 +286,11 @@ def get_datas_from_table_td_tag(tag:BeautifulSoup):
     dataText = remove_parentheses_text(tagText,["（）","()","[]","「」","『』"])
     dataText = dataText.replace("<br>と<br>","<br>")
     dataText = dataText.replace("<br>・","<br>")
+    dataText = dataText.replace("<br>-","<br>")
+    dataText = dataText.replace("<br><br>","<br>")
     dataText = dataText.replace("年<br>","年")
-    dataText = dataText.replace("<br>-","、")
+    dataText = dataText.replace("日 - ","日")
+    dataText = dataText.replace(" -<br>","<br>")
     
     # 区切り文字で配列化
     dataTexts = re.split(r"<br>|、", dataText)
@@ -300,6 +305,7 @@ def get_datas_from_table_td_tag(tag:BeautifulSoup):
         if data.endswith("など"): data = data[:-2]
         if data.endswith("ほか"): data = data[:-2]
         if not data: continue
+        elif data == "他": continue
         elif data == "企画室": continue
         elif data == "第一部-第三部：": continue
         elif data == "第四部-第六部：": continue
@@ -310,12 +316,16 @@ def get_datas_from_table_td_tag(tag:BeautifulSoup):
             data = "武内つなよし"
         elif data == "東京テレビ動画":
             data = "日本テレビ動画"
+        elif data == "日本放送協会":
+            data = "NHK"
         elif data == "日本テレビ放送網":
             data = "日本テレビ"
         elif data == "テレビ東京メディアネット":
             data = "テレビ東京"
-        elif data == "NET" or data == "NET日本教育テレビ":
+        elif data == "NET" or data == "NETテレビ" or data == "NET日本教育テレビ" or data == "日本教育テレビ":
             data = "テレビ朝日"
+        elif data == "フジテレビ・エンタプライズ" or data == "テレビ動画":
+            data = "フジテレビ"
         elif data == "日本文華社":
             data = "ぶんか社"
         elif data == "円谷映像":
@@ -344,8 +354,6 @@ def get_datas_from_table_td_tag(tag:BeautifulSoup):
             data = "スタジオゼロ"
         elif data == "Aプロダクション" or data == "Aプロ":
             data = "シンエイ動画"
-        elif data == "フジテレビ・エンタプライズ" or data == "テレビ動画":
-            data = "フジテレビ"
         elif "小学一年生" in data or "小学二年生" in data or "小学三年生" in data or "小学四年生" in data or "小学五年生" in data or "小学六年生" in data:
             data = "小学館の学年別学習雑誌"
         
