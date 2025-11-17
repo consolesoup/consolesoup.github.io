@@ -289,7 +289,7 @@ def get_datas_from_table_td_tag(tag:BeautifulSoup):
     dataText = dataText.replace("<br>-","<br>")
     dataText = dataText.replace("<br><br>","<br>")
     dataText = dataText.replace("年<br>","年")
-    dataText = dataText.replace("日 - ","日")
+    dataText = dataText.replace("日 - ","日<br>")
     dataText = dataText.replace(" -<br>","<br>")
     
     # 区切り文字で配列化
