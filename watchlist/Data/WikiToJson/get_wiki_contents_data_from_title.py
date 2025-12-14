@@ -304,8 +304,8 @@ def get_datas_from_table_td_tag(tag:BeautifulSoup):
         if data.endswith("→"): data = data[:-1]
         if data.endswith("など"): data = data[:-2]
         if data.endswith("ほか"): data = data[:-2]
-        if not data: continue
-        elif data == "他": continue
+        # if data.endswith("他"): data = data[:-1]
+        if data == "他": continue
         elif data == "企画室": continue
         elif data == "第一部-第三部：": continue
         elif data == "第四部-第六部：": continue
@@ -357,6 +357,7 @@ def get_datas_from_table_td_tag(tag:BeautifulSoup):
         elif "小学一年生" in data or "小学二年生" in data or "小学三年生" in data or "小学四年生" in data or "小学五年生" in data or "小学六年生" in data:
             data = "小学館の学年別学習雑誌"
         
+        if not data: continue
         datas.append(data)
     
     message = f"データ　：{datas}"
